@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,12 +14,14 @@ Route::get('/products', function () {
     return view('products.index');
 })->name('products-index');
 
-Route::get('/products-details/{product}', function () {
-    return view('products.show');
+Route::get('/products-details/{product}', function ($product) {
+    $product = Product::find($product);
+    return view('products.show', ['product' => $product]);
 })->name('products-show-details');
 
-Route::get('/categories/{category}', function () {
-    return view('categories.show');
+Route::get('/categories/{slug}', function ($slug) {
+    $category = Category::where('slug', $slug)->first();
+    return view('categories.show', ['category' => $category]);
 })->name('categories-show');
 
 Route::get('/cart', function () {

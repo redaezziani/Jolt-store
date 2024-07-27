@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <title>{{ $title ?? 'My App' }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-    <link rel="icon" href="{{ asset('icon.png') }}" />
+    <link rel="icon" href="{{ asset('favicon.ico') }}" />
     <!-- Styles -->
     @vite('resources/css/app.css')
     @livewireStyles
@@ -17,7 +17,7 @@
 
 <body class="relative flex flex-col items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden">
     {{ $slot }}
-    
+
     <!-- Scripts -->
     @vite('resources/js/app.js')
     @livewireScripts

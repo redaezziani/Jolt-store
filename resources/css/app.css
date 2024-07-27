@@ -32,3 +32,8 @@ button {
 .ghost {
     @apply text-primary underline-offset-4 hover:underline;
 }
+
+.scroll{
+    width: 300px;
+    height: 300px;
+}
