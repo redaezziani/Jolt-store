@@ -9,7 +9,8 @@ class NewCategory extends Component
 {
     public function render()
     {
-        $latestCategory = Category::latest()->first(); // get the latest category
+        // randomize the categories
+        $latestCategory = Category::inRandomOrder()->first();
         return view('livewire.new-category', ['latestCategory' => $latestCategory]);
     }
 }

@@ -1,6 +1,9 @@
 <article
-class="w-full relative h-72 rounded-md border border-neutral-400/15 flex justify-center overflow-hidden  mt-10 items-center"
+class="w-full  relative h-72 rounded-md border border-neutral-400/15 flex justify-center overflow-hidden  mt-10 items-center"
 >
+<div class="w-full z-10 h-full bg-black/30 absolute">
+
+</div>
 <img
 src="{{ asset('storage/' . $latestCategory->cover_img) }}"
 alt="{{ $latestCategory->name }}"
@@ -10,7 +13,7 @@ class="w-full absolute z-0 h-full object-cover"
 <h3 class=" text-neutral-50 text-3xl font-bold">
 {{ $latestCategory->name }}
 </h3>
-<p class=" text-base text-neutral-50/80">
+<p class=" text-base text-neutral-50/90">
 {{ $latestCategory->description }}
 </p>
 

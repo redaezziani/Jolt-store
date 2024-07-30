@@ -17,8 +17,10 @@
         "@fontsource-variable/onest": "^5.0.4",
         "@tailwindcss/forms": "^0.5.7",
         "@tailwindcss/typography": "^0.5.13",
+        "apexcharts": "^3.51.0",
         "date-fns": "^3.6.0",
         "gsap": "^3.12.5",
+        "lodash": "^4.17.21",
         "preline": "^2.4.0"
     }
 }

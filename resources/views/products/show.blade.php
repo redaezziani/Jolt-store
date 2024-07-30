@@ -102,6 +102,8 @@
                 @endif
 
             </div>
+
+            <livewire:add-to-cart :product="$product" />
         </div>
         @include('components.custom.footer-page')
     </x-store-layout>
