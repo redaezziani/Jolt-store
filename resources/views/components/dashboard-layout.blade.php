@@ -12,7 +12,7 @@
         {{ $keywords }}
     </x-slot>
 
-    <div class="relative flex items-center    justify-start w-full h-screen gap-2 overflow-hidden">
+    <div class="relative flex items-center bg-teal-800    justify-start w-full h-screen gap-2 overflow-hidden">
         @include('components.custom.sheet-side')
         @include('components.custom.side-bar')
         <div

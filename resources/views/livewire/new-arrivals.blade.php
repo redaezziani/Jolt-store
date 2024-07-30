@@ -10,21 +10,27 @@
                 </svg>
             </span>
             <div
-                class="relative flex justify-center items-center  rounded-md w-full aspect-[9/12] h-auto overflow-hidden">
+                class="relative flex justify-center items-center  rounded-md w-full aspect-[9/12] h-auto ">
                 <img src="{{ asset('storage/' . $product->cover_img) }}" alt="{{ $product->name }}"
                     class="w-full h-full object-cover">
+                    {{-- @if ($product->discounts.length>0)
+                    <span
+                class=" absolute overflow-hidden flex justify-start items-center min-w-32  -bottom-2 bg-teal-800 text-amber-200 text-xs font-bold px-2 py-1  left-0">
+                {{ $product->discounts->last()->name }}  {{ $product->discounts->last()->value }}% off
+
+               </span>
+                    @endif --}}
+
             </div>
             <div class="flex w-full mt-2 justify-between items-center gap-2">
                 <div class="flex flex-col">
-                    <a href="{{ route('products-show-details', $product) }}" class="  text-neutral-700">
+                    <a href="{{ route('products-show-details', $product) }}" class="  text-neutral-900 line-clamp-1">
                         {{ $product->name }}
                     </a>
                     <p class="   text-neutral-600">
                         {{ $product->price }} DH
                     </p>
-                    <p class=" text-neutral-500">
-                        {{ $product->category->name }}
-                    </p>
+
                 </div>
             </div>
         </article>

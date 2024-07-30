@@ -40,4 +40,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class); // Define the correct relationship
     }
+
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class); // Define the correct relationship
+    }
 }

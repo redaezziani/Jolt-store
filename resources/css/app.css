@@ -6,6 +6,14 @@
     --primary: #0077df;
     --secondary:#06182b;
     --rounded: 0rem;
+
+    /* custome color  Colors */
+
+    --red-600: #dc2626;
+    --black-600: #000000;
+    --teal-600: #14b8a6;
+    --amber-600: #f59e0b;
+    --indigo-600: ##4f46e5;
 }
 
 @layer utilities {

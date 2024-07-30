@@ -7,13 +7,15 @@
 <div
     class="w-full h-[80vh] overflow-hidden relative flex justify-center items-center gap-4 flex-col">
         <img class="w-full h-full absolute z-0 object-cover grayscale" src="{{ asset('storage/cover-web-hero.jpg') }}"
-            alt="hero-image" />
+        alt="hero-image" />
+        <div class="w-full bg-gradient-to-b from-black/25 via-transparent to-transparent z-10 absolute h-full">
+        </div>
             <h2
             id="title"
 
             class=" z-10 relative text-7xl font-semibold text-wrap text-white"
             >
-                Jolt Store <span id="b" class=" text-lime-300">.</span>
+                Jolt Store <span id="b" class=" text-teal-800">.</span>
             </h2>
             <p
             id="description"
@@ -25,7 +27,7 @@
 
             <button
             id="shopButton"
-            class=" z-10 absolute bottom-10 font-medium rounded-full text-white px-7 py-2.5  bg-lime-400 hover:bg-lime-400"
+            class=" z-10 absolute bottom-10 font-medium rounded-full text-white px-7 py-2.5  bg-teal-800 hover:bg-teal-800"
             >
                 Shop Now
             </button>
@@ -46,14 +48,19 @@
             </p>
             <livewire:new-arrivals
             >
+            <a href="{{ route('products-index') }}">
                 <button
                 class="  font-medium w-32  rounded-full text-white px-7 py-2.5  bg-primary hover:bg-primary/90"
                 >
                     See All
                 </button>
+            </a>
         </section>
         <section class="mt-10 pb-3 w-full flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
             <livewire:new-category>
         </section>
     </div>
+<div class="w-full grid max-w-[80%] grid-cols-3 justify-center items-center">
+    @include('components.custom.footer-page')
+</div>
 </x-store-layout>

@@ -19,6 +19,7 @@ new class extends Component {
             "name"=>$this->name,
             "description"=>$this->description,
             "cover_img"=> $coverImagePath,
+            "slug"=>\Str::slug($this->name)
         ]);
         // Reset form fields
         $this->reset();

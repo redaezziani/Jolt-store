@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Log;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::post('/scrape', function (Request $request) {
     $products = $request->all(); // Get the array of products
 
@@ -21,18 +20,17 @@ Route::post('/scrape', function (Request $request) {
             // Get cover image URL and download it
             $cover_img_url = $productData['cover_img'];
             $cover_img_name = time() . '_' . basename($cover_img_url);
-            // this nade to be like /public/products/cover_images/slug/cover_img_name
+            // this needs to be like /public/products/cover_images/slug/cover_img_name
             $cover_img_path = 'products/cover_images/' . $productData['slug'] . '/' . $cover_img_name;
             $cover_img_content = Http::get($cover_img_url)->body();
             Storage::disk('public')->put($cover_img_path, $cover_img_content);
-
 
             // Get previous images URLs, download them, and store paths
             $prev_imgs_urls = explode('@', $productData['prev_imgs']);
             $prev_imgs_paths = [];
             foreach ($prev_imgs_urls as $url) {
                 $img_name = time() . '_' . basename($url);
-                // this nade to be like /public/products/prev_images/slug/img_name
+                // this needs to be like /public/products/prev_images/slug/img_name
                 $img_path = 'products/prev_images/' . $productData['slug'] . '/' . $img_name;
                 $img_content = Http::get($url)->body();
                 Storage::disk('public')->put($img_path, $img_content);
@@ -48,8 +46,8 @@ Route::post('/scrape', function (Request $request) {
                 'prev_imgs' => $prev_imgs,
                 'quantity' => $productData['quantity'],
                 'rating' => $productData['rating'],
-                // make sure the price is a float value transformed from a string
-                'price' => (float) $productData['price'],// this is the line that was missing
+                // ensure price is converted to float
+                'price' => (float) $productData['price'],
                 'sizes' => $productData['sizes'] ?? '',
                 'colors' => $productData['colors'] ?? '',
                 'shipping' => $productData['shipping'] ?? 'Paid',

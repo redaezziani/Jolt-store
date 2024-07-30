@@ -1,4 +1,4 @@
-<img src="./readme/cover.png" 
+<img src="./readme/prev.png" 
 />
 
 ### Hyper Store - E-commerce Website

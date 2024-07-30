@@ -1,16 +1,20 @@
-<aside class=" w-96  left-0 top-0 h-screen sticky hidden  md:flex flex-col gap-4 justify-start items-center px-3 py-6">
+<aside class=" w-96  left-0 top-0 h-screen sticky hidden  md:flex flex-col gap-4 justify-start items-center px-2 py-2">
     <aside class="flex  flex-col w-full h-screen px-5 py-8">
-        <a href="{{ route('dashboard-index') }}" class="flex items-center gap-2">
-            <img class="w-auto h-20 -ml-8" src="{{ asset('icon.png') }}" alt="logo">
-            <span class="text-2xl font-bold text-gray-800 dark:text-white">
-                Hyper Store
+        <a href="{{ route('dashboard-index') }}" class="flex mt-12 items-center justify-start ">
+            <svg fill="none" class="text-white size-10 mt-2" viewBox="0 0 256 256" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="m200.035 48.61c-4.67-27.94-29.16-48.61-29.16-48.61v30.78l-14.54 3.75-9.11-10.97-4.81 9.46c-9.92-2.7-23.58-4.44-42.37-4.44-18.7901 0-32.4501 1.75-42.3701 4.44l-4.81-9.46-9.11 10.97-14.54-3.75v-30.78s-24.48997 20.67-29.1599684 48.61l32.1399684 11.12c1.05 19.43 9.79 71.88 12.29 76.64 2.66 5.07 16.78 19.56 27.83 25.13 0 0 4-4.23 6.44-7.96 3.1 3.65 19.11 16.45 21.3001 16.45 2.19 0 18.2-12.79 21.3-16.45 2.44 3.73 6.44 7.96 6.44 7.96 11.05-5.57 25.17-20.06 27.83-25.13 2.5-4.76 11.24-57.21 12.29-76.64l32.14-11.12zm-46.19 44.74-21.75 1.94 1.91 26.67s-13.23 10.95-33.96 10.95c-20.7301 0-33.9601-10.95-33.9601-10.95l1.91-26.67-21.75-1.94-3.72-30.04 36.05 12.48-2.8 37.39c6.7 1.7 13.75 3.39 24.2801 3.39 10.53 0 17.57-1.69 24.27-3.39l-2.8-37.39 36.05-12.48-3.72 30.04z"
+                    fill="#ffff"></path>
+            </svg>
+            <span class="text-2xl font-bold text-white">
+                Jolt.
             </span>
         </a>
 
         <div class="flex flex-col justify-between flex-1 mt-6">
             <nav class="-mx-3 space-y-3 ">
                 <a href="{{ route('dashboard-index') }}"
-                    class="flex items-center px-3 py-2 text-gray-900 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    class="flex items-center px-3 py-2 text-gray-50 transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-amber-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -21,7 +25,7 @@
                 </a>
 
                 <a href="{{ route('dashboard-products-index') }}"
-                    class="flex items-center px-3 py-2 text-gray-900 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    class="flex items-center px-3 py-2 text-gray-50 transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-amber-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round"
@@ -41,7 +45,7 @@
 
 
                 <a href="{{ route('dashboard-orders-index') }}"
-                    class="flex items-center px-3 py-2 text-gray-900 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    class="flex items-center px-3 py-2 text-gray-50 transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-amber-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round"
@@ -59,7 +63,7 @@
                 </a>
 
                 <a href="{{ route('dashboard-customers-index') }}"
-                    class="flex items-center px-3 py-2 text-gray-900 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    class="flex items-center px-3 py-2 text-gray-50 transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-amber-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-star">
@@ -80,19 +84,19 @@
 
             </nav>
 
-            <div>
+            <div
+            class=" mt-10"
+            >
                 <div class="flex items-center justify-between">
-                    <h2 class="text-base  text-gray-800 dark:text-white">
+                    <h2 class="text-base  text-gray-50 dark:text-white">
                         Conatact Devloper
                     </h2>
-
-
                 </div>
 
-                <nav class="mt-4 -mx-3 space-y-3 ">
+                <nav class="mt-7 -mx-3 space-y-3 ">
                     <a href="https://github.com/redaezziani">
                         <button
-                            class="flex items-center justify-between w-full px-3 py-1 text-xs font-medium text-gray-900 transition-colors duration-300 transform rounded-md dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            class="flex items-center justify-between w-full px-3 py-1 text-xs font-medium text-gray-50 transition-colors duration-300 transform rounded-md dark:text-amber-300  dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-amber-200">
                             <div class="flex items-center gap-x-2 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -115,7 +119,7 @@
                     </a>
                     <a href="https://www.linkedin.com/in/reda-ezziani-43a121295/">
                         <button
-                            class="flex items-center justify-between w-full px-3 py-1 text-xs font-medium text-gray-900 transition-colors duration-300 transform rounded-md dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                            class="flex items-center justify-between w-full px-3 py-1 text-xs font-medium text-gray-50 transition-colors duration-300 transform rounded-md dark:text-amber-300  dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-amber-200">
                             <div class="flex items-center gap-x-2 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
