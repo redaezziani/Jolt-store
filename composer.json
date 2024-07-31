@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
         "livewire/volt": "^1.6",
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "stripe/stripe-php": "^15.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

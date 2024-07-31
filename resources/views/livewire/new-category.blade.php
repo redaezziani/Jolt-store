@@ -1,5 +1,5 @@
 <article
-class="w-full  relative h-72 rounded-md border border-neutral-400/15 flex justify-center overflow-hidden  mt-10 items-center"
+class="w-full  relative h-72 rounded-none border border-neutral-400/15 flex justify-center overflow-hidden  mt-10 items-center"
 >
 <div class="w-full z-10 h-full bg-black/30 absolute">
 

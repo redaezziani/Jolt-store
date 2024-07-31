@@ -1,6 +1,6 @@
 <x-button
     wire:click="addToCart({{ $product->id }})"
-class="default font-bold mt-5 flex gap-x-2 justify-center items-center"
+class="default font-bold  flex gap-x-2 justify-center items-center"
 >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none">
         <path

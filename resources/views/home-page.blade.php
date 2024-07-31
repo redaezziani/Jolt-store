@@ -25,12 +25,7 @@
                 don't miss the chance injoy shopping with us with the best quality and price you can find.
             </p>
 
-            <button
-            id="shopButton"
-            class=" z-10 absolute bottom-10 font-medium rounded-full text-white px-7 py-2.5  bg-teal-800 hover:bg-teal-800"
-            >
-                Shop Now
-            </button>
+
     </div>
     <div class="relative px-6 flex items-center flex-col justify-start w-full min-h-screen gap-2 overflow-hidden">
         <section class="mt-10 pb-3 flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
@@ -48,13 +43,7 @@
             </p>
             <livewire:new-arrivals
             >
-            <a href="{{ route('products-index') }}">
-                <button
-                class="  font-medium w-32  rounded-full text-white px-7 py-2.5  bg-primary hover:bg-primary/90"
-                >
-                    See All
-                </button>
-            </a>
+            
         </section>
         <section class="mt-10 pb-3 w-full flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
             <livewire:new-category>

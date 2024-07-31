@@ -117,7 +117,9 @@
                 @endif
 
             </div>
-
-            <livewire:add-to-cart :product="$product" />
+            <div class="flex gap-x-5 mt-5 justify-start items-center">
+                <livewire:add-to-cart :product="$product" />
+                @include('components.check-order')
+            </div>
         </div>
 </x-store-layout>
