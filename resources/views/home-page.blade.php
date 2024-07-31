@@ -59,8 +59,32 @@
         <section class="mt-10 pb-3 w-full flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
             <livewire:new-category>
         </section>
+
+        <section class="mt-10 pb-3 flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
+            <h3
+
+            class=" text-neutral-900 text-3xl font-bold"
+            >
+                Random Products
+            </h3>
+
+            <p
+            class=" text-base text-center max-w-3xl text-neutral-800"
+            >
+            see some of our random products with the best quality and price you can find what you are looking for.
+            </p>
+            <livewire:random-products
+            >
+            <a href="{{ route('products-index') }}">
+                <button
+                class="  font-medium w-32  rounded-full text-white px-7 py-2.5  bg-primary hover:bg-primary/90"
+                >
+                    See All
+                </button>
+            </a>
+        </section>
     </div>
-<div class="w-full grid max-w-[80%] grid-cols-3 justify-center items-center">
+<div class="w-full grid max-w-7xl grid-cols-3 justify-center items-center">
     @include('components.custom.footer-page')
 </div>
 </x-store-layout>

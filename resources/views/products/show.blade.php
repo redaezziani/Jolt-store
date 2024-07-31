@@ -6,7 +6,7 @@
 
     <div class="w-full mt-24 gap-6 px-3 md:max-w-[75%] grid grid-cols-1 md:grid-cols-3">
         <div class="col-span-3 flex">
-            @include('components.path-link',['product' => $product])
+            @include('components.path-link', ['product' => $product])
         </div>
         {{-- the product slide image --}}
         @include('components.custom.product.product-slide-image')
@@ -19,9 +19,7 @@
                 {{ $product->name }}
             </h2>
             <p class=" text-neutral-600 mt-4 text-base">
-                this is a description for the product , the best product in the world and you will love it.
-                just simple text to fill the space and make the product looks good.
-                to fill the space and make the product looks good.
+                {{ $product->description }}
             </p>
             <div class="flex flex-col gap-3 justify-start items-start">
                 <p class=" text-neutral-700 text-lg">
@@ -57,14 +55,13 @@
                             <label class=" cursor-pointer" for="{{ $color }}">
                                 <input value="{{ $color }}" aria-label="size" hidden class=" peer hidden"
                                     type="radio" name="size" id="{{ $color }}">
-                                <div
-                                {{--
+                                <div {{--
     --red-600: #dc2626;
     --black-600: #000000;
     --teal-600: #14b8a6;
     --amber-600: #f59e0b;
     --indigo-600: ##4f46e5; lets make the bg and ring --}}
-                                  style="
+                                    style="
                                   background-color: @if ($color == 'red') #dc2626 @elseif ($color == 'black') #000000 @elseif ($color == 'teal') #14b8a6 @elseif ($color == 'amber') #f59e0b @elseif ($color == 'indigo') #4f46e5 @endif
 
                                   "
@@ -84,26 +81,43 @@
             <div class="w-full">
 
             </div>
-            <div class="flex mt-4 flex-col gap-2 justify-start items-start">
-                <p class=" text-neutral-700">
+            <div class="flex mt-4  gap-2 justify-start items-start">
+                <span
+                    class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                        color="#000000" fill="none">
+                        <path
+                            d="M19.5 17.5C19.5 18.8807 18.3807 20 17 20C15.6193 20 14.5 18.8807 14.5 17.5C14.5 16.1193 15.6193 15 17 15C18.3807 15 19.5 16.1193 19.5 17.5Z"
+                            stroke="currentColor" stroke-width="1.5" />
+                        <path
+                            d="M9.5 17.5C9.5 18.8807 8.38071 20 7 20C5.61929 20 4.5 18.8807 4.5 17.5C4.5 16.1193 5.61929 15 7 15C8.38071 15 9.5 16.1193 9.5 17.5Z"
+                            stroke="currentColor" stroke-width="1.5" />
+                        <path
+                            d="M14.5 17.5H9.5M15 15.5V7C15 5.58579 15 4.87868 14.5607 4.43934C14.1213 4 13.4142 4 12 4H5C3.58579 4 2.87868 4 2.43934 4.43934C2 4.87868 2 5.58579 2 7V15C2 15.9346 2 16.4019 2.20096 16.75C2.33261 16.978 2.52197 17.1674 2.75 17.299C3.09808 17.5 3.56538 17.5 4.5 17.5M15.5 6.5H17.3014C18.1311 6.5 18.5459 6.5 18.8898 6.6947C19.2336 6.8894 19.4471 7.2451 19.8739 7.95651L21.5725 10.7875C21.7849 11.1415 21.8911 11.3186 21.9456 11.5151C22 11.7116 22 11.918 22 12.331V15C22 15.9346 22 16.4019 21.799 16.75C21.6674 16.978 21.478 17.1674 21.25 17.299C20.9019 17.5 20.4346 17.5 19.5 17.5"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
                     {{ $product->shipping }}
-                </p>
-                @if ($product->shipping == 'Paid Shipping')
-                    <div
-                        class="w-full flex flex-col gap-2 rounded-lg justify-start items-start p-2 h-28 border bg-amber-100 border-amber-500 text-amber-600">
-                        <p class=" text-lg font-semibold">
-                            Disclaimer !
-                        </p>
-                        <p class=" text-sm text-amber-500">
-                            this product is shipped by the seller and the shipping cost is on the buyer. the shipping
-                            cost will be calculated based on the buyer location and the shipping company.
-                        </p>
-                    </div>
+                </span>
+                {{-- prodcut have a discount --}}
+                @if ($product->discounts->count() > 0)
+                    <span
+                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                            color="#000000" fill="none">
+                            <path
+                                d="M7.83152 21.3478L7.31312 20.6576C6.85764 20.0511 5.89044 20.1 5.50569 20.7488C4.96572 21.6595 3.5 21.2966 3.5 20.2523V3.74775C3.5 2.7034 4.96572 2.3405 5.50569 3.25115C5.89044 3.90003 6.85764 3.94888 7.31312 3.34244L7.83152 2.65222C8.48467 1.78259 9.84866 1.78259 10.5018 2.65222L10.5833 2.76076C11.2764 3.68348 12.7236 3.68348 13.4167 2.76076L13.4982 2.65222C14.1513 1.78259 15.5153 1.78259 16.1685 2.65222L16.6869 3.34244C17.1424 3.94888 18.1096 3.90003 18.4943 3.25115C19.0343 2.3405 20.5 2.7034 20.5 3.74774V20.2523C20.5 21.2966 19.0343 21.6595 18.4943 20.7488C18.1096 20.1 17.1424 20.0511 16.6869 20.6576L16.1685 21.3478C15.5153 22.2174 14.1513 22.2174 13.4982 21.3478L13.4167 21.2392C12.7236 20.3165 11.2764 20.3165 10.5833 21.2392L10.5018 21.3478C9.84866 22.2174 8.48467 22.2174 7.83152 21.3478Z"
+                                stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                            <path d="M15 9L9 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M15 15H14.991M9.00897 9H9" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        {{ $product->discounts->last()->name }} {{ $product->discounts->last()->value }}% off
+                    </span>
                 @endif
 
             </div>
 
             <livewire:add-to-cart :product="$product" />
         </div>
-        @include('components.custom.footer-page')
-    </x-store-layout>
+</x-store-layout>

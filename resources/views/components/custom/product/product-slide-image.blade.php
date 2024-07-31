@@ -3,7 +3,7 @@
 x-data="{ currentImage: '{{ asset('storage/' . $product->cover_img) }}' }"
 x-on:click="currentImage = $event.target.src"
 
-class=" col-span-1 w-full flex flex-col gap-2 justify-start items-start">
+class=" col-span-1  w-full flex flex-col gap-2 justify-start items-start">
     <div aria-label="product-image"
         class="w-full flex justify-center border border-neutral-400/35 bg-neutral-200 items-center rounded-none aspect-[9/12] overflow-hidden">
         <img

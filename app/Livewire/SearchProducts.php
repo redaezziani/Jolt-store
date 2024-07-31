@@ -8,10 +8,10 @@ use Livewire\Component;
 class SearchProducts extends Component
 {
     public $search = '';
-
+    protected $queryString = ['search'];
     public function render()
     {
-        if (strlen($this->search) < 2) {
+        if (strlen($this->search) < 1) {
             return view('livewire.search-products', ['products' => []]);
         }
 

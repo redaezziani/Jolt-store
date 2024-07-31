@@ -8,7 +8,7 @@ return [
         'page_title' => 'Sign in',
         'headline' => 'Sign in',
         'subheadline' => 'Login to your account below',
-        'show_subheadline' => false,
+        'show_subheadline' => true,
         'email_address' => 'Email Address',
         'password' => 'Password',
         'edit' => 'Edit',

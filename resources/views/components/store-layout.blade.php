@@ -1,7 +1,8 @@
 @props(['title', 'description', 'keywords'])
 
 <x-layout>
-    @include('components.cart-side-bar')
+    @include('components.notification-toaster')
+    <livewire:cart-side-bar>
     <livewire:search-products>
     <x-slot name="title">
         {{ $title }}
