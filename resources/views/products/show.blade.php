@@ -75,9 +75,16 @@
             </div>
             {{-- the quantity of the product --}}
             @include('components.custom.product.quantity-input')
-            <p class=" text-lg mt-2 font-bold text-primary">
+           <div class="flex gap-3">
+            <p class=" text-lg line-through mt-2 text-neutral-400">
                 {{ $product->price }} DH
             </p>
+
+            <p class=" text-lg font-bold mt-2 text-primary">
+                {{ $product->price - ($product->price * $product->discounts->last()->value / 100) }} DH
+            </p>
+
+           </div>
             <div class="w-full">
 
             </div>
