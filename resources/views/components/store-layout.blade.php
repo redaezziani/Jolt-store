@@ -49,7 +49,7 @@
                 <div
                    x-data
                      x-on:click="$dispatch('search-side-bar-open')"
-                    class="text-sm font-semibold flex  gap-x-2 justify-start items-center text-neutral-800 ">
+                    class="text-sm font-semibold flex cursor-pointer  gap-x-2 justify-start items-center text-neutral-800 ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">

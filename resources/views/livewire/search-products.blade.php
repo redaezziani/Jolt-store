@@ -28,7 +28,9 @@
             <div class="flex w-full justify-start items-start gap-2">
                 <img src="{{ asset('storage/' . $product->cover_img) }}" alt="{{$product->name }}"
                 class="w-16 h-16 object-cover rounded-md">
-            <div class="flex flex-col justify-start items-start">
+            <a
+            href="{{ route('products-show-details', $product) }}"
+            class="flex flex-col justify-start items-start">
                 <h3 class="  text-neutral-600 text-sm font-medium line-clamp-1">
                     {{ $product->name }}
                 </h3>
@@ -43,7 +45,7 @@
                 </span>
                 @endif
             </div>
-            </div>
+        </a>
             @endforeach
         </div>
     </aside>

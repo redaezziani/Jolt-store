@@ -1,5 +1,3 @@
-@props(['title' => 'Success', 'message' => ''])
-
 <div x-data="toastNotification()" x-init="init()"
     x-show="show"
     x-on:open-toast-notification.window="

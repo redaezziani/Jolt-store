@@ -33,9 +33,17 @@ class AddToCart extends Component
             $cartItem->quantity += 1;
             $cartItem->save();
 
+          // lets dispatch
+          /*
+           x-on:open-toast-notification.window="
+        openToast($event.detail.variant, $event.detail.title, $event.detail.message);
+    "
+          */
+
             $this->dispatch('open-toast-notification', [
-                'type' => 'success',
-                'message' => 'Product added to cart successfully',
+                'variant' => 'success',
+                'title' => 'Success',
+                'message' => 'Product added to cart',
             ]);
         } else {
             $cart->items()->create([
@@ -47,8 +55,10 @@ class AddToCart extends Component
             $this->dispatch('open-toast-notification', [
                 'variant' => 'success',
                 'title' => 'Success',
-                'message' => 'Product added to cart successfully',
+                'message' => 'Product added to cart',
             ]);
+
+
         }
     }
 
