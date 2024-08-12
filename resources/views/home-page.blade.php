@@ -24,11 +24,9 @@
                 Shop from Jolt Store  and get the 60% off on all products just for this week ,
                 don't miss the chance injoy shopping with us with the best quality and price you can find.
             </p>
-
-
     </div>
-    <div class="relative px-6 flex items-center flex-col justify-start w-full min-h-screen gap-2 overflow-hidden">
-        <section class="mt-10 pb-3 flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
+    <div class="relative  flex items-center flex-col justify-start w-full min-h-screen gap-2 overflow-hidden">
+        <section class="mt-10 pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
             <h3
 
             class=" text-neutral-900 text-3xl font-bold"
@@ -43,13 +41,13 @@
             </p>
             <livewire:new-arrivals
             >
-            
+
         </section>
-        <section class="mt-10 pb-3 w-full flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
+        <section class="mt-5 pb-3 w-full flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
             <livewire:new-category>
         </section>
 
-        <section class="mt-10 pb-3 flex flex-col gap-4 justify-center items-center md:max-w-[70%]">
+        <section class="mt-10 pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
             <h3
 
             class=" text-neutral-900 text-3xl font-bold"

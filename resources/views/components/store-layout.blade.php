@@ -2,6 +2,7 @@
 
 <x-layout>
     @include('components.notification-toaster')
+    @include('components.nav-sheet')
     <livewire:cart-side-bar>
     <livewire:search-products>
     <x-slot name="title">
@@ -14,15 +15,15 @@
         {{ $keywords }}
     </x-slot>
     <header class=" w-full z-50 max-w-full bg-white/15 border-b border-teal-700/35 flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
-        <span id="wrapper" class=" w-full justify-center flex h-8 bg-teal-600 items-center overflow-hidden relative">
-            <h1 class=" text-neutral-800   text-sm font-bold capitalize">
+        <span id="wrapper" class=" w-full justify-center flex h-8 bg-teal-800 text-amber-200 items-center overflow-hidden relative">
+            <h1 class="    text-sm font-bold capitalize">
                 The new Collection in our store is all with a <span
-                    class=" text-white bg-primary rounded-full px-3 py-0.5">60% off</span>
+                    class=" bg-white text-primary rounded-full px-3 py-0.5">33% off</span>
             </h1>
         </span>
         <nav
         id="nav-bar"
-        class=" w-full backdrop-blur-sm  border-neutral-400/35 flex justify-between md:max-w-[85%] items-center py-2 px-6">
+        class=" w-full backdrop-blur-sm  border-neutral-400/35 flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-6">
             <div class="flex gap-x-4 justify-end items-end">
                 <a class=" text-teal-800 font-bold text-3xl" href={{ route('home') }}
                 >
@@ -63,7 +64,7 @@
                 </div>
 
                 <div
-                    class="text-sm font-semibold flex  gap-x-2 justify-start items-center text-neutral-800 ">
+                    class="text-sm font-semibold hidden sm:flex  gap-x-2 justify-start items-center text-neutral-800 ">
                    <livewire:bag-cart />
                     <a
                     href="{{ route('login') }}"
@@ -82,15 +83,17 @@
                         </p>
                     </a>
                 </div>
-                <svg class=" flex md:hidden" aria-label='open-menu' xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24' width="20" height="20" fill='none'>
-                    <path d='M4 5L20 5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
-                        stroke-linejoin='round' />
-                    <path d='M4 12L20 12' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
-                        stroke-linejoin='round' />
-                    <path d='M4 19L20 19' stroke='currentColor' stroke-width='1.5' stroke-inecap='round'
-                        stroke-inejoin='round' />
-                </svg>
+               <div class=" rounded-md border flex md:hidden border-neutral-400/60 text-neutral-600 p-1">
+                <svg class=" " aria-label='open-menu' xmlns='http://www.w3.org/2000/svg'
+                viewBox='0 0 24 24' width="20" height="20" fill='none'>
+                <path d='M4 5L20 5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
+                    stroke-linejoin='round' />
+                <path d='M4 12L20 12' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
+                    stroke-linejoin='round' />
+                <path d='M4 19L20 19' stroke='currentColor' stroke-width='1.5' stroke-inecap='round'
+                    stroke-inejoin='round' />
+            </svg>
+               </div>
             </div>
         </nav>
     </header>

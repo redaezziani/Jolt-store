@@ -31,6 +31,7 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
            </button>
         </div>
         <div class="flex flex-col mt-4 w-full justify-start items-start gap-3">
+            @if ($cartItems)
             @foreach ($cartItems as $item)
                 <div class="w-full flex gap-3  justify-between items-center">
                   <div class="flex w-full justify-start items-start gap-2">
@@ -41,7 +42,14 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                         {{ $item->product->name }}
                     </h3>
                     <p class="text-neutral-700 text-sm">
-                        {{ $item->quantity }} x {{ $item->product->price }} DH
+                        @php
+                        $quantity = is_numeric($item->quantity) ? (float)$item->quantity : 0;
+                        $price = is_numeric($item->product->price) ? (float)$item->product->price : 0;
+                        $total = $quantity * $price;
+                    @endphp
+
+                    {{ $quantity }} x {{ number_format($price, 2, ',', '.') }} DH = {{ number_format($total, 2, ',', '.') }} DH
+
                     </p>
                 </div>
                   </div>
@@ -60,6 +68,7 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                     </button>
                 </div>
             @endforeach
+            @endif
         </div>
     </aside>
 </div>

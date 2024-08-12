@@ -16,7 +16,7 @@ class CartSideBar extends Component
     public function removeFromCart($itemId)
     {
         $cartItem = CartItem::find($itemId);
-       // this is the cart item that we want to remove
+        // this is the cart item that we want to remove
         if ($cartItem) {
             $cartItem->delete();
             $this->cartItems = $this->cartItems->except($itemId);
@@ -31,6 +31,6 @@ class CartSideBar extends Component
                 $this->cartItems = $cart->items;
             }
         }
-        return view('livewire.cart-side-bar', ['cartItems' => $this->cartItems]);
+        return view('livewire.cart-side-bar', ['cartItems' => []]);
     }
 }

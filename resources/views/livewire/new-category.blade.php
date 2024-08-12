@@ -1,7 +1,7 @@
 <article
 class="w-full  relative h-72 rounded-none border border-neutral-400/15 flex justify-center overflow-hidden  mt-10 items-center"
 >
-<div class="w-full z-10 h-full bg-black/30 absolute">
+<div class="w-full z-10 h-full  bg-gradient-to-b from-transparent via-black/40  to-black/70 absolute">
 
 </div>
 <img
@@ -9,11 +9,11 @@ src="{{ asset('storage/' . $latestCategory->cover_img) }}"
 alt="{{ $latestCategory->name }}"
 class="w-full absolute z-0 h-full object-cover"
 >
-<div class="flex flex-col p-3 w-[80%] text-white  gap-3 z-10 justify-start items-start">
+<div class="flex flex-col p-3 w-[80%]  text-white  gap-3 z-10 justify-start items-start">
 <h3 class=" text-neutral-50 text-3xl font-bold">
 {{ $latestCategory->name }}
 </h3>
-<p class=" text-base text-neutral-50/90">
+<p class=" text-base text-neutral-50/90 line-clamp-4">
 {{ $latestCategory->description }}
 </p>
 

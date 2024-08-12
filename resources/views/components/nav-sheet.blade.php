@@ -1,7 +1,7 @@
 <div
 wire:poll.100ms
 x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
-    x-on:keydown.shift.tab="open = false" x-on:open-sheet.window="open = true" x-on:close-sheet.window="open = false"
+    x-on:keydown.shift.tab="open = false" x-on:nav-sheet-open.window="open = true" x-on:nav-sheet-close.window="open = false"
     x-on:click.outside="open = false" x-show="open" style="display: none"
     class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0">
     <div x-on:click="open = false" class="w-full z-[1] overflow-hidden h-screen backdrop-blur-sm bg-black/20"></div>
@@ -15,7 +15,7 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
             <p
             class="text-2xl flex font-semibold text-neutral-800"
             >
-                Dashboard Menu
+                Nav Menu
             </p>
            <button
               x-on:click="open = false"

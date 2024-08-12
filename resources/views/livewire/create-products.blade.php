@@ -136,7 +136,7 @@
             @enderror
         </div>
 
-        <div class="mb-4 flex flex-col items-start justify-start gap-2">
+        <div class="mb-4 flex flex-col w-full md:w-fit items-start justify-start gap-2">
             <x-label for="quantity">Your Product Quantity </x-label>
             <x-input wire:model="quantity" min="0" type="number" id="quantity" placeholder="" />
             @error('quantity')
@@ -144,7 +144,7 @@
             @enderror
         </div>
     </div>
-    <div class="flex  items-center flex-wrap md:w-[38rem] justify-start gap-4">
+    <div class="flex  items-center flex-wrap md:w-[38rem] justify-between md:justify-start gap-4">
         <div class="mb-4 flex flex-col items-start justify-start gap-2">
             <x-label for="shipping">Your Product Shipping Type </x-label>
             <!-- Select -->
@@ -152,10 +152,10 @@
     <select wire:ignore wire:model='shipping' data-hs-select='{
         "placeholder": "Select option...",
         "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500",
+        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-teal-800",
         "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
         "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
-        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+        "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-teal-900 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
         "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
       }' class="hidden">
         <option value="Free">Free Shipping</option>
@@ -169,13 +169,7 @@
             @enderror
  </div>
 
-        <div class="mb-4 flex flex-col items-start justify-start gap-2">
-            <x-label for="quantity">Your Product Price </x-label>
-            <x-input wire:model="price" min="0" type="number" id="price" placeholder="" />
-            @error('price')
-                <p class="text-red-500 text-sm">{{ $message }}</p>
-            @enderror
-        </div>
+
 
         <div class="mb-4 flex flex-col items-start justify-start gap-2">
             <x-label for="category_id">Your Product Category </x-label>
@@ -183,10 +177,10 @@
                 <select wire:ignore wire:model='category_id' data-hs-select='{
                     "placeholder": "Select option...",
                     "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500",
+                    "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-teal-800",
                     "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
                     "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
-                    "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+                    "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-teal-900 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
                     "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
                   }' class="hidden">
                     @foreach ($categories as $category)
@@ -199,13 +193,20 @@
                 <p class="text-red-500 text-sm">{{ $message }}</p>
             @enderror
         </div>
+        <div class="mb-4 flex flex-col w-full md:w-fit items-start justify-start gap-2">
+            <x-label for="quantity">Your Product Price </x-label>
+            <x-input wire:model="price" min="0" type="number" id="price" placeholder="" />
+            @error('price')
+                <p class="text-red-500 text-sm">{{ $message }}</p>
+            @enderror
+        </div>
     </div>
     <div class="flex gap-x-2  flex-wrap">
-        <div class="mb-4 flex flex-col items-start justify-start gap-2">
+        <div class="mb-4 flex flex-col  items-start justify-start gap-2">
             <x-label for="cover_img">Your image cover </x-label>
             <div>
                 <label for="dropzone-file"
-                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border border-gray-300  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -232,7 +233,7 @@
             <x-label for="prev_imgs">Your prev images </x-label>
             <div>
                 <label for="prev_imgs"
-                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border border-gray-300  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -259,12 +260,12 @@
              @endif
         </div>
     </div>
-    
+
     <div class="flex gap-x-4 w-full justify-end items-center">
-        <x-button class="outline" wire:click='cancelProduct' wire:ignore>
+        <x-button class="outline w-1/2 md:w-fit" wire:click='cancelProduct' wire:ignore>
             Cancel
         </x-button>
-        <x-button wire:click='createProduct' wire:loading.attr="disabled" id="submit" class="default">
+        <x-button wire:click='createProduct' wire:loading.attr="disabled" id="submit" class="default w-1/2 md:w-fit">
             <p wire:loading.class=' hidden' wire:target='#submit'>
                 Create Product
             </p>

@@ -1,5 +1,5 @@
 <x-button
-class=" outline font-bold  flex gap-x-2 justify-center items-center"
+class=" outline font-bold w-1/2  flex gap-x-2 justify-center items-center"
 >
     Check Order
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"  fill="none">

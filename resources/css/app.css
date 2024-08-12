@@ -16,6 +16,7 @@
     --teal-600: #14b8a6;
     --amber-600: #f59e0b;
     --indigo-600: ##4f46e5;
+
 }
 
 @layer utilities {
@@ -29,10 +30,10 @@ button {
     @apply inline-flex items-center justify-center text-sm font-medium transition-colors rounded-md focus-visible:ring-ring whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50;
 }
 .default {
-    @apply text-white shadow bg-primary hover:bg-primary/90;
+    @apply  shadow bg-primary text-amber-200  hover:bg-primary/90;
 }
 .destructive {
-    @apply text-white bg-red-500 shadow hover:bg-red-600;
+    @apply text-white bg-red-500 shadow  hover:bg-red-600;
 }
 
 .outline {

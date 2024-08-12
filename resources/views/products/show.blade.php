@@ -4,15 +4,14 @@
     keywords="product, {{ $product->name }}, details, information">
     >
 
-    <div class="w-full mt-24 gap-6 px-3 md:max-w-[75%] grid grid-cols-1 md:grid-cols-3">
-        <div class="col-span-3 flex">
+    <div class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
+        <div class="col-span-3 overflow-hidden flex">
             @include('components.path-link', ['product' => $product])
         </div>
-        {{-- the product slide image --}}
+
         @include('components.custom.product.product-slide-image')
-        {{-- the product details --}}
-        <div class="w-full md:w-2/3 flex gap-2 col-span-1 md:col-span-2  flex-col justify-start items-start">
-            <h3 class=" text-neutral-700 text-lg ">
+        <div class="w-full md:w-2/3 flex gap-2 col-span-3 md:col-span-2  flex-col justify-start items-start">
+            <h3 class=" text-neutral-700 -mt-2 underline underline-offset-2 text-lg ">
                 {{ $product->category->name }}
             </h3>
             <h2 class=" text-neutral-900 uppercase text-xl font-bold">
@@ -55,12 +54,7 @@
                             <label class=" cursor-pointer" for="{{ $color }}">
                                 <input value="{{ $color }}" aria-label="size" hidden class=" peer hidden"
                                     type="radio" name="size" id="{{ $color }}">
-                                <div {{--
-    --red-600: #dc2626;
-    --black-600: #000000;
-    --teal-600: #14b8a6;
-    --amber-600: #f59e0b;
-    --indigo-600: ##4f46e5; lets make the bg and ring --}}
+                                <div
                                     style="
                                   background-color: @if ($color == 'red') #dc2626 @elseif ($color == 'black') #000000 @elseif ($color == 'teal') #14b8a6 @elseif ($color == 'amber') #f59e0b @elseif ($color == 'indigo') #4f46e5 @endif
 
@@ -86,7 +80,6 @@
 
            </div>
             <div class="w-full">
-
             </div>
             <div class="flex mt-4  gap-2 justify-start items-start">
                 <span
@@ -124,7 +117,7 @@
                 @endif
 
             </div>
-            <div class="flex gap-x-5 mt-5 justify-start items-center">
+            <div class="flex w-full md:w-fit gap-x-3 md:gap-x-5 mt-5 pb-3 justify-start items-center">
                 <livewire:add-to-cart :product="$product" />
                 @include('components.check-order')
             </div>
