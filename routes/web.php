@@ -14,10 +14,11 @@ Route::get('/products', function () {
     return view('products.index');
 })->name('products-index');
 
-Route::get('/products-details/{product}', function ($product) {
-    $product = Product::find($product);
+Route::get('/products-details/{slug}', function ($slug) {
+    $product = Product::where('slug', $slug)->firstOrFail();
     return view('products.show', ['product' => $product]);
 })->name('products-show-details');
+
 
 Route::get('/categories/{slug}', function ($slug) {
     $category = Category::where('slug', $slug)->first();

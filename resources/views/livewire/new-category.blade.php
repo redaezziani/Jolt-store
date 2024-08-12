@@ -1,9 +1,11 @@
 <article
 class="w-full  relative h-72 rounded-none border border-neutral-400/15 flex justify-center overflow-hidden  mt-10 items-center"
 >
+@if ($latestCategory)
 <div class="w-full z-10 h-full  bg-gradient-to-b from-transparent via-black/40  to-black/70 absolute">
 
 </div>
+
 <img
 src="{{ asset('storage/' . $latestCategory->cover_img) }}"
 alt="{{ $latestCategory->name }}"
@@ -26,4 +28,6 @@ class="w-full absolute z-0 h-full object-cover"
 </button>
 </a>
 </div>
+@endif
+
 </article>

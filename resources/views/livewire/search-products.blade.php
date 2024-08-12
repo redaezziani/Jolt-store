@@ -29,7 +29,7 @@
                 <img src="{{ asset('storage/' . $product->cover_img) }}" alt="{{$product->name }}"
                 class="w-16 h-16 object-cover rounded-md">
             <a
-            href="{{ route('products-show-details', $product) }}"
+             href="{{ route('products-show-details', $product->slug) }}"
             class="flex flex-col justify-start items-start">
                 <h3 class="  text-neutral-600 text-sm font-medium line-clamp-1">
                     {{ $product->name }}

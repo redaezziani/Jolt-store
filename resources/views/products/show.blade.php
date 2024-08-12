@@ -75,7 +75,27 @@
             </p>
 
             <p class=" text-lg font-bold mt-2 text-primary">
-                {{ $product->price - ($product->price * $product->discounts->last()->value / 100) }} DH
+                @php
+                        $discountValue = optional($product->discounts->last())->value;
+                    @endphp
+                    {{-- lets take it and transform it from string to float --}}
+                    @php
+                        $discountValue = (float) $discountValue;
+                    @endphp
+                    {{-- lets take the price and transform it from string to float --}}
+                    @php
+                        $price = (float) $product->price;
+                    @endphp
+                    {{-- lets calculate the discount --}}
+                    @php
+                        $discount = ($discountValue / 100) * $price;
+                    @endphp
+                    {{-- lets calculate the new price --}}
+                    @php
+                        $newPrice = $price - $discount;
+                    @endphp
+                    {{ $newPrice }} DH
+
             </p>
 
            </div>

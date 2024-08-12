@@ -14,7 +14,7 @@
     <x-slot name="keywords">
         {{ $keywords }}
     </x-slot>
-    <header class=" w-full z-50 max-w-full bg-white/15 border-b border-teal-700/35 flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
+    <header class=" w-full z-50 max-w-full bg-white bg-white/15 border-b border-teal-700/35 flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
         <span id="wrapper" class=" w-full justify-center flex h-8 bg-teal-800 text-amber-200 items-center overflow-hidden relative">
             <h1 class="    text-sm font-bold capitalize">
                 The new Collection in our store is all with a <span
@@ -23,7 +23,7 @@
         </span>
         <nav
         id="nav-bar"
-        class=" w-full backdrop-blur-sm  border-neutral-400/35 flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-6">
+        class=" w-full backdrop-blur-sm   border-neutral-400/35 flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-6">
             <div class="flex gap-x-4 justify-end items-end">
                 <a class=" text-teal-800 font-bold text-3xl" href={{ route('home') }}
                 >

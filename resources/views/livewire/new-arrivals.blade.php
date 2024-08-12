@@ -4,7 +4,12 @@
            @include('components.custom.product.product-card', ['product' => $product])
         @endforeach
     </div>
-    <div class="w-full flex justify-end items-start">
+    <div class="w-full flex mt-5  justify-between items-start">
+
+        {{-- pagination --}}
+        {{ $new_arrivals->links('livewire::simple-tailwind') }}
+
+        {{-- see all --}}
         @if ($new_arrivals->count() > 0)
             <a href="{{ route('products-index') }}">
 
