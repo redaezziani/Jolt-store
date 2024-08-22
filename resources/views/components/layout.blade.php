@@ -17,12 +17,12 @@
     @vite('resources/css/app.css')
     @vite('resources/css/lib.css')
     @livewireStyles
+    @vite('resources/js/app.js')
 </head>
 
 <body class="relative flex flex-col  items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden">
     {{ $slot }}
     <!-- Scripts -->
-    @vite('resources/js/app.js')
     @livewireScripts
 </body>
 

@@ -69,7 +69,7 @@ class="mt-5 flex w-full flex-col">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{ $product->name }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap max-w-[26rem] truncate line-clamp-1">
+                                <td class="px-6 py-4 whitespace-nowrap max-w-[22rem] truncate line-clamp-1">
                                     <div class="text-sm text-gray-900">{{ $product->description }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -86,7 +86,7 @@ class="mt-5 flex w-full flex-col">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                    {{ str_replace('@', ' ', $product->colors) }}
                                 </td>
-                                <td class="px-6 py-4 truncate line-clamp-1 w-52 whitespace-nowrap">
+                                <td class="px-6 py-4 truncate line-clamp-1 w-32 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{ $product->category->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -131,7 +131,7 @@ class="mt-5 flex w-full flex-col">
             </div>
         </div>
         <div class="w-[99%] px-3 mt-2">
-            {{ $products->links() }}
+            {{ $products->links('livewire::simple-tailwind') }}
         </div>
     </div>
 

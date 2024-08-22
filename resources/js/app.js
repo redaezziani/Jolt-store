@@ -1,39 +1,50 @@
+import 'trix';
+import 'trix/dist/trix.css';
+import './datepicker.js'
+import './dashboard.js'
+
 import './bootstrap';
+// import './libs/trix';
 import 'preline';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
+// Ensure GSAP is loaded before this script runs
+document.addEventListener('DOMContentLoaded', function () {
+    // Title animation
+    gsap.from("#hero-title", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out"
+    });
 
-const title = document.querySelector('#title');
-const description = document.querySelector('#description');
-const shopButton = document.querySelector('#shopButton');
-const navbar = document.getElementById('nav-bar');
-const itemLinks = document.querySelectorAll('.item-link');
+    // Description animation with delay
+    gsap.from("#hero-description", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: 0.5,
+        ease: "power2.out"
+    });
 
-// GSAP animations for title and description
-gsap.from(title, {
-    duration: 1,
-    y: 20,
-    opacity: 0,
-    ease: 'expo.inOut',
-    delay: 1
-});
-
-gsap.from(description, {
-    duration: 1,
-    y: 20,
-    opacity: 0,
-    ease: 'expo.inOut',
-    delay: 1.4
-});
-
-gsap.from(shopButton, {
-    duration: 1,
-    y: 200,
-    opacity: 0,
-    ease: 'expo.inOut',
-    scale: 0.8,
-    delay: 1.6
+    // Button animation with delay
+    gsap.from("#hero-button button", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: 1,
+        ease: "power2.out",
+        onComplete: function() {
+            // Optional: Add a little bounce effect to the button after it appears
+            gsap.to("#hero-button button", {
+                scale: 1.05,
+                duration: 0.2,
+                yoyo: true,
+                repeat: 1
+            });
+        }
+    });
 });

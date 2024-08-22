@@ -11,25 +11,25 @@
     </span>
     <a
     href="{{ route('products-show-details', $product->slug) }}"
-    class="relative flex justify-center items-center  rounded-md w-full aspect-[9/12] h-auto ">
-        <img src="{{ asset('storage/' . $product->cover_img) }}" alt="{{ $product->name }}"
-            class="w-full h-full  object-cover">
+    class="relative flex justify-center items-center overflow-hidden rounded-none   w-full aspect-[9/12] h-auto ">
+        <img
+         src="{{ asset('storage/' . $product->cover_img) }}" alt="{{ $product->name }}"
+         class="w-full hover:scale-105 duration-500 transition-all ease-in-out  h-full  object-cover">
 
-        @if ($product->discounts->count() > 0)
+    </a>
+    <div class="flex w-full  justify-between items-center gap-2">
+        <div class=" flex flex-col gap-1 ">
+            @if ($product->discounts->count() > 0)
             <span
-                class=" absolute overflow-hidden flex justify-start items-center min-w-32  -bottom-2 bg-teal-800 text-amber-200 line-clamp-1 truncate text-xs font-bold px-2 py-1  left-0">
+                class="  overflow-hidden flex justify-start w-fit items-center min-w-32  -bottom-2 bg-primary text-amber-200 line-clamp-1 truncate text-xs font-bold px-2 py-1  left-0">
                 {{ $product->discounts->last()->name }} {{ $product->discounts->last()->value }}% off
             </span>
         @endif
-
-        </a>
-    <div class="flex w-full mt-4 justify-between items-center gap-2">
-        <div class="flex flex-col">
-            <a href="{{ route('products-show-details', $product->slug) }}" class="  text-neutral-900 line-clamp-1">
+            <a href="{{ route('products-show-details', $product->slug) }}" class="  text-slate-600 line-clamp-1">
                 {{ $product->name }}
             </a>
             <div class="flex gap-2">
-                <p class=" line-through text-neutral-600    ">
+                <p class=" line-through text-slate-600    ">
                     {{ $product->price }}
                 </p>
 

@@ -13,7 +13,7 @@
     </div>
 
     <a href="{{ route('dashboard-products-create') }}">
-        <x-button class="default  flex items-center justify-center gap-1 px-4 py-2 bg-teal-800 text-amber-200">
+        <x-button class="default  flex items-center justify-center gap-1 px-4 py-2 bg-primary text-amber-200">
 
             <p>
                 Create Product
@@ -21,6 +21,14 @@
         </x-button>
 
     </a>
+
+    <x-button
+    wire:click='deleteAllProducts()'
+    class="destructive  flex items-center justify-center gap-1 px-4 py-2 bg-primary text-amber-200">
+        <p>
+            delete all
+        </p>
+    </x-button>
     <div wire:ignore class="flex">
     </div>
 </div>

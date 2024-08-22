@@ -17,7 +17,7 @@ class SearchProducts extends Component
 
         $products = Product::where('name', 'like', '%' . $this->search . '%')
             ->orWhere('description', 'like', '%' . $this->search . '%')
-            ->get();
+            ->limit(8)->get();
         return view('livewire.search-products', ['products' => $products]);
     }
 }

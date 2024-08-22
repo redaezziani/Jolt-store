@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +11,13 @@ class CreateOrdersTable extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id(); // UUID as primary key
+            $table->id(); // Order ID as primary key
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Assuming orders are linked to users
             $table->decimal('total', 10, 2); // Total order amount
-            $table->string('status')->default('pending'); // Order status (e.g., pending, completed)
+            $table->string('status')->default('pending');
+            $table->string('phone'); // Phone number
+            $table->string('city'); // City
+            $table->text('address'); // Address
             $table->timestamps();
         });
     }

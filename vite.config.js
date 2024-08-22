@@ -7,5 +7,12 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-    ]
+    ],
+    // server: {
+    //     host: '192.168.134.148', // Your IP address
+    //     port: 3000, // Vite port
+    //     hmr: {
+    //         host: '192.168.134.148', // For Hot Module Replacement
+    //     },
+    // },
 });

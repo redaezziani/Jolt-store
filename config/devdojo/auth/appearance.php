@@ -19,10 +19,10 @@ return [
     ],
     'color' => [
         'text' => '#697e9b',
-        'button' => '#058f65',
+        'button' => '#8000ff',
         'button_text' => '#ffffff',
         'input_text' => '#3e4a60',
-        'input_border' => '#057b69',
+        'input_border' => '#6600ff',
     ],
     'alignment' => [
         'heading' => 'center',

@@ -1,5 +1,7 @@
-<div class=" flex justify-start w-full items-start flex-col gap-4">
-    <div class="flex gap-1 flex-col justify-start items-start">
+<div class="w-full flex flex-col flex-wrap justify-start items-start md:justify-between md:flex-row">
+
+    <div class=" flex justify-start w-full md:w-1/2 items-start flex-col gap-4">
+        <div class="flex gap-1 flex-col justify-start items-start">
         <h1 class=" text-slate-800 text-lg font-bold">
             Create a Product
         </h1>
@@ -201,79 +203,87 @@
             @enderror
         </div>
     </div>
-    <div class="flex gap-x-2  flex-wrap">
-        <div class="mb-4 flex flex-col  items-start justify-start gap-2">
-            <x-label for="cover_img">Your image cover </x-label>
-            <div>
-                <label for="dropzone-file"
-                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border border-gray-300  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                    </svg>
+    <div class="">
+        <x-toggle>
+        </x-toggle>
+    </div>
+</div>
+<div class=" flex gap-x-2 w-full md:w-1/2 mt-[6.5rem] m  flex-wrap">
+    <div class="mb-4 flex w-full flex-col  items-start justify-start gap-2">
+        <x-label for="cover_img">Your image cover </x-label>
+        <div
+        class=" w-full"
+        >
+            <label for="dropzone-file"
+                class="flex flex-col items-center w-full md:max-w-lg  p-5  mt-2 text-center bg-white border border-gray-300  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                </svg>
 
-                    <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Cover File</h2>
+                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Cover File</h2>
 
-                    <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
-                        file SVG, PNG, JPG or GIF. </p>
+                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
+                    file SVG, PNG, JPG or GIF. </p>
 
-                    <input id="dropzone-file" wire:model='cover_img' type="file" class="hidden" />
-                </label>
-            </div>
-            @error('cover_img')
-                <p class="text-red-500 text-sm">{{ $message }}</p>
-            @enderror
-            @if ($cover_img)
-                <img src="{{ $cover_img->temporaryUrl() }}" alt="" class="size-10 object-cover rounded-md">
-            @endif
+                <input id="dropzone-file" wire:model='cover_img' type="file" class="hidden" />
+            </label>
         </div>
-
-        <div class="mb-4 flex flex-col items-start justify-start gap-2">
-            <x-label for="prev_imgs">Your prev images </x-label>
-            <div>
-                <label for="prev_imgs"
-                    class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border border-gray-300  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                    </svg>
-
-                    <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Cover File</h2>
-
-                    <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
-                        file SVG, PNG, JPG or GIF. </p>
-
-                    <input multiple id="prev_imgs" wire:model='prev_imgs' type="file" class="hidden" />
-                </label>
-            </div>
-            @error('prev_imgs')
-                <p class="text-red-500 text-sm">{{ $message }}</p>
-            @enderror
-            @if ($prev_imgs)
-                <div class="flex gap-2">
-                    @foreach ($prev_imgs as $img)
-                        <img src="{{ $img->temporaryUrl() }}" alt="" class="size-10 object-cover rounded-md">
-                    @endforeach
-                </div>
-             @endif
-        </div>
+        @error('cover_img')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+        @enderror
+        @if ($cover_img)
+            <img src="{{ $cover_img->temporaryUrl() }}" alt="" class="w-full h-16 md:max-w-lg  object-cover rounded-md">
+        @endif
     </div>
 
-    <div class="flex gap-x-4 w-full justify-end items-center">
-        <x-button class="outline w-1/2 md:w-fit" wire:click='cancelProduct' wire:ignore>
-            Cancel
-        </x-button>
-        <x-button wire:click='createProduct' wire:loading.attr="disabled" id="submit" class="default w-1/2 md:w-fit">
-            <p wire:loading.class=' hidden' wire:target='#submit'>
-                Create Product
-            </p>
-            <div wire:loading wire:target='#submit'
-                class="size-4 animate-spin rounded-full border-[2px] border-current border-t-transparent text-white dark:text-white"
-                role="status" aria-label="loading">
-                <span class="sr-only">Loading...</span>
+    <div class="mb-4 flex flex-col w-full items-start justify-start gap-2">
+        <x-label for="prev_imgs">Your prev images </x-label>
+        <div
+        class=" w-full"
+        >
+            <label for="prev_imgs"
+                class="flex flex-col items-center w-full  md:max-w-lg p-5  mt-2 text-center bg-white border border-gray-300  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                </svg>
+
+                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Cover File</h2>
+
+                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
+                    file SVG, PNG, JPG or GIF. </p>
+
+                <input multiple id="prev_imgs" wire:model='prev_imgs' type="file" class="hidden" />
+            </label>
+        </div>
+        @error('prev_imgs')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+        @enderror
+        @if ($prev_imgs)
+            <div class="flex gap-2 flex-wrap">
+                @foreach ($prev_imgs as $img)
+                    <img src="{{ $img->temporaryUrl() }}" alt="" class="size-20 object-cover rounded-md">
+                @endforeach
             </div>
-        </x-button>
+         @endif
     </div>
+</div>
+<div class="flex gap-x-4 w-full justify-end items-center">
+    <x-button class="outline w-1/2 md:w-fit" wire:click='cancelProduct' wire:ignore>
+        Cancel
+    </x-button>
+    <x-button wire:click='createProduct' wire:loading.attr="disabled" id="submit" class="default w-1/2 md:w-fit">
+        <p wire:loading.class=' hidden' wire:target='#submit'>
+            Create Product
+        </p>
+        <div wire:loading wire:target='#submit'
+            class="size-4 animate-spin rounded-full border-[2px] border-current border-t-transparent text-white dark:text-white"
+            role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </x-button>
+</div>
 </div>

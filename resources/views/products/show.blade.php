@@ -6,104 +6,112 @@
 
     <div class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
         <div class="col-span-3 overflow-hidden flex">
-            @include('components.path-link', ['product' => $product])
+            @include('components.show-product-path-link', ['product' => $product])
         </div>
 
         @include('components.custom.product.product-slide-image')
         <div class="w-full md:w-2/3 flex gap-2 col-span-3 md:col-span-2  flex-col justify-start items-start">
-            <h3 class=" text-neutral-700 -mt-2 underline underline-offset-2 text-lg ">
+            <a {{-- lets send the slug as query filter= --}} href="{{ route('products-index', ['filter' => $product->category->slug]) }}"
+                class=" text-slate-700 -mt-2 underline underline-offset-2 text-lg ">
                 {{ $product->category->name }}
-            </h3>
-            <h2 class=" text-neutral-900 uppercase text-xl font-bold">
+            </a>
+            <h2 class=" text-slate-900 uppercase text-xl font-bold">
                 {{ $product->name }}
             </h2>
-            <p class=" text-neutral-600 mt-4 text-base">
+            <p class=" text-slate-600 mt-0 text-base">
                 {{ $product->description }}
             </p>
-            <div class="flex flex-col gap-3 justify-start items-start">
-                <p class=" text-neutral-700 text-lg">
-                    Sizes
-                </p>
-                <div class="w-full flex gap-3 flex-wrap justify-start items-center">
-                    {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
-                    @foreach (explode('@', $product->sizes) as $size)
-                        <div class="flex gap-3">
-                            <label class=" cursor-pointer" for="{{ $size }}">
-                                <input value="{{ $size }}" aria-label="size" hidden class=" peer hidden"
-                                    type="radio" name="size" id="{{ $size }}">
-                                <div
-                                    class="  w-14 px-3 text-sm h-8 flex justify-center items-center rounded-full border border-neutral-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
-                                    <span class=" text-sm">
-                                        {{ $size }}
-                                    </span>
-                                </div>
-                            </label>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            <div class="flex gap-5 flex-wrap">
 
-            <div class="flex flex-col gap-3 justify-start items-start">
-                <p class=" text-neutral-700 text-lg">
-                    Colors
-                </p>
-                <div class="w-full flex gap-3 flex-wrap justify-start items-center">
-                    {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
-                    @foreach (explode('@', $product->colors) as $color)
-                        <div class="flex gap-3">
-                            <label class=" cursor-pointer" for="{{ $color }}">
-                                <input value="{{ $color }}" aria-label="size" hidden class=" peer hidden"
-                                    type="radio" name="size" id="{{ $color }}">
-                                <div
-                                    style="
+                <div class="flex flex-col gap-3 justify-start items-start">
+                    <p class=" text-slate-800 font-semibold text-lg">
+                        Sizes
+                    </p>
+                    <div class="w-full flex gap-3 flex-wrap justify-start items-center">
+                        {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
+                        @foreach (explode('@', $product->sizes) as $size)
+                            <div class="flex gap-3">
+                                <label class=" cursor-pointer" for="{{ $size }}">
+                                    <input value="{{ $size }}" aria-label="size" hidden class=" peer hidden"
+                                        type="radio" name="size" id="{{ $size }}">
+                                    <div
+                                        class="  w-14 px-3 text-sm h-8 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                        <span class=" text-sm">
+                                            {{ $size }}
+                                        </span>
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-3 justify-start items-start">
+                    <p class=" text-slate-800 font-semibold text-lg">
+                        Colors
+                    </p>
+                    <div class="w-full flex gap-3 flex-wrap justify-start items-center">
+                        {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
+                        @foreach (explode('@', $product->colors) as $color)
+                            <div class="flex gap-3">
+                                <label class=" cursor-pointer" for="{{ $color }}">
+                                    <input value="{{ $color }}" aria-label="size" hidden class=" peer hidden"
+                                        type="radio" name="size" id="{{ $color }}">
+                                    <div style="
                                   background-color: @if ($color == 'red') #dc2626 @elseif ($color == 'black') #000000 @elseif ($color == 'teal') #14b8a6 @elseif ($color == 'amber') #f59e0b @elseif ($color == 'indigo') #4f46e5 @endif
 
                                   "
-                                    class="  w-8  text-sm h-8 flex justify-center items-center rounded-full border border-neutral-400/35   transtio duration-300 peer-checked:ring-teal-600 peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                        class="  w-8  text-sm h-8 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-teal-600 peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
 
-                                </div>
-                            </label>
-                        </div>
-                    @endforeach
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
+
             {{-- the quantity of the product --}}
-            @include('components.custom.product.quantity-input')
-           <div class="flex gap-3">
-            <p class=" text-lg line-through mt-2 text-neutral-400">
-                {{ $product->price }} DH
-            </p>
+            <div class="flex justify-start items-center gap-5 ">
 
-            <p class=" text-lg font-bold mt-2 text-primary">
-                @php
-                        $discountValue = optional($product->discounts->last())->value;
-                    @endphp
-                    {{-- lets take it and transform it from string to float --}}
-                    @php
-                        $discountValue = (float) $discountValue;
-                    @endphp
-                    {{-- lets take the price and transform it from string to float --}}
-                    @php
-                        $price = (float) $product->price;
-                    @endphp
-                    {{-- lets calculate the discount --}}
-                    @php
-                        $discount = ($discountValue / 100) * $price;
-                    @endphp
-                    {{-- lets calculate the new price --}}
-                    @php
-                        $newPrice = $price - $discount;
-                    @endphp
-                    {{ $newPrice }} DH
+                <div class="flex gap-3">
+                    <p class=" text-lg line-through mt-2 text-slate-400">
+                        {{ $product->price }} DH
+                    </p>
 
-            </p>
+                    <p class=" text-lg font-bold mt-2 text-primary">
+                        @php
+                            $discountValue = optional($product->discounts->last())->value;
+                        @endphp
+                        {{-- lets take it and transform it from string to float --}}
+                        @php
+                            $discountValue = (float) $discountValue;
+                        @endphp
+                        {{-- lets take the price and transform it from string to float --}}
+                        @php
+                            $price = (float) $product->price;
+                        @endphp
+                        {{-- lets calculate the discount --}}
+                        @php
+                            $discount = ($discountValue / 100) * $price;
+                        @endphp
+                        {{-- lets calculate the new price --}}
+                        @php
+                            $newPrice = $price - $discount;
+                        @endphp
+                        {{ $newPrice }} DH
 
-           </div>
+                    </p>
+
+                </div>
+                @include('components.custom.product.quantity-input')
+            </div>
+
             <div class="w-full">
             </div>
             <div class="flex mt-4  gap-2 justify-start items-start">
                 <span
-                    class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-white">
+                    class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
                         color="#000000" fill="none">
                         <path
@@ -121,7 +129,7 @@
                 {{-- prodcut have a discount --}}
                 @if ($product->discounts->count() > 0)
                     <span
-                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-white">
+                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
                             color="#000000" fill="none">
                             <path
@@ -141,5 +149,17 @@
                 <livewire:add-to-cart :product="$product" />
                 @include('components.check-order')
             </div>
+        </div>
+
+        <div class=" w-full mt-5 col-span-3  gap-0  overflow-x-hidden  grid  md:grid-cols-3 ">
+            <p class=" text-slate-600 underline underline-offset-2  text-base">
+                Related products
+            </p>
+            <div class="w-full col-span-3 mb-10">
+                <livewire:related-products :product="$product" />
+            </div>
+        </div>
+        <div class=" w-full mt-5 col-span-3  gap-0 px-3 overflow-x-hidden  grid  md:grid-cols-3">
+            @include('components.custom.footer-page')
         </div>
 </x-store-layout>

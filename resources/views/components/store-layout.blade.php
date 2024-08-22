@@ -4,99 +4,103 @@
     @include('components.notification-toaster')
     @include('components.nav-sheet')
     <livewire:cart-side-bar>
-    <livewire:search-products>
-    <x-slot name="title">
-        {{ $title }}
-    </x-slot>
-    <x-slot name="description">
-        {{ $description }}
-    </x-slot>
-    <x-slot name="keywords">
-        {{ $keywords }}
-    </x-slot>
-    <header class=" w-full z-50 max-w-full bg-white bg-white/15 border-b border-teal-700/35 flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
-        <span id="wrapper" class=" w-full justify-center flex h-8 bg-teal-800 text-amber-200 items-center overflow-hidden relative">
-            <h1 class="    text-sm font-bold capitalize">
-                The new Collection in our store is all with a <span
-                    class=" bg-white text-primary rounded-full px-3 py-0.5">33% off</span>
-            </h1>
-        </span>
-        <nav
-        id="nav-bar"
-        class=" w-full backdrop-blur-sm   border-neutral-400/35 flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-6">
-            <div class="flex gap-x-4 justify-end items-end">
-                <a class=" text-teal-800 font-bold text-3xl" href={{ route('home') }}
-                >
-                    Jolt
-                </a>
-                <ul class=" ml-8 hidden md:flex justify-center gap-x-4 items-center">
-                    <a
-                    href="#"
-                        class="text-sm font-semibold text-neutral-800 ">Home</a>
-                    <a
-                    href="#"
-                        class="text-sm font-semibold text-neutral-800 ">Best</a>
-                    <a
-                    href="#"
-                        class="text-sm font-semibold text-neutral-800 ">Category</a>
-                    <a
-                    href="#"
-                        class="text-sm font-semibold text-neutral-800 ">Sold</a>
-                </ul>
-            </div>
+        <livewire:search-products>
+            <x-slot name="title">
+                {{ $title }}
+            </x-slot>
+            <x-slot name="description">
+                {{ $description }}
+            </x-slot>
+            <x-slot name="keywords">
+                {{ $keywords }}
+            </x-slot>
+            <header
+                class=" w-full z-50 max-w-full bg-none   flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
+
+                <nav id="nav-bar"
+                    class=" w-full     flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-3">
+                    <div class="flex gap-x-4 justify-end items-end">
+                        <a class=" text-white font-bold flex gap-0 items-center justify-start text-3xl"
+                            href={{ route('home') }}>
+                            Jolt
+                        </a>
+                        <ul class="ml-8 hidden md:flex justify-center gap-x-4 items-center">
+                            <a href="{{ route('products-index') }}"
+                                class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'products-index' ? 'text-white' : '' }}">
+                                Products
+                            </a>
+                            <a href="#"
+                                class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'best' ? 'active' : '' }}">
+                                Best
+                            </a>
+                            <a href="#"
+                                class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'category' ? 'active' : '' }}">
+                                Category
+                            </a>
+                            <a href="#"
+                                class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
+                                Sold
+                            </a>
+
+                            <a href="#"
+                            class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
+                            About Us
+                            </a>
+
+                            <a href="#"
+                            class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
+                            Contact Us
+                           </a>
+                        </ul>
+
+                    </div>
 
 
-            <div class="flex gap-x-4 justify-center items-center" id="">
-                <div
-                   x-data
-                     x-on:click="$dispatch('search-side-bar-open')"
-                    class="text-sm font-semibold flex cursor-pointer  gap-x-2 justify-start items-center text-neutral-800 ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                        <path d="M21 21l-6 -6" />
-                    </svg>
-                    <p>
-                        Search
-                    </p>
-                </div>
+                    <div class="flex gap-x-4 justify-center items-center" id="">
+                        <div x-data x-on:click="$dispatch('search-side-bar-open')"
+                            class="text-sm font-semibold flex cursor-pointer  gap-x-2 justify-start items-center text-slate-50 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                <path d="M21 21l-6 -6" />
+                            </svg>
+                            <p>
+                                Search
+                            </p>
+                        </div>
 
-                <div
-                    class="text-sm font-semibold hidden sm:flex  gap-x-2 justify-start items-center text-neutral-800 ">
-                   <livewire:bag-cart />
-                    <a
-                    href="{{ route('login') }}"
-                        class="text-sm font-semibold flex ml-6  gap-x-2 justify-start items-center text-neutral-800 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-circle">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-                        </svg>
-                        <p>
-                            Login
-                        </p>
-                    </a>
-                </div>
-               <div class=" rounded-md border flex md:hidden border-neutral-400/60 text-neutral-600 p-1">
-                <svg class=" " aria-label='open-menu' xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 24 24' width="20" height="20" fill='none'>
-                <path d='M4 5L20 5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
-                    stroke-linejoin='round' />
-                <path d='M4 12L20 12' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
-                    stroke-linejoin='round' />
-                <path d='M4 19L20 19' stroke='currentColor' stroke-width='1.5' stroke-inecap='round'
-                    stroke-inejoin='round' />
-            </svg>
-               </div>
-            </div>
-        </nav>
-    </header>
-    {{--rednder slots--}}
-    {{ $slot }}
+                        <div
+                            class="text-sm font-semibold hidden sm:flex  gap-x-2 justify-start items-center text-slate-50 ">
+                            <livewire:bag-cart />
+                            <a href="{{ route('login') }}"
+                                class="text-sm font-semibold flex ml-6  gap-x-2 justify-start items-center text-slate-50 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+                                    <path d="M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+
+                            </a>
+                        </div>
+                        <div class=" rounded-md border flex md:hidden border-neutral-400/60 text-slate-50 p-1">
+                            <svg
+                            x-data
+                            x-on:click="$dispatch('nav-sheet-open')"
+                            class=" " aria-label='open-menu' xmlns='http://www.w3.org/2000/svg'
+                                viewBox='0 0 24 24' width="20" height="20" fill='none'>
+                                <path d='M4 5L20 5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
+                                    stroke-linejoin='round' />
+                                <path d='M4 12L20 12' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'
+                                    stroke-linejoin='round' />
+                                <path d='M4 19L20 19' stroke='currentColor' stroke-width='1.5' stroke-inecap='round'
+                                    stroke-inejoin='round' />
+                            </svg>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            {{-- rednder slots --}}
+            {{ $slot }}
 </x-layout>

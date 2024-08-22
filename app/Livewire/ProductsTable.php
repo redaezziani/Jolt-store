@@ -29,12 +29,18 @@ class ProductsTable extends Component
         $this->dispatch('close-product-delete-model');
     }
 
+    public function deleteAllProducts()
+    {
+        // lets delete all products
+        Product::truncate(); // this will delete all products
+    }
+
     public function render()
     {
         if ($this->search) {
-            $products = Product::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->paginate(9);
         } else {
-            $products = Product::paginate(10);
+            $products = Product::paginate(9);
         }
         return view('livewire.products-table', compact('products'));
     }

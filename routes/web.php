@@ -29,6 +29,14 @@ Route::get('/cart', function () {
     return view('cart.index');
 })->name('cart-index');
 
+Route::get('/order-checkout', function () {
+    return view('order.index');
+})->name('order-index');
+
+Route::get('/order-success', function () {
+    return view('order.success');
+})->name('order-success');
+
 // profile routes
 
 Route::get('/profile', function () {
