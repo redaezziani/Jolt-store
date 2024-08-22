@@ -57,5 +57,10 @@ php artisan db:seed
 ```bash
 php artisan serve
 ```
+![GitHub](https://img.shields.io/github/license/naereen/StrapDown.js.svg)
+![GitHub](https://img.shields.io/badge/Stack-Laravel-blue)
+![GitHub](https://img.shields.io/badge/Stack-Livewire-blue)
+![GitHub](https://img.shields.io/badge/Stack-TailwindCSS-blue)
+![GitHub](https://img.shields.io/badge/Stack-Stripe-blue)
 
 
