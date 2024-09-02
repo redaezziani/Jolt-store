@@ -1,10 +1,10 @@
 <x-button wire:click="addToCart({{ $product->id }})"
-    class="default font-bold w-1/2  flex gap-x-2 justify-center items-center">
+    class="default font-bold w-1/2 flex gap-x-2 justify-center items-center">
     <div wire:loading class="flex gap-x-2 justify-center items-center">
         <div
         class="animate-spin inline-block size-4 border-[2px] border-current border-t-transparent text-amber-200 rounded-full dark:text-amber-200" role="status" aria-label="loading">
         </div>
-        Adding to Cart ...
+        إضافة إلى السلة ...
     </div>
     <div wire:loading.remove class="flex gap-x-2 justify-center items-center">
 
@@ -17,6 +17,6 @@
             <path d="M14 18H22M18 22L18 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             <path d="M10.5 11H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
         </svg>
-        Add To Cart
+        أضف إلى السلة
     </div>
 </x-button>

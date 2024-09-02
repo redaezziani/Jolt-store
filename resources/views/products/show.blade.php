@@ -1,7 +1,7 @@
 {{-- Product details page lets render the titel and also desc and keywords props base on it  --}}
-<x-store-layout title="Detials page for product {{ $product->name }}"
-    description="This is the details page for the product {{ $product->name }}. You can find all the information about the product here."
-    keywords="product, {{ $product->name }}, details, information">
+<x-store-layout title="صفحة تفاصيل المنتج {{ $product->name }}"
+    description="هذه هي صفحة تفاصيل المنتج {{ $product->name }}. يمكنك العثور على جميع المعلومات حول المنتج هنا."
+    keywords="منتج, {{ $product->name }}, تفاصيل, معلومات">
     >
 
     <div class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
@@ -25,7 +25,7 @@
 
                 <div class="flex flex-col gap-3 justify-start items-start">
                     <p class=" text-slate-800 font-semibold text-lg">
-                        Sizes
+                        الأحجام
                     </p>
                     <div class="w-full flex gap-3 flex-wrap justify-start items-center">
                         {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
@@ -48,7 +48,7 @@
 
                 <div class="flex flex-col gap-3 justify-start items-start">
                     <p class=" text-slate-800 font-semibold text-lg">
-                        Colors
+                        الألوان
                     </p>
                     <div class="w-full flex gap-3 flex-wrap justify-start items-center">
                         {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
@@ -76,7 +76,7 @@
 
                 <div class="flex gap-3">
                     <p class=" text-lg line-through mt-2 text-slate-400">
-                        {{ $product->price }} DH
+                        {{ $product->price }}
                     </p>
 
                     <p class=" text-lg font-bold mt-2 text-primary">
@@ -99,7 +99,7 @@
                         @php
                             $newPrice = $price - $discount;
                         @endphp
-                        {{ $newPrice }} DH
+                        {{ $newPrice }} درهم مغربي
 
                     </p>
 
@@ -140,7 +140,7 @@
                             <path d="M15 15H14.991M9.00897 9H9" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        {{ $product->discounts->last()->name }} {{ $product->discounts->last()->value }}% off
+                        {{ $product->discounts->last()->name }} {{ $product->discounts->last()->value }}% خصم
                     </span>
                 @endif
 
@@ -153,7 +153,7 @@
 
         <div class=" w-full mt-5 col-span-3  gap-0  overflow-x-hidden  grid  md:grid-cols-3 ">
             <p class=" text-slate-600 underline underline-offset-2  text-base">
-                Related products
+                المنتجات ذات الصلة
             </p>
             <div class="w-full col-span-3 mb-10">
                 <livewire:related-products :product="$product" />

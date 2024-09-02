@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -64,3 +65,27 @@ Route::post('/scrape', function (Request $request) {
         'message' => 'Products created successfully',
     ], 201);
 });
+
+
+
+// get the products by id
+Route::get('/products/{id}', function ($id) {
+    /*  "name": "جاكيت أديداس براند لوف Q2",
+    "description": "ابقَ دافئًا، وابقَ أنيقًا. اكتشف أفضل ما في ملابس الخارج مع مجموعتنا الحصرية من أديداس ونايكي. سواء كنت تواجه البرد أو تضيف لمسة خاصة لمظهرك اليومي، فإن مجموعتنا من الجاكيتات ستلبي احتياجاتك."
+    */
+
+    $productNewName = "جاكيت أديداس براند لوف Q2";
+    $productNewDescription = "ابقَ دافئًا، وابقَ أنيقًا. اكتشف أفضل ما في ملابس الخارج مع مجموعتنا الحصرية من أديداس ونايكي. سواء كنت تواجه البرد أو تضيف لمسة خاصة لمظهرك اليومي، فإن مجموعتنا من الجاكيتات ستلبي احتياجاتك.";
+    $product = Product::find($id);
+
+    // lets update the product with the translated text
+    $product->update([
+        'name' => $productNewName,
+        'description' => $productNewDescription,
+    ]);
+
+    return response()->json($product);
+});
+
+
+

@@ -1,5 +1,5 @@
 @import './_trix.css';
-@import url('https://fonts.googleapis.com/css2?family=Ruluko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zain:wght@200;300;400;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -52,5 +52,7 @@ button {
 
 
 body {
-    font-family: "Ruluko", sans-serif;
+    font-family: "Zain", sans-serif;
+    direction: rtl;
+    text-align: right;
 }

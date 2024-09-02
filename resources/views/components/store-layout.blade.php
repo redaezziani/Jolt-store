@@ -22,34 +22,34 @@
                     <div class="flex gap-x-4 justify-end items-end">
                         <a class=" text-white font-bold flex gap-0 items-center justify-start text-3xl"
                             href={{ route('home') }}>
-                            Jolt
+                            جولت
                         </a>
                         <ul class="ml-8 hidden md:flex justify-center gap-x-4 items-center">
                             <a href="{{ route('products-index') }}"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'products-index' ? 'text-white' : '' }}">
-                                Products
+                                المنتجات
                             </a>
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'best' ? 'active' : '' }}">
-                                Best
+                                الأفضل
                             </a>
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'category' ? 'active' : '' }}">
-                                Category
+                                الفئة
                             </a>
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
-                                Sold
+                                المباعة
                             </a>
 
                             <a href="#"
                             class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
-                            About Us
+                            من نحن
                             </a>
 
                             <a href="#"
                             class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
-                            Contact Us
+                            اتصل بنا
                            </a>
                         </ul>
 
@@ -68,8 +68,10 @@
                                 <path d="M21 21l-6 -6" />
                             </svg>
                             <p>
-                                Search
+                                البحث
                             </p>
+                            </svg>
+                            
                         </div>
 
                         <div

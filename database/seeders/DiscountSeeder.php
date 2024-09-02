@@ -11,30 +11,30 @@ class DiscountSeeder extends Seeder
 {
     public function run()
     {
-        // Get the last 8 products
+        // الحصول على آخر 8 منتجات
         $products = Product::orderBy('id', 'desc')->take(8)->get();
 
-        // Define discount details
+        // تحديد تفاصيل الخصومات
         $discounts = [
-            ['name' => 'Summer Sale', 'value' => 15.00],
-            ['name' => 'Flash Sale', 'value' => 20.00],
-            ['name' => 'Clearance', 'value' => 30.00],
-            ['name' => 'Holiday Discount', 'value' => 25.00],
-            ['name' => 'End of Season Sale', 'value' => 18.00],
-            ['name' => 'Limited Time Offer', 'value' => 22.00],
-            ['name' => 'Back to School Sale', 'value' => 10.00],
-            ['name' => 'Winter Warm-up', 'value' => 28.00],
+            ['name' => 'تخفيضات الصيف', 'value' => 15.00],
+            ['name' => 'تخفيضات فلاش', 'value' => 20.00],
+            ['name' => 'تصفية', 'value' => 30.00],
+            ['name' => 'تخفيضات العطلات', 'value' => 25.00],
+            ['name' => 'تخفيضات نهاية الموسم', 'value' => 18.00],
+            ['name' => 'عرض محدود الوقت', 'value' => 22.00],
+            ['name' => 'تخفيضات العودة إلى المدرسة', 'value' => 10.00],
+            ['name' => 'تسخين الشتاء', 'value' => 28.00],
         ];
 
-        // Seed discounts for the last 8 products
+        // تعبئة الخصومات للـ 8 منتجات الأخيرة
         foreach ($products as $key => $product) {
-            $discount = $discounts[$key % count($discounts)]; // Cycle through discounts
+            $discount = $discounts[$key % count($discounts)]; // التبديل بين الخصومات
             Discount::create([
                 'name' => $discount['name'],
                 'value' => $discount['value'],
                 'product_id' => $product->id,
-                'start_date' => Carbon::now()->subDays($key + 1), // Start date from past days
-                'end_date' => Carbon::now()->addDays($key + 7), // End date 7 days ahead
+                'start_date' => Carbon::now()->subDays($key + 1), // تاريخ البدء من الأيام الماضية
+                'end_date' => Carbon::now()->addDays($key + 7), // تاريخ الانتهاء بعد 7 أيام
             ]);
         }
     }
