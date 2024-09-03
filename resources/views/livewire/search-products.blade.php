@@ -7,13 +7,13 @@
     x-transition:enter-start="transform translate-y-full" x-transition:enter-end="transform -translate-y-0"
     x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform -translate-y-0"
     x-transition:leave-end="transform translate-y-full"
-        class="w-full  h-[96.5vh] z-10 absolute left-0 bottom-0  flex bg-white flex-col gap-4 justify-start items-center p-4">
+        class="w-full h-screen z-10 absolute left-0 bottom-0  flex bg-white flex-col gap-4 justify-start items-center p-4">
         <div class="flex md:max-w-[100%] lg:max-w-[78%] flex-col gap-2 justify-start w-full items-center">
 
         <div class="w-full flex justify-between items-center">
             <p class=" text-primary font-bold flex gap-0 items-center justify-start text-3xl"
             >
-            Jolt
+                جولت
           </p>
            <button
               x-on:click="open = false"
@@ -29,7 +29,7 @@
            </button>
         </div>
         <div class="flex  top-0 left-0 bg-white mt-5  w-full gap-3 justify-between items-center">
-            <x-input wire:model.live.debounce='search' type="text" placeholder="Search for products" class="w-full" />
+            <x-input wire:model.live.debounce='search' type="text" placeholder="البحث عن المنتجات" class="w-full" />
         </div>
 
         <div class="flex flex-col mt-10 w-full justify-start items-start gap-3">
@@ -44,13 +44,14 @@
                     {{ $product->name }}
                 </h3>
                 <p class="text-neutral-700 text-sm">
-                     {{ $product->price }} DH
+                     {{ $product->price }} د.م.
+                </p>
                 </p>
                 {{--if hi have a discount --}}
                 @if ($product->discounts->count() > 0)
                 <span
                 class="  overflow-hidden flex justify-start items-center min-w-32  bg-teal-800 text-amber-200 text-xs font-bold px-2 py-0.5">
-                {{ $product->discounts->last()->name }}  {{ $product->discounts->last()->value }}% off
+                {{ $product->discounts->last()->name }}  {{ $product->discounts->last()->value }}% OFF
                 </span>
                 @endif
             </div>

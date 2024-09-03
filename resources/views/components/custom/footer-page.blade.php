@@ -3,113 +3,71 @@
         <div class="grid gap-8 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div>
                 <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
+                    البدء
                 </div>
 
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
+                <a href="#"
+                    class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    التثبيت
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    ملاحظات الإصدار
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    دليل الترقية
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    الاستخدام مع المعالجين المسبقين
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    تحسين الأداء للإنتاج
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    دعم المتصفح
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    الذكاء الاصطناعي
                 </a>
             </div>
 
             <div>
                 <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
+                    البدء
                 </div>
 
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
+                <a href="#"
+                    class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    التثبيت
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    ملاحظات الإصدار
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    دليل الترقية
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    الاستخدام مع المعالجين المسبقين
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    تحسين الأداء للإنتاج
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    دعم المتصفح
                 </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
-                </a>
-            </div>
-
-            <div>
-                <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
-                </div>
-
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
-                </a>
-            </div>
-
-            <div>
-                <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
-                </div>
-
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
+                <a href="#"
+                    class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    الذكاء الاصطناعي
                 </a>
             </div>
         </div>
@@ -117,10 +75,11 @@
         <hr class="my-10 border-gray-200 dark:border-gray-700">
 
         <div class="sm:flex sm:items-center sm:justify-between">
-            <p class="text-sm text-gray-400">© Copyright 2024. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400">جميع الحقوق محفوظة © 2024.</p>
 
             <div class="flex mt-3 -mx-2 sm:mt-0">
-                <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Reddit">
+                <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+                    aria-label="Reddit">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -129,7 +88,8 @@
                     </svg>
                 </a>
 
-                <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Facebook">
+                <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+                    aria-label="Facebook">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -138,7 +98,8 @@
                     </svg>
                 </a>
 
-                <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Github">
+                <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+                    aria-label="Github">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

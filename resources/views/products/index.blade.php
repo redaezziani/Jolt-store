@@ -4,7 +4,7 @@
     keywords="منتج، تفاصيل، معلومات">
     >
 
-    <div class="w-full mt-24 gap-0 px-3 overflow-x-hidden lg:max-w-[75%] grid md:grid-cols-3">
+    <div class="w-full mt-14 gap-0 px-3 overflow-x-hidden lg:max-w-[75%] grid md:grid-cols-3">
         <div class="col-span-3 overflow-hidden flex">
             @include('components.products-list-path-link')
         </div>

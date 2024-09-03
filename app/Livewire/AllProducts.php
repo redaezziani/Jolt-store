@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire;
 
 use Livewire\Component;
@@ -13,31 +12,80 @@ class AllProducts extends Component
 
     public $filter = '';
     public $search = '';
+    public $sortPrice = null;
+    public $shipping = null;
 
-    protected $queryString = ['filter', 'search'];
+    protected $queryString = ['filter', 'search', 'sortPrice', 'shipping'];
 
     public function applyFilter($filter)
     {
         $this->filter = $filter;
+        $this->resetPage(); // Reset pagination when filter changes
+    }
+
+    public function applySort($sortPrice)
+    {
+        $this->sortPrice = $sortPrice;
+        $this->resetPage(); // Reset pagination when sort changes
+    }
+
+    public function applySortShipping ($applySortShipping)
+    {
+        $this->shipping = $applySortShipping;
+        $this->resetPage(); // Reset pagination when sort changes
     }
 
     public function render()
     {
         $query = Product::query();
-        // if the filter is not empty and the search input is empty
-        if ($this->filter && empty($this->search)) {
+
+         switch ($this->shipping) {
+            case 1:
+                $query->where('shipping', 'Free Shipping');
+                break;
+            case 2:
+                $query->where('shipping', 'Paid Shipping');
+                break;
+            default:
+                $query->where('shipping', 'Free Shipping');
+                break;
+        }
+        // Apply category filter
+        if ($this->filter) {
             $query->whereHas('category', function ($query) {
                 $query->where('slug', $this->filter);
             });
         }
-        // if the search input is not empty and more than 2 characters
+
+        // Apply search filter
         if (!empty($this->search)) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
 
-        $products = $query->orderBy('created_at', 'desc')->paginate(8);
+        switch ($this->sortPrice) {
+            case 1:
+                $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) < ?', [50]);
+                break;
+            case 2:
+                $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) BETWEEN ? AND ?', [50, 100]);
+                break;
+            case 3:
+                $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) BETWEEN ? AND ?', [100, 200]);
+                break;
+            case 4:
+                $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) > ?', [200]);
+                break;
+            default:
+                $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) > ?', [0]);
+                break;
+        }
+        $products = $query->orderBy('created_at', 'desc')->paginate(16);
         $categories = Category::inRandomOrder()->limit(4)->get();
 
-        return view('livewire.all-products', ['products' => $products, 'categories' => $categories]);
+        return view('livewire.all-products', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
 }
+?>

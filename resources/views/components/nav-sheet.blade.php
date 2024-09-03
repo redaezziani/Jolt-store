@@ -1,3 +1,6 @@
+{{--
+
+--}}
 <div
 wire:poll.100ms
 x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
@@ -9,11 +12,11 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
         x-transition:enter-start="transform translate-y-full" x-transition:enter-end="transform -translate-y-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform -translate-y-0"
         x-transition:leave-end="transform translate-y-full"
-        class="w-full h-[96.5vh] z-10 absolute left-0 bottom-0  flex bg-white flex-col gap-4 justify-start items-start p-4">
-        <div class="w-full flex justify-between items-center">
+        class="w-full h-screen z-10 absolute left-0 bottom-0  flex bg-white flex-col gap-4 justify-start items-start p-4">
+        <div class="w-full flex  justify-between items-center">
             <p class=" text-primary font-bold flex gap-0 items-center justify-start text-3xl"
             >
-            Jolt
+                جولت
           </p>
            <button
               x-on:click="open = false"
@@ -28,6 +31,34 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
         </svg>
            </button>
         </div>
+        <p
+        class="text-lg mt-5 font-semibold text-slate-700"
+        >
+            القائمة الرئيسية
+        </p>
+        <ul class="ml-8  flex flex-col justify-start gap-3 items-start">
+            <a href="{{ route('products-index') }}"
+                class="text-sm font-semibold text-slate-500">
+                المنتجات
+            </a>
+            <a href="#"
+                class="text-sm font-semibold text-slate-500">
+                الأفضل
+            </a>
+            <a href="#"
+                class="text-sm font-semibold text-slate-500">
+                الفئة
+            </a>
+            <a href="#"
+            class="text-sm font-semibold text-slate-500 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
+            من نحن
+            </a>
+
+            <a href="#"
+            class="text-sm font-semibold text-slate-500 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
+            اتصل بنا
+           </a>
+        </ul>
 
     </aside>
 </div>
