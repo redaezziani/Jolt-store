@@ -37,16 +37,17 @@
             @include('components.custom.product.product-card', ['product' => $product])
         @endforeach
     </div>
-    <div class="w-full flex mt-5  justify-between items-start">
+    <div class="w-full flex mt-5  justify-between items-center">
 
         {{-- pagination --}}
         {{ $new_arrivals->links('livewire::simple-tailwind') }}
 
         {{-- see all --}}
         @if ($new_arrivals->count() > 0)
-            <a href="{{ route('products-index') }}">
-
-                See All
+            <a
+            class="text-sm font-semibold text-primary"
+            href="{{ route('products-index') }}">
+                    عرض الكل
             </a>
         @endif
 

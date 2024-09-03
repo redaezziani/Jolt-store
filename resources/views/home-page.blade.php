@@ -5,17 +5,17 @@
     keywords="متجر جولت، تسوق، خصم 60٪، منتجات، جودة، سعر"
 >
 <div
-    class="w-full h-[90vh] overflow-hidden relative border-b   border-slate-300/35 flex justify-start items-start gap-4 flex-col">
-  <div class="flex z-10 max-w-7xl mx-auto flex-col gap-4 mt-32">
+    class="w-full h-96 lg:h-[90vh] overflow-hidden relative border-b   border-slate-300/35 flex justify-start items-start gap-4 flex-col">
+  <div class="flex z-10 p-3 max-w-7xl mx-auto flex-col gap-4 mt-32">
     <h2
     id="hero-title"
-    class=" text-7xl max-w-4xl text-white "
+    class=" text-3xl lg:text-7xl max-w-4xl text-white "
     >
         تسوق من متجر جولت واحصل على خصم 60٪
     </h2>
     <p
     id="hero-description"
-    class=" text-2xl max-w-4xl text-white "
+    class=" text-lg lg:text-2xl max-w-4xl text-white "
     >
         على جميع المنتجات فقط لهذا الأسبوع ، لا تفوت الفرصة للاستمتاع بالتسوق معنا بأفضل جودة وسعر يمكنك العثور عليه.
     </p>
@@ -30,7 +30,7 @@
         </button>
     </a>
   </div>
-<img src="{{ asset('storage/hero.jpg') }}" alt="صورة بطل" class="absolute -z-[1] object-cover">
+<img src="{{ asset('storage/hero.jpg') }}" alt="صورة بطل" class="absolute -z-[1] object-cover top-0 left-0 w-full h-full">
 <img src="{{ asset('storage/star-1.png') }}" alt="صورة بطل" class="absolute  left-16 bottom-20 z-10 w-14 object-cover">
 <img src="{{ asset('storage/star-2.png') }}" alt="صورة بطل" class="absolute  right-32 top-32 z-10 w-14 object-cover">
 <div class="flex absolute right-4 bottom-10 gap-x-3 z-10">

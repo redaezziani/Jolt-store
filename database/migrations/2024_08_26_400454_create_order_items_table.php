@@ -4,23 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartItemsTable extends Migration
+class CreateOrderItemsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('cart_items', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cart_id'); // Cart ID
+            $table->unsignedBigInteger('order_id'); // Order ID
             $table->unsignedBigInteger('product_id'); // Product ID
             $table->integer('quantity'); // Quantity of the product
-            $table->decimal('price', 10, 2); // Price of the product
+            $table->decimal('price', 10, 2); // Price of the product at the time of order
+            $table->string('size')->nullable(); // Size of the product
+            $table->string('color')->nullable(); // Color of the product
             $table->timestamps(); // Timestamps for created_at and updated_at
 
             // Foreign key constraints
-            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
@@ -30,6 +32,6 @@ class CreateCartItemsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cart_items');
+        Schema::dropIfExists('order_items');
     }
 }

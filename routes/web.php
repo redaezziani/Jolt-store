@@ -31,7 +31,7 @@ Route::get('/cart', function () {
 
 Route::get('/order-checkout', function () {
     return view('order.index');
-})->name('order-index');
+})->middleware('auth.cart')->name('order-index');
 
 Route::get('/order-success', function () {
     return view('order.success');
