@@ -8,7 +8,7 @@ class RelatedProducts extends Component
 {
     public $relatedProducts=[];
     public $product;
-    // get the product id as props then 
+    // get the product id as props then
     public function mount($product)
     {
         $this->product = $product;
@@ -17,7 +17,7 @@ class RelatedProducts extends Component
          $product->category->products()
          ->where('id', '!=', $product->id)
          ->inRandomOrder()
-         ->limit(6)->get();
+         ->limit(12)->get();
     }
     public function render()
     {

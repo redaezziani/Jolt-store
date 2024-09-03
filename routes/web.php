@@ -3,7 +3,7 @@
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Cache;
 
 //web routes
 Route::get('/', function () {
@@ -15,7 +15,16 @@ Route::get('/products', function () {
 })->name('products-index');
 
 Route::get('/products-details/{slug}', function ($slug) {
-    $product = Product::where('slug', $slug)->firstOrFail();
+    // Define a unique cache key based on the product slug
+    $cacheKey = 'product_details_' . $slug;
+
+    // Attempt to retrieve the product from cache, or fetch from DB and cache if not found
+    $product = Cache::remember($cacheKey, 60, function () use ($slug) {
+        // This block runs only if the cache is empty or expired
+        return Product::where('slug', $slug)->firstOrFail();
+    });
+
+    // Return the view with the cached or fetched product
     return view('products.show', ['product' => $product]);
 })->name('products-show-details');
 

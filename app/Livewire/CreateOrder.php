@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
@@ -8,6 +9,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Resend\Laravel\Facades\Resend;
+
 class CreateOrder extends Component
 {
     public $firstname;
@@ -24,8 +26,6 @@ class CreateOrder extends Component
         // Redirect if user is not authenticated
 
         $this->loadCartItems();
-
-
     }
 
     public function loadCartItems()
@@ -87,16 +87,16 @@ class CreateOrder extends Component
                 $product = Product::find($item->product_id);
                 if ($product)
                     $product->increment('quantity', $item->quantity);
-                 }
             }
+        }
 
-            // Clear the cart after order creation
+        // Clear the cart after order creation
 
-            Resend::emails()->send([
-                'from' => 'Acme <onboarding@resend.dev>',
-                'to' => 'klausdev2@gmail.com',
-                'subject' => 'تأكيد الطلب الخاص بك',
-              'html' => "
+        Resend::emails()->send([
+            'from' => 'Acme <onboarding@resend.dev>',
+            'to' => 'klausdev2@gmail.com',
+            'subject' => 'تأكيد الطلب الخاص بك',
+            'html' => "
     <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6; padding: 20px; max-width: 600px; margin: auto; border: 1px solid #ddd; direction: rtl;
     text-align: right;'>
         <!-- Header -->
@@ -120,13 +120,13 @@ class CreateOrder extends Component
             <tbody>
                 <!-- Loop through each order item -->
                 " . $this->cartItems->map(function ($item) {
-                    return "
+                return "
                     <tr>
                         <td style='padding: 10px 0; border-bottom: 1px solid #ddd;'>{$item->product->name}</td>
                         <td style='padding: 10px 0; text-align: center; border-bottom: 1px solid #ddd;'>{$item->quantity}</td>
                         <td style='padding: 10px 0; text-align: center; border-bottom: 1px solid #ddd;'>{$item->price} درهم</td>
                     </tr>";
-                })->implode('') . "
+            })->implode('') . "
             </tbody>
         </table>
 
@@ -149,12 +149,10 @@ class CreateOrder extends Component
         </div>
     </div>
 ",
-
-            ]);
-            // reste the inputs
-            $this->clearCart();
-            return redirect()->route('order-success');
-        }
+        ]);
+        // reste the inputs
+        $this->clearCart();
+        return redirect()->route('order-success');
     }
 
     public function clearCart()
@@ -173,4 +171,3 @@ class CreateOrder extends Component
         ]);
     }
 }
-

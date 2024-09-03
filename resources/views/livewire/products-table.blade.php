@@ -1,23 +1,23 @@
 <div
 wire:poll.750ms
 class="mt-5 flex w-full flex-col">
-    {{-- search-bar --}}
+    {{-- شريط البحث --}}
     <div class="flex">
         @include('components.custom.product.top-bar')
     </div>
-    {{-- create-button --}}
+    {{-- زر الإنشاء --}}
     <div id="delete-model"
-        class="invisible fixed left-0 top-0 z-[99] flex h-screen w-full items-center justify-center overflow-hidd bg-black/40">
+        class="invisible fixed left-0 top-0 z-[99] flex h-screen w-full items-center justify-center overflow-hidden bg-black/40">
         <section
             class="flex h-44 w-[30rem] flex-col items-start justify-start gap-2 rounded-md border border-slate-400/30 bg-white p-4">
-            <h2 class="font-medium text-red-500">Delete Product </h2>
+            <h2 class="font-medium text-red-500">حذف المنتج</h2>
             <h3 class="text-slate-400">
-                Are you sure that you what to delete this product?
+                هل أنت متأكد من أنك تريد حذف هذا المنتج؟
             </h3>
             <div class="mt-10 flex w-full items-center justify-end gap-2">
-                <x-button class="outline" id="cancle-button">cancel</x-button>
+                <x-button class="outline" id="cancle-button">إلغاء</x-button>
                 <x-button wire:click="deleteProduct()" class="default">
-                    confirme
+                    تأكيد
                 </x-button>
             </div>
         </section>
@@ -29,37 +29,37 @@ class="mt-5 flex w-full flex-col">
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Name
+                                اسم المنتج
                             </th>
 
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Description
+                                وصف المنتج
                             </th>
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Price
+                                سعر المنتج
                             </th>
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Quantity
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Size
+                                كمية المنتج
                             </th>
 
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Color
+                                حجم المنتج
                             </th>
 
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Category
+                                لون المنتج
                             </th>
 
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
-                                Product Shipping
+                                فئة المنتج
+                            </th>
+
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                                شحن المنتج
                             </th>
 
                             <th scope="col" class="px-6 py-3 text-end text-xs font-medium uppercase text-gray-500">
-                                Action
+                                الإجراءات
                             </th>
                         </tr>
                     </thead>
@@ -91,7 +91,6 @@ class="mt-5 flex w-full flex-col">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
-                                      {{-- {{ $product->shipping }} if =="Paid Shipping" make text-amber-400 else text-teal-400 --}}
                                         @if ($product->shipping == 'Paid Shipping')
                                             <span class="text-amber-500 bg-amber-50 border border-amber-400  px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
                                         @else
@@ -100,9 +99,6 @@ class="mt-5 flex w-full flex-col">
 
                                     </div>
                                 </td>
-                                <td class="whitespace
-
-
                                 <td class="whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
                                     <button type="button"
                                         class="inline-flex items-center gap-x-2 rounded-lg border border-transparent text-sm font-semibold text-primary hover:text-primary disabled:pointer-events-none disabled:opacity-50"

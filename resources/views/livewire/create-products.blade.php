@@ -2,16 +2,16 @@
 
     <div class=" flex justify-start w-full md:w-1/2 items-start flex-col gap-4">
         <div class="flex gap-1 flex-col justify-start items-start">
-        <h1 class=" text-slate-800 text-lg font-bold">
-            Create a Product
-        </h1>
-        <p class=" text-slate-500 lowercase text-sm">
-            Create a new Product in your store by fill the inputs bellow.
-        </p>
+            <h1 class=" text-slate-800 text-lg font-bold">
+                إنشاء منتج جديد
+            </h1>
+            <p class=" text-slate-500 lowercase text-sm">
+                قم بإنشاء منتج جديد في متجرك بملء المدخلات أدناه.
+            </p>
     </div>
     <div class="flex mt-10 flex-col  w-full md:w-[37rem] gap-3">
         <x-label for="name">
-            Your Product Name
+            اسم المنتج الخاص بك
         </x-label>
         <x-input wire:model="name" type="text" placeholder="" name="" />
         @error('name')
@@ -20,7 +20,7 @@
     </div>
     <div class="flex flex-col  w-full md:w-[37rem] gap-3">
         <x-label for="description">
-            Your Product description
+            وصف المنتج الخاص بك
         </x-label>
         <x-input wire:model="description" type="text"
             class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
@@ -32,7 +32,7 @@
 
     <div class="flex  items-center flex-wrap md:w-[38rem] justify-start gap-4">
         <div class="mb-4 flex flex-col items-start justify-start gap-2">
-            <x-label for="sizes">Your Product Color </x-label>
+                <x-label for="sizes">لون المنتج الخاص بك </x-label>
 
             <div class="flex gap-x-2 items-center justify-center">
                 <div class="flex gap-3">
@@ -86,7 +86,9 @@
             @enderror
         </div>
         <div class="mb-4 flex flex-col items-start justify-start gap-2">
-            <x-label for="quantity">Your Product Sizes </x-label>
+            <x-label for="quantity">
+                حجم المنتج الخاص بك
+            </x-label>
             <div class="flex gap-x-2 items-center justify-center">
                 <div class="flex gap-3">
                     <label class=" cursor-pointer" for="xs">
@@ -139,7 +141,9 @@
         </div>
 
         <div class="mb-4 flex flex-col w-full md:w-fit items-start justify-start gap-2">
-            <x-label for="quantity">Your Product Quantity </x-label>
+            <x-label for="quantity">
+                كمية المنتج الخاص بك
+            </x-label>
             <x-input wire:model="quantity" min="0" type="number" id="quantity" placeholder="" />
             @error('quantity')
                 <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -148,7 +152,7 @@
     </div>
     <div class="flex  items-center flex-wrap md:w-[38rem] justify-between md:justify-start gap-4">
         <div class="mb-4 flex flex-col items-start justify-start gap-2">
-            <x-label for="shipping">Your Product Shipping Type </x-label>
+            <x-label for="shipping">نوع الشحن الخاص بمنتجك </x-label>
             <!-- Select -->
 <div class=" w-44 " wire:ignore>
     <select wire:ignore wire:model='shipping' data-hs-select='{
@@ -160,9 +164,9 @@
         "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-teal-900 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
         "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
       }' class="hidden">
-        <option value="Free">Free Shipping</option>
-        <option value="Paid">Paid Shipping</option>
-        <option value="Pickup">Pickup</option>
+      <option value="">اختر النوع</option>
+      <option value="free">شحن مجاني</option>
+      <option value="paid">شحن مدفوع</option>
       </select>
 </div>
   <!-- End Select -->
@@ -174,7 +178,9 @@
 
 
         <div class="mb-4 flex flex-col items-start justify-start gap-2">
-            <x-label for="category_id">Your Product Category </x-label>
+            <x-label for="category_id">
+                اختر القسم الخاص بمنتجك
+            </x-label>
             <div class=" w-44 " wire:ignore>
                 <select wire:ignore wire:model='category_id' data-hs-select='{
                     "placeholder": "Select option...",
@@ -196,7 +202,9 @@
             @enderror
         </div>
         <div class="mb-4 flex flex-col w-full md:w-fit items-start justify-start gap-2">
-            <x-label for="quantity">Your Product Price </x-label>
+            <x-label for="quantity">
+                سعر المنتج الخاص بك
+            </x-label>
             <x-input wire:model="price" min="0" type="number" id="price" placeholder="" />
             @error('price')
                 <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -210,7 +218,9 @@
 </div>
 <div class=" flex gap-x-2 w-full md:w-1/2 mt-[6.5rem] m  flex-wrap">
     <div class="mb-4 flex w-full flex-col  items-start justify-start gap-2">
-        <x-label for="cover_img">Your image cover </x-label>
+        <x-label for="images">
+            صور المنتج الخاص بك
+        </x-label>
         <div
         class=" w-full"
         >
@@ -222,10 +232,9 @@
                         d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                 </svg>
 
-                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Cover File</h2>
+                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">ملف الغلاف</h2>
 
-                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
-                    file SVG, PNG, JPG or GIF. </p>
+                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">قم بتحميل أو سحب وإفلات ملف SVG أو PNG أو JPG أو GIF الخاص بك. </p>
 
                 <input id="dropzone-file" wire:model='cover_img' type="file" class="hidden" />
             </label>
@@ -239,7 +248,9 @@
     </div>
 
     <div class="mb-4 flex flex-col w-full items-start justify-start gap-2">
-        <x-label for="prev_imgs">Your prev images </x-label>
+        <x-label for="prev_imgs">
+            صور المنتج الخاص بك
+        </x-label>
         <div
         class=" w-full"
         >
@@ -251,10 +262,13 @@
                         d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                 </svg>
 
-                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Cover File</h2>
+                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                    ملفات الصور
+                </h2>
 
-                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
-                    file SVG, PNG, JPG or GIF. </p>
+                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                    قم بتحميل أو سحب وإفلات ملفات الصور الخاصة بك. 
+                </p>
 
                 <input multiple id="prev_imgs" wire:model='prev_imgs' type="file" class="hidden" />
             </label>
@@ -273,17 +287,13 @@
 </div>
 <div class="flex gap-x-4 w-full justify-end items-center">
     <x-button class="outline w-1/2 md:w-fit" wire:click='cancelProduct' wire:ignore>
-        Cancel
+        إلغاء الأمر
     </x-button>
     <x-button wire:click='createProduct' wire:loading.attr="disabled" id="submit" class="default w-1/2 md:w-fit">
-        <p wire:loading.class=' hidden' wire:target='#submit'>
-            Create Product
+        <p  wire:target='#submit'>
+            إنشاء المنتج
         </p>
-        <div wire:loading wire:target='#submit'
-            class="size-4 animate-spin rounded-full border-[2px] border-current border-t-transparent text-white dark:text-white"
-            role="status" aria-label="loading">
-            <span class="sr-only">Loading...</span>
-        </div>
+
     </x-button>
 </div>
 </div>
