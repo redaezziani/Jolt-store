@@ -3,7 +3,7 @@
 <x-layout>
     @include('components.notification-toaster')
     @include('components.nav-sheet')
-    <livewire:cart-side-bar>
+        <livewire:cart-side-bar  />
         <livewire:search-products>
             <x-slot name="title">
                 {{ $title }}
@@ -14,7 +14,9 @@
             <x-slot name="keywords">
                 {{ $keywords }}
             </x-slot>
-            <header id="header"
+            <header
+            x-data="{ open: false }"
+            id="header"
                 class=" w-full z-50 max-w-full bg-primary   flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
                 <nav id="nav-bar"
                     class=" w-full     flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-3">
@@ -26,29 +28,26 @@
                         <ul class="ml-8 hidden md:flex justify-center gap-x-4 items-center">
                             <a href="{{ route('products-index') }}"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'products-index' ? 'text-white' : '' }}">
-                                المنتجات
+                                {{ __('products') }}
                             </a>
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'best' ? 'active' : '' }}">
-                                الأفضل
+                                {{ __('best') }}
                             </a>
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'category' ? 'active' : '' }}">
-                                الفئة
+                                {{ __('category') }}
                             </a>
+
+
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
-                                المباعة
+                                {{ __('about_us') }}
                             </a>
 
                             <a href="#"
                                 class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
-                                من نحن
-                            </a>
-
-                            <a href="#"
-                                class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
-                                اتصل بنا
+                                {{ __('contact_us') }}
                             </a>
                         </ul>
 
@@ -67,10 +66,24 @@
                                 <path d="M21 21l-6 -6" />
                             </svg>
                             <p>
-                                البحث
+                                {{ __('search') }}
                             </p>
                             </svg>
 
+                        </div>
+                        <div class="relative inline-block text-left">
+                            <button
+                             @click="open = !open"
+                              class="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none">
+                                Language
+                            </button>
+
+                            <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div class="py-1">
+                                    <a href="{{ route('switchLanguage', 'en') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-300 ease-in-out">English</a>
+                                    <a href="{{ route('switchLanguage', 'ar') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-300 ease-in-out">العربية</a>
+                                </div>
+                            </div>
                         </div>
 
                         <div
@@ -88,7 +101,6 @@
                                         d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z"
                                         stroke="currentColor" stroke-width="1.5" />
                                 </svg>
-
                             </a>
                         </div>
                         <div class=" rounded-md  flex md:hidden text-white p-1">
@@ -108,4 +120,14 @@
             </header>
             {{-- rednder slots --}}
             {{ $slot }}
+
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    Alpine.data('languageSwitcher', () => ({
+                        open: false,
+                        lang: '{{ app()->getLocale() }}'
+                    }));
+                });
+            </script>
+
 </x-layout>

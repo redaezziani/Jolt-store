@@ -5,6 +5,8 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 
+
+
 //web routes
 Route::get('/', function () {
     return view('home-page');
@@ -93,4 +95,6 @@ Route::get('/dashboard/customers', function () {
 })->name('dashboard-customers-index');
 
 
+use App\Http\Controllers\LanguageController;
 
+Route::get('switch-language/{locale}', [LanguageController::class, 'switchLanguage'])->name('switchLanguage');
