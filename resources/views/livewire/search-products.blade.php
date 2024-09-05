@@ -50,7 +50,7 @@
                 {{--if hi have a discount --}}
                 @if ($product->discounts->count() > 0)
                 <span
-                class="  overflow-hidden flex justify-start items-center min-w-32  bg-teal-800 text-amber-200 text-xs font-bold px-2 py-0.5">
+                class="  overflow-hidden flex justify-start items-center min-w-32  bg-primary text-amber-200 text-xs font-bold px-2 py-0.5">
                 {{ $product->discounts->last()->name }}  {{ $product->discounts->last()->value }}% OFF
                 </span>
                 @endif
@@ -58,6 +58,18 @@
         </a>
             @endforeach
         </div>
+
+        {{-- if there is no products --}}
+        @if ($products == null || $products->count() == 0)
+        <div class="flex flex-col w-full justify-center items-center gap-3">
+            <img src="{{ asset('images/empty.svg') }}" alt="empty" class="w-32 h-32">
+            <p class="text-neutral-600 text-lg font-bold">
+                لا يوجد منتجات
+            </p>
+        </div>
+        @endif
+
+
     </div>
 
     </aside>

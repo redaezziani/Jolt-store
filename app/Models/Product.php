@@ -62,4 +62,9 @@ class Product extends Model
     {
         $this->discounts()->delete();
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

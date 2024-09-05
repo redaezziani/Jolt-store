@@ -15,9 +15,16 @@
                 {{ $keywords }}
             </x-slot>
             <header
-            x-data="{ open: false }"
-            id="header"
+             id="header"
                 class=" w-full z-50 max-w-full bg-primary   flex flex-col gap-0 justify-start items-center fixed top-0 left-0">
+                <div class=" w-full bg-white px-4 py-3 text-primary">
+                    <p class="text-center text-sm font-medium">
+                        {{ __('free_shipping') }}
+                      <a href="#" class="inline-block px-2 underline">
+                        {{ __('learn_more') }}
+                      </a>
+                    </p>
+                  </div>
                 <nav id="nav-bar"
                     class=" w-full     flex justify-between md:max-w-[100%] lg:max-w-[78%] items-center py-2 px-3">
                     <div class="flex gap-x-4 justify-end items-end">
@@ -71,20 +78,67 @@
                             </svg>
 
                         </div>
-                        <div class="relative inline-block text-left">
-                            <button
-                             @click="open = !open"
-                              class="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none">
-                                Language
-                            </button>
+                        <div
+                        x-data="{
+                            open: false,
+                            toggle() {
+                                if (this.open) {
+                                    return this.close()
+                                }
 
-                            <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div class="py-1">
-                                    <a href="{{ route('switchLanguage', 'en') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-300 ease-in-out">English</a>
-                                    <a href="{{ route('switchLanguage', 'ar') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-300 ease-in-out">العربية</a>
-                                </div>
-                            </div>
+                                this.$refs.button.focus()
+
+                                this.open = true
+                            },
+                            close(focusAfter) {
+                                if (! this.open) return
+
+                                this.open = false
+
+                                focusAfter && focusAfter.focus()
+                            }
+                        }"
+                        x-on:keydown.escape.prevent.stop="close($refs.button)"
+                        x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                        x-id="['dropdown-button']"
+                        class="relative"
+                    >
+                        <!-- Button -->
+                        <button
+                            x-ref="button"
+                            x-on:click="toggle()"
+                            :aria-expanded="open"
+                            :aria-controls="$id('dropdown-button')"
+                            type="button"
+                            class="flex items-center gap-2 bg-none px-5 py-2.5 text-white"
+                        >
+                            Language
+
+                            <!-- Heroicon: chevron-down -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <!-- Panel -->
+                        <div
+                            x-ref="panel"
+                            x-show="open"
+                            x-transition.origin.top.left
+                            x-on:click.outside="close($refs.button)"
+                            :id="$id('dropdown-button')"
+                            style="display: none;"
+                            class="absolute left-0 mt-2 w-40 rounded-md bg-white shadow-md"
+                        >
+                            <a href="{{ route('switchLanguage', 'en') }}" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50">
+                                English
+                            </a>
+
+                            <a href="{{ route('switchLanguage', 'ar') }}" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50">
+                                العربية
+                            </a>
                         </div>
+                    </div>
 
                         <div
                             class="text-sm font-semibold hidden sm:flex  gap-x-2 justify-start items-center text-slate-50 ">

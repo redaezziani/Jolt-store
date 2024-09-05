@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Cart as CartModel;
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -14,6 +15,14 @@ class AddToCart extends Component
     public $size = '';
     public $color = '';
     public $quantity = 1;
+    public $commentText;
+    public $rating = 5; // Default rating
+
+    protected $rules = [
+        'commentText' => 'required|min:3',
+        'rating' => 'required|integer|between:1,5',
+    ];
+
 
     protected $queryString = ['size', 'color', 'quantity'];
     protected $listeners = ['addToCart', 'removeFromCart'];
@@ -23,6 +32,41 @@ class AddToCart extends Component
         $this->product = $product;
     }
 
+    public function deleteComment($commentId)
+    {
+        $comment = Comment::find($commentId);
+        if (!$comment) {
+            return;
+        }
+
+        if ($comment->user_id !== Auth::id()) {
+            return;
+        }
+
+        $comment->delete();
+    }
+    public function addComment()
+    {
+        // Validate the input data
+        $this->validate();
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        Comment::create([
+            'comment_text' => $this->commentText,
+            'rating' => $this->rating,
+            'product_id' => $this->product->id,
+            'user_id' => Auth::id(), // Assuming the user is authenticated
+        ]);
+
+        // Reset the form
+        $this->commentText = '';
+        $this->rating = 5;
+
+        // Emit event for comment update
+        session()->flash('message', 'Comment added successfully!');
+    }
     public function setSize($size)
     {
         $this->size = $size;
@@ -64,9 +108,9 @@ class AddToCart extends Component
 
         $cart = CartModel::firstOrCreate(['user_id' => Auth::id()]);
         $cartItem = $cart->items()->where('product_id', $productId)
-                                   ->where('size', $this->size)
-                                   ->where('color', $this->color)
-                                   ->first();
+            ->where('size', $this->size)
+            ->where('color', $this->color)
+            ->first();
 
         $price = $product->price;
         $discountValue = optional($product->discounts->last())->value;
@@ -104,18 +148,21 @@ class AddToCart extends Component
         $this->color = '';
         $this->size = '';
         $this->quantity = 1;
-
-
     }
 
 
     public function render()
     {
+        $comments = Comment::where('product_id', $this->product->id)
+            ->with('user') // Load the user who made the comment
+            ->latest()
+            ->get();
         // send the selected color and size to the view
         return view('livewire.add-to-cart', [
             'selectedColor' => $this->color,
             'selectedSize' => $this->size,
             'currentQuantity' => $this->quantity,
+            'comments' => $comments,
         ]);
     }
 }

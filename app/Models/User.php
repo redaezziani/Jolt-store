@@ -44,4 +44,9 @@ class User extends AuthUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

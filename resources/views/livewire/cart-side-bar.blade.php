@@ -80,7 +80,7 @@
                 @endforeach
             @endif
         </div>
-        @if ($cartItems->count() > 0)
+        @if ($cartItems)
             <div class="w-full flex gap-2 justify-between items-center">
                 <div class="w-full flex gap-2 justify-between items-center">
                     <p class=" text-slate-600 capitalize">
@@ -91,20 +91,18 @@
         @endif
 
         {{---if empty display the message --}}
-        @if ($cartItems->count() == 0)
+        @if ($cartItems)
             <div class="w-full flex justify-center items-center">
                 <p class="text-lg text-neutral-600">
                     لا يوجد منتجات في العربة
                 </p>
             </div>
         @endif
-        @if ($cartItems->count() > 0)
+        @if ($cartItems)
             <div class="flex w-full absolute bottom-0 left-0 bg-white p-2 gap-2 justify-start items-center">
-                <x-button wire:click='clearCart()' class=" outline w-[30%]">
+                <x-button wire:click='clearCart()' class=" ghost w-[30%]">
                     تفريغ العربة
                 </x-button>
-
-
                 <x-button
                 wire:click='checkout()'
                 wire:loading.attr="disabled"
