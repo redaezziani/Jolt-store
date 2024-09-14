@@ -23,6 +23,8 @@
         <section class="w-full grid md:grid-cols-2 grid-cols-1 gap-3 lg:grid-cols-4 ">
             <article
                 class="w-full p-2 md:col-span-1 lg:col-span-2 bg-slate-50/40 min-h-80 rounded-md border border-slate-400/35">
+                <div id="hs-single-area-chart"></div>
+
             </article>
 
             <article
@@ -33,9 +35,10 @@
                 class="w-full p-2 md:col-span-1 lg:col-span-1 bg-slate-50/40 min-h-80 rounded-md border border-slate-400/35">
             </article>
         </section>
-       
+
         <livewire:create-category />
+
+
         </div>
-        <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
 
 </x-dashboard-layout>

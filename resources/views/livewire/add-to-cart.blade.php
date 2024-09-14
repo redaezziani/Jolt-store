@@ -54,11 +54,9 @@
                                 <input value="{{ $color }}" aria-label="color" hidden class=" peer hidden"
                                     type="radio" name="color" id="color-{{ $color }}">
                                 <div style="
-                                  background-color: @if ($color == 'red') #dc2626 @elseif ($color == 'black') #000000 @elseif ($color == 'teal') #14b8a6 @elseif ($color == 'amber') #f59e0b @elseif ($color == 'indigo') #4f46e5 @endif
-
+                                  background-color: {{$color}}
                                   "
                                     class="  w-8  text-sm h-8 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
-
 
                                 </div>
                             </label>
@@ -121,41 +119,63 @@
                         d="M14.5 17.5H9.5M15 15.5V7C15 5.58579 15 4.87868 14.5607 4.43934C14.1213 4 13.4142 4 12 4H5C3.58579 4 2.87868 4 2.43934 4.43934C2 4.87868 2 5.58579 2 7V15C2 15.9346 2 16.4019 2.20096 16.75C2.33261 16.978 2.52197 17.1674 2.75 17.299C3.09808 17.5 3.56538 17.5 4.5 17.5M15.5 6.5H17.3014C18.1311 6.5 18.5459 6.5 18.8898 6.6947C19.2336 6.8894 19.4471 7.2451 19.8739 7.95651L21.5725 10.7875C21.7849 11.1415 21.8911 11.3186 21.9456 11.5151C22 11.7116 22 11.918 22 12.331V15C22 15.9346 22 16.4019 21.799 16.75C21.6674 16.978 21.478 17.1674 21.25 17.299C20.9019 17.5 20.4346 17.5 19.5 17.5"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                {{ $product->shipping }}
+                {{-- if shepping is Paid Shipping well transl it to arabic and do same for Free --}}
+                @if ($product->shipping == 'Paid Shipping')
+                    الشحن مدفوع
+                @else
+                    الشحن مجاني
+                @endif
             </span>
 
 
         </div>
         <div class="flex w-full md:w-fit gap-x-3 md:gap-x-5 mt-5 pb-3 justify-start items-center">
-            <x-button id="add-to-cart" wire:loading.attr="disabled" wire:click="addToCart({{ $product->id }})"
-                class="default font-bold w-1/2 flex gap-x-2 justify-center items-center">
-                <div wire:loading wire:target="#addToCart" class="flex gap-x-2 justify-center items-center">
-                    <div class="animate-spin inline-block size-4 border-[2px] border-current border-t-transparent text-amber-200 rounded-full dark:text-amber-200"
-                        role="status" aria-label="loading">
-                    </div>
-                    إضافة إلى السلة ...
-                </div>
-                <div wire:loading.remove wire:target="#addToCart" class="flex gap-x-2 justify-center items-center">
+            <x-my-button id="add-to-cart" wire:loading.attr="disabled" wire:click="addToCart({{ $product->id }})"
+                class=" default  font-bold w-1/2 flex gap-x-2 justify-center items-center">
+               <!-- Spinner displayed during loading -->
+               <div wire:loading wire:target="addToCart" class="flex gap-x-2 items-center">
+                <svg aria-hidden="true" role="status"
+                    class="inline mr-2 w-4 h-4 text-secondary animate-spin dark:text-secondary"
+                    viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                        fill="currentColor"></path>
+                    <path class=" fill-primary"
+                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                        fill="currentColor"></path>
+                </svg>
+                <span>يتم إضافة المنتج إلى السلة ...</span>
+            </div>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
-                        fill="none">
-                        <path
-                            d="M19.5 11.5C18.4791 8.47991 17.2039 7.5 13.4291 7.5H9.65019C5.74529 7.5 4.23479 8.48796 3.1549 12.2373C2.18223 15.6144 1.6959 17.3029 2.20436 18.6124C2.51576 19.4143 3.06862 20.1097 3.79294 20.6104C5.24007 21.6109 8.98007 22.084 12.5 21.9878"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        <path d="M7 8V6.36364C7 3.95367 9.01472 2 11.5 2C13.9853 2 16 3.95367 16 6.36364V8"
-                            stroke="currentColor" stroke-width="1.5" />
-                        <path d="M14 18H22M18 22L18 14" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" />
-                        <path d="M10.5 11H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                    </svg>
-                    أضف إلى السلة
-                </div>
-            </x-button>
+            <!-- "Add to Cart" text displayed when not loading -->
+            <div wire:loading.remove wire:target="addToCart" class="flex gap-x-2 justify-center items-center">
+
+                أضف إلى السلة
+            </div>
+            </x-my-button>
             @include('components.check-order')
         </div>
     </div>
     <div class=" w-full mt-5 col-span-3  gap-0  overflow-x-hidden justify-start items-start ">
-        {{-- comments section --}}
+        <div class="flex justify-start items-start flex-col gap-3 max-w-sm w-full">
+            <h4 class="text-lg font-semibold mb-4">توزيع تقييمات المنتج</h4>
+            <ul class="space-y-2 w-full">
+                @foreach($ratings as $rating)
+                    @php
+                        // Calculate the percentage width based on total number of comments
+                        $percentage = ($totalComments > 0) ? ($rating->count / $totalComments) * 100 : 0;
+                    @endphp
+                    <li class="flex flex-col gap-1 w-full justify-start items-start space-y-4">
+                        <span>{{ $rating->rating }} نجوم</span>
+                        <span class="relative flex justify-start items-center overflow-hidden w-full bg-slate-100 rounded-full h-2 border border-slate-400/35">
+                            <span class="bg-amber-300 h-full" style="width: {{ $percentage }}%;"></span>
+                        </span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+
         <p class=" text-slate-600 underline underline-offset-2  text-base">
             التعليقات والآراء
         </p>
@@ -169,13 +189,15 @@
                 @foreach ($comments as $comment)
                     <article class="flex gap-2 gap-x-3 max-w-xl justify-start items-start">
                         <div class="flex h-full flex-col gap-2 justify-start items-center">
-                            <div class="h-8 w-8 overflow-hidden bg-slate-100 border border-slate-400/35 rounded-full">
-                                <!-- Avatar -->
+                            <div class="h-9 w-9 overflow-hidden bg-slate-100 border border-slate-400/35 rounded-full">
+                                {{-- get the image from the storage/app/public/auth/ --}}
+                                <img src="{{ asset('storage/auth/' . 'd-avatar.avif') }}" alt="profile photo"
+                                    class="object-cover w-full h-full">
                             </div>
                             <hr class="h-full w-[0.050rem] bg-slate-400/35">
                         </div>
 
-                        <div class="flex gap-1 justify-start items-start flex-col">
+                        <div class="flex  justify-start items-start flex-col">
                             <p class="text-slate-800 font-semibold text-lg">
                                 {{ $comment->user->name }}
                             </p>
@@ -183,6 +205,11 @@
                                 {{ $comment->created_at->diffForHumans() }}
                             </p>
 
+
+
+                            <p class="text-slate-600 mt-3 text-base">
+                                {{ $comment->comment_text }}
+                            </p>
                             <div class="flex gap-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                                     fill="currentColor" class="w-5 h-5 text-amber-500">
@@ -190,33 +217,12 @@
                                         d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <p
-                                class="text-slate-600 text-base"
-                                >
-                                {{ $comment->rating }}
-                                /5
+                                <p class="text-slate-600 text-base">
+                                    {{ $comment->rating }}
+                                    /5
                                 </p>
                             </div>
 
-                            <p class="text-slate-600 mt-3 text-base">
-                                {{ $comment->comment_text }}
-                            </p>
-
-                            <button wire:click="deleteComment({{ $comment->id }})">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                    height="24" color="#000000" fill="none">
-                                    <path
-                                        d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                    <path
-                                        d="M3 5.5H21M16.0557 5.5L15.3731 4.09173C14.9196 3.15626 14.6928 2.68852 14.3017 2.39681C14.215 2.3321 14.1231 2.27454 14.027 2.2247C13.5939 2 13.0741 2 12.0345 2C10.9688 2 10.436 2 9.99568 2.23412C9.8981 2.28601 9.80498 2.3459 9.71729 2.41317C9.32164 2.7167 9.10063 3.20155 8.65861 4.17126L8.05292 5.5"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                    <path d="M9.5 16.5L9.5 10.5" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" />
-                                    <path d="M14.5 16.5L14.5 10.5" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" />
-                                </svg>
-                            </button>
                         </div>
                     </article>
                 @endforeach
@@ -228,15 +234,35 @@
             أضف تعليقك
         </p>
 
-        <div class=" relative overflow-hidden max-w-xl mt-5 flex gap-3 justify-start items-start flex-col">
+        <div class=" relative overflow-hidden max-w-xl pb-5 px-1 mt-5 flex gap-3 justify-start items-start flex-col">
             <textarea wire:model.live.lazydebounce.250ms="commentText" placeholder="أضف تعليقك هنا"
                 class="flex w-full rounded-md border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 h-24">
                </textarea>
+               <x-my-input
+               wire:model.live='rating'
+               type="number" placeholder="" />
+            <div class="flex gap-x-2  w-full md:w-96">
+                <x-my-button id="add-comment(4)" wire:loading.attr="disabled" wire:click="addComment" class="default ">
+                    <div wire:loading wire:ignore wire:target="addComment" class="flex">
+                        <svg aria-hidden="true" role="status"
+                            class="inline mr-2 w-4 h-4 text-secondary animate-spin dark:text-secondary"
+                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor"></path>
+                            <path class=" fill-primary"
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentColor"></path>
 
-            <div class="flex gap-x-2 w-full md:w-96">
-                <x-button wire:loading.attr="disabled" wire:click="addComment" class="default">
-                    أضف تعليقك
-                </x-button>
+                        </svg>
+                        <span>
+                            يتم إضافة تعليقك ...
+                        </span>
+                    </div>
+                    <span wire:loading.attr='hidden' class="text-sm" wire:target="addComment">
+                        أضف تعليقك
+                    </span>
+                </x-my-button>
             </div>
         </div>
 

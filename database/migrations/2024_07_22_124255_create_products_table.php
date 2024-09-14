@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
             $table->text('prev_imgs')->nullable();
             $table->integer('quantity')->default(0);
             $table->integer('rating')->default(0);
-            $table->float('price')->default(0);
+            $table->decimal('price')->default(0);
             $table->text('sizes')->nullable();
             $table->text('colors')->nullable();
             $table->text('shipping')->nullable();

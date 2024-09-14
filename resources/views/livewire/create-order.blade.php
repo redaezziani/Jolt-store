@@ -20,7 +20,7 @@
                     <li>{{ $item->product->name }} - {{ $item->quantity }} × {{ $item->product->price }} درهم</li>
                 @endforeach
             </ul>
-            <p class="text-lg font-semibold text-slate-600 mt-4">الإجمالي: {{ $total }} درهم</p>
+            <p class="text-lg font-bold text-slate-900 mt-4">الإجمالي: {{ $total }} درهم</p>
         </div>
     </div>
     <div class="col-span-2  bg-white">
@@ -31,26 +31,26 @@
         >
 
             <div class="flex w-full gap-2 mt-5  justify-start items-center">
-                <div class="w-1/2">
+                <div class="w-full flex justify-start items-start gap-3 flex-col lg:w-1/2">
                     <x-label for="firstname" class="text-slate-700">
                         الاسم الأول
                     </x-label>
-                    <x-input wire:model="firstname" type="text"
+                    <x-my-input wire:model="firstname" type="text"
                         class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="أدخل اسمك الأول" name="firstname" type="text" />
+                        placeholder="  " name="firstname" type="text" />
 
                     @error('firstname')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div class="w-1/2">
+                <div class="w-full flex justify-start items-start gap-3 flex-col lg:w-1/2">
                     <x-label for="lastname" class="text-slate-700">
                         الاسم الأخير
                     </x-label>
-                    <x-input wire:model="lastname" type="text"
+                    <x-my-input wire:model="lastname" type="text"
                         class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="أدخل اسمك الأخير" name="lastname" type="text" />
+                        placeholder="  " name="lastname" type="text" />
                     @error('lastname')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -60,35 +60,35 @@
                 <x-label for="phone" class="text-slate-700">
                     رقم الهاتف
                 </x-label>
-                <x-input wire:model="phone" type="text"
+                <x-my-input wire:model="phone" type="text"
                     class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="أدخل رقم هاتفك" name="phone" type="text" />
+                    placeholder="  " name="phone" type="text" />
                 @error('phone')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="flex w-full gap-2 justify-start items-center">
-                <div class="w-1/2">
+            <div class="flex w-full gap-2 justify-start items-start">
+                <div class="w-full flex justify-start items-start gap-3 flex-col lg:w-1/2">
                     <x-label for="city" class="text-slate-700">
                         المدينة
                     </x-label>
-                    <x-input wire:model="city" type="text"
+                    <x-my-input wire:model="city" type="text"
                         class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="أدخل اسم مدينتك" name="city" type="text" />
+                        placeholder="  " name="city" type="text" />
 
                     @error('city')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div class="w-1/2">
+                <div class="w-full flex justify-start items-start gap-3 flex-col lg:w-1/2">
                     <x-label for="zipCode" class="text-slate-700">
                         الرمز البريدي
                     </x-label>
-                    <x-input wire:model="zipCode" type="text"
+                    <x-my-input wire:model="zipCode" type="text"
                         class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="أدخل الرمز البريدي لمدينتك" name="zip_code" type="text" />
+                        placeholder="   " name="zip_code" type="text" />
                     @error('zipCode')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -98,17 +98,36 @@
                 <x-label for="address" class="text-slate-700">
                     العنوان
                 </x-label>
-                <x-input wire:model="address" as="textarea"
+                <x-my-input wire:model="address" as="textarea"
                     class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="أدخل عنوانك" name="address" type="text" />
+                    placeholder=" " name="address" type="text" />
                 @error('address')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="flex w-full gap-x-3 ">
+                <x-my-button
+                class=" outline w-full flex justify-center items-center gap-2"
+                >
+                    <span>
+                        الدفع عبر البطاقة
 
+                    </span>
+                <img src="/stripe.svg" class=" w-7 aspect-auto " />
+                </x-my-button>
+
+                <x-my-button
+                class=" outline w-full flex justify-center items-center gap-2"
+                >
+                    <span>
+                        الدفع عبر باي بال
+                    </span>
+                    <img src="/paypal.svg" class=" w-7 aspect-auto " />
+                </x-my-button>
+            </div>
             <button type="submit"
-                class="w-full py-3 px-4 bg-primary text-white font-semibold rounded-md shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                تقديم الطلب
+                class="w-full hover:bg-primary rounded-full py-3 px-4 bg-primary text-white font-semibold  shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                الدفع عند الاستلام
             </button>
         </form>
     </div>

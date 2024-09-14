@@ -21,7 +21,7 @@
         <div class=" flex flex-col gap-1 ">
             @if ($product->discounts->count() > 0)
             <span
-                class="  overflow-hidden flex justify-start w-fit items-center min-w-32  -bottom-2 bg-primary text-amber-200 line-clamp-1 truncate text-xs font-bold px-2 py-1  left-0">
+                class="  overflow-hidden flex justify-start w-fit items-center min-w-32  -bottom-2 bg-[#00e554] text-secondary line-clamp-1 truncate text-xs font-bold px-2 py-1  left-0">
                 {{ $product->discounts->last()->name }} {{ $product->discounts->last()->value }}% off
             </span>
         @endif
@@ -33,7 +33,7 @@
                     {{ $product->price }}
                 </p>
 
-                <p class=" text-teal-700   ">
+                <p class=" text-primary   ">
                     @php
                         $discountValue = optional($product->discounts->last())->value;
                     @endphp

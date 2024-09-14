@@ -30,10 +30,10 @@
         </p>
         <p
         x-data
-        
-         x-on:click="$dispatch('side-bar-open')"
-          class="text-sm font-semibold text-slate-500"
-            title="المنتجات الخاصة بك">
+        x-on:click="$dispatch('side-bar-open')"
+        class="text-sm font-semibold text-slate-500"
+        title="المنتجات الخاصة بك"
+        >
             عربة التسوق
         </p>
         <ul class="ml-8  flex flex-col justify-start gap-3 items-start">

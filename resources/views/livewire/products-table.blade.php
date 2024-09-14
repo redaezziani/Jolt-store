@@ -2,7 +2,7 @@
 wire:poll.750ms
 class="mt-5 flex w-full flex-col">
     {{-- شريط البحث --}}
-    <div class="flex">
+    <div class="flex w-full ">
         @include('components.custom.product.top-bar')
     </div>
     {{-- زر الإنشاء --}}
@@ -15,71 +15,71 @@ class="mt-5 flex w-full flex-col">
                 هل أنت متأكد من أنك تريد حذف هذا المنتج؟
             </h3>
             <div class="mt-10 flex w-full items-center justify-end gap-2">
-                <x-button class="outline" id="cancle-button">إلغاء</x-button>
-                <x-button wire:click="deleteProduct()" class="default">
+                <x-my-button class="outline" id="cancle-button">إلغاء</x-my-button>
+                <x-my-button wire:click="deleteProduct()" class="default">
                     تأكيد
-                </x-button>
+                </x-my-button>
             </div>
         </section>
     </div>
-    <div class="-m-1.5 mt-10 overflow-x-auto">
-        <div class="inline-block min-w-full p-1.5 align-middle">
-            <div class="overflow-hidden rounded-lg border">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+    <div class="-m-1.5  mt-10 overflow-x-auto">
+        <div class="inline-block  min-w-full p-1.5 align-middle">
+            <div class="overflow-hidden  rounded-lg border">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 اسم المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 وصف المنتج
                             </th>
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 سعر المنتج
                             </th>
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 كمية المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 حجم المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 لون المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 فئة المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
                                 شحن المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-end text-xs font-medium uppercase text-gray-500">
+                            <th scope="col" class="px-6 py-3 text-end text-xs font-medium uppercase text-slate-500">
                                 الإجراءات
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody class="divide-y divide-slate-200">
                         @foreach ($products as $product)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $product->name }}</div>
+                                    <div class="text-sm text-slate-900">{{ $product->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap max-w-[22rem] truncate line-clamp-1">
-                                    <div class="text-sm text-gray-900">{{ $product->description }}</div>
+                                    <div class="text-sm text-slate-900">{{ $product->description }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $product->price }}</div>
+                                    <div class="text-sm text-slate-900">{{ $product->price }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $product->quantity }}</div>
+                                    <div class="text-sm text-slate-900">{{ $product->quantity }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">
+                                    <div class="text-sm font-medium text-slate-900">
                                         {{ str_replace('@', ' ', $product->sizes) }}
                                     </div>
                                 </td>
@@ -87,21 +87,21 @@ class="mt-5 flex w-full flex-col">
                                    {{ str_replace('@', ' ', $product->colors) }}
                                 </td>
                                 <td class="px-6 py-4 truncate line-clamp-1 w-32 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $product->category->name }}</div>
+                                    <div class="text-sm text-slate-900">{{ $product->category->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">
+                                    <div class="text-sm text-slate-900">
                                         @if ($product->shipping == 'Paid Shipping')
-                                            <span class="text-amber-500 bg-amber-50 border border-amber-400  px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
+                                            <span class="text-red-700   px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
                                         @else
-                                            <span class="text-teal-500 bg-teal-50 border border-teal-400  px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
+                                            <span class="text-primary   px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
                                         @endif
 
                                     </div>
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
                                     <button type="button"
-                                        class="inline-flex items-center gap-x-2 rounded-lg border border-transparent text-sm font-semibold text-primary hover:text-primary disabled:pointer-events-none disabled:opacity-50"
+                                        class="inline-flex items-center gap-x-2 rounded-lg border border-transparent text-sm font-semibold text-slate-400  disabled:pointer-events-none disabled:opacity-50"
                                         x-data
                                         x-on:click="$dispatch('open-product-delete-model', { productId: {{ $product->id }} })">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"

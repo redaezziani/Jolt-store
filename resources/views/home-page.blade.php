@@ -37,7 +37,6 @@
                 {{ __('new_arrivals') }}
                 <span class="w-14 bg-slate-900 h-1"></span>
             </h3>
-
             <p class="text-base text-center max-w-3xl text-neutral-800">
                 {{ __('discover_new_trends') }}
             </p>

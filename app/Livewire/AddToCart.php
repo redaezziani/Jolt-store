@@ -7,10 +7,13 @@ use App\Models\Cart as CartModel;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+
+use WireUi\Traits\Actions;
 
 class AddToCart extends Component
 {
+
+    use Actions;
     public $product;
     public $size = '';
     public $color = '';
@@ -36,36 +39,65 @@ class AddToCart extends Component
     {
         $comment = Comment::find($commentId);
         if (!$comment) {
+            $this->notification()->error(
+                $title = 'حدث خطأ',
+                $description = 'حدث خطأ أثناء حذف التعليق.'
+            );
             return;
         }
 
         if ($comment->user_id !== Auth::id()) {
+            $this->notification()->error(
+                $title = 'حدث خطأ',
+                $description = 'لا يمكنك حذف تعليق لم تقم بإضافته.'
+            );
             return;
         }
 
         $comment->delete();
+
+        $this->notification()->success(
+            $title = 'تم الحذف بنجاح',
+            $description = 'تم حذف تعليقك بنجاح.'
+        );
     }
-    public function addComment()
+
+    public function setRating($rating)
     {
+        $this->rating = $rating;
+    }
+    public function addComment(){
+
+
+
         // Validate the input data
         $this->validate();
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
-        Comment::create([
+        $ADD= Comment::create([
             'comment_text' => $this->commentText,
             'rating' => $this->rating,
             'product_id' => $this->product->id,
             'user_id' => Auth::id(), // Assuming the user is authenticated
         ]);
 
-        // Reset the form
+        if (!$ADD) {
+            $this->notification()->error(
+                $title = 'حدث خطأ',
+                $description = 'حدث خطأ أثناء إضافة تعليقك على المنتج.'
+            );
+            return;
+        }
+
         $this->commentText = '';
         $this->rating = 5;
 
-        // Emit event for comment update
-        session()->flash('message', 'Comment added successfully!');
+        $this->notification()->success(
+            $title = 'تمت الإضافة بنجاح',
+            $description = 'تمت إضافة تعليقك بنجاح على المنتج.'
+        );
     }
     public function setSize($size)
     {
@@ -85,7 +117,10 @@ class AddToCart extends Component
     {
         $product = Product::find($productId);
         if (!$product) {
-            // Optionally dispatch an error notification here
+            $this->notification()->error(
+                $title = 'حدث خطأ',
+                $description = 'حدث خطأ أثناء إضافة المنتج إلى السلة.'
+            );
             return;
         }
 
@@ -138,12 +173,10 @@ class AddToCart extends Component
             ]);
         }
 
-        $this->dispatch('open-toast-notification', [
-            'variant' => 'success',
-            'title' => 'تمت الإضافة بنجاح',
-            'message' => 'تم إضافة المنتج إلى السلة.',
-        ]);
-
+        $this->notification()->success(
+            $title = 'تمت الإضافة بنجاح',
+            $description = 'تمت إضافة المنتج إلى السلة بنجاح.'
+        );
         // reset the selected color, size, and quantity
         $this->color = '';
         $this->size = '';
@@ -152,17 +185,31 @@ class AddToCart extends Component
 
 
     public function render()
-    {
-        $comments = Comment::where('product_id', $this->product->id)
-            ->with('user') // Load the user who made the comment
-            ->latest()
-            ->get();
-        // send the selected color and size to the view
-        return view('livewire.add-to-cart', [
-            'selectedColor' => $this->color,
-            'selectedSize' => $this->size,
-            'currentQuantity' => $this->quantity,
-            'comments' => $comments,
-        ]);
-    }
+{
+    // Retrieve comments for the current product
+    $comments = Comment::where('product_id', $this->product->id)
+        ->with('user')
+        ->latest()
+        ->get();
+
+    // Get total number of comments
+    $totalComments = $comments->count();
+
+    // Group ratings by their value and count how many times each rating was given
+    $ratings = Comment::selectRaw('rating, COUNT(*) as count')
+        ->where('product_id', $this->product->id)
+        ->groupBy('rating')
+        ->orderBy('rating', 'desc')
+        ->get();
+
+    return view('livewire.add-to-cart', [
+        'selectedColor' => $this->color,
+        'selectedSize' => $this->size,
+        'currentQuantity' => $this->quantity,
+        'comments' => $comments,
+        'ratings' => $ratings,
+        'totalComments' => $totalComments, // Pass total number of comments to the view
+    ]);
+}
+
 }

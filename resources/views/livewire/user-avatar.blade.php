@@ -1,53 +1,26 @@
-<div class="flex items-center justify-start gap-x-2">
+<div class=" flex items-center justify-start py-2 px-2">
+    <div class="flex gap-x-2 justify-start items-center">
+
+    <svg class=" text-slate-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+        fill="none">
+        <path
+            d="M15.5 12C15.5 13.933 13.933 15.5 12 15.5C10.067 15.5 8.5 13.933 8.5 12C8.5 10.067 10.067 8.5 12 8.5C13.933 8.5 15.5 10.067 15.5 12Z"
+            stroke="currentColor" stroke-width="1.5" />
+        <path
+            d="M21.011 14.0965C21.5329 13.9558 21.7939 13.8854 21.8969 13.7508C22 13.6163 22 13.3998 22 12.9669V11.0332C22 10.6003 22 10.3838 21.8969 10.2493C21.7938 10.1147 21.5329 10.0443 21.011 9.90358C19.0606 9.37759 17.8399 7.33851 18.3433 5.40087C18.4817 4.86799 18.5509 4.60156 18.4848 4.44529C18.4187 4.28902 18.2291 4.18134 17.8497 3.96596L16.125 2.98673C15.7528 2.77539 15.5667 2.66972 15.3997 2.69222C15.2326 2.71472 15.0442 2.90273 14.6672 3.27873C13.208 4.73448 10.7936 4.73442 9.33434 3.27864C8.95743 2.90263 8.76898 2.71463 8.60193 2.69212C8.43489 2.66962 8.24877 2.77529 7.87653 2.98663L6.15184 3.96587C5.77253 4.18123 5.58287 4.28891 5.51678 4.44515C5.45068 4.6014 5.51987 4.86787 5.65825 5.4008C6.16137 7.3385 4.93972 9.37763 2.98902 9.9036C2.46712 10.0443 2.20617 10.1147 2.10308 10.2492C2 10.3838 2 10.6003 2 11.0332V12.9669C2 13.3998 2 13.6163 2.10308 13.7508C2.20615 13.8854 2.46711 13.9558 2.98902 14.0965C4.9394 14.6225 6.16008 16.6616 5.65672 18.5992C5.51829 19.1321 5.44907 19.3985 5.51516 19.5548C5.58126 19.7111 5.77092 19.8188 6.15025 20.0341L7.87495 21.0134C8.24721 21.2247 8.43334 21.3304 8.6004 21.3079C8.76746 21.2854 8.95588 21.0973 9.33271 20.7213C10.7927 19.2644 13.2088 19.2643 14.6689 20.7212C15.0457 21.0973 15.2341 21.2853 15.4012 21.3078C15.5682 21.3303 15.7544 21.2246 16.1266 21.0133L17.8513 20.034C18.2307 19.8187 18.4204 19.711 18.4864 19.5547C18.5525 19.3984 18.4833 19.132 18.3448 18.5991C17.8412 16.6616 19.0609 14.6226 21.011 14.0965Z"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </svg>
+
+    <span
+    class=" size-8 bg-slate-300 rounded-full"
+    >
+
+    </span>
+
+</div>
+
     @guest
-   <a href="{{ route('login') }}" >
-    <x-button class="outline">
-        sign-in
-    </x-button>
-
-   </a>
-    <a href="{{ route('register') }}" >
-        <x-button class="default">
-            sign-up
-        </x-button>
-    </a>
     @else
-
-    <div x-data="{ isOpen: false }" class="relative inline-block">
-        <!-- Dropdown toggle button -->
-        <button @click="isOpen = !isOpen" class="relative flex justify-start items-center gap-x-2 z-10  p-2 text-gray-700 ">
-            <span
-            class=" overflow-hidden size-10 text-neutral-400 grid place-content-center  bg-neutral-100 border border-neutral-400/35 rounded-full">
-            <img class=" w-auto h-full aspect-square object-cover" src="https://www.redaezziani.com/profile-image.webp" alt="profile-image" />
-            </span>
-            <div class="flex justify-center items-center">
-                <div class="flex flex-col gap-1 items-center justify-center">
-                    <p class=" text-neutral-400">
-                        {{ auth()->user()->name }}
-                    </p>
-                </div>
-            </div>
-            <svg class="w-5 h-5 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-        </button>
-
-        <!-- Dropdown menu -->
-        <div x-show="isOpen"
-            @click.away="isOpen = false"
-            x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="opacity-0 scale-90"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90"
-            class="absolute right-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md  border border-neutral-400/35 dark:bg-gray-800"
-        >
-            <h1>
-                <a href="{{ route('dashboard-index') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-            </h1>
-        </div>
-    </div>
 
     @endguest
 

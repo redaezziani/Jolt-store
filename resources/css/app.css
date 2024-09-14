@@ -1,23 +1,24 @@
-@import './_trix.css';
-@import url('https://fonts.googleapis.com/css2?family=Zain:wght@200;300;400;700;800;900&display=swap');
+@font-face {
+    font-family: "Zain";
+    src: url("./Zain-Regular.ttf");
+    font-weight: 900;
+    font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --primary: #0077df;
-    --secondary:#06182b;
+    --primary: rgb(0, 67, 154);
+    --secondary: #06182b;
     --rounded: 0rem;
-
-    /* custome color  Colors */
-
     --red-600: #dc2626;
-    --black-600: #000000;
-    --teal-600: #08cb6d;
-    --amber-600: #f59e0b;
+    --black-600: #18181c;
+    --teal-600: #00e554;
+    --amber-600: #688136;
     --indigo-600: #4f46e5;
-
+    --v: #7c3aed;
 }
 
 @layer utilities {
@@ -26,38 +27,42 @@
     }
 }
 
-
 button {
-    @apply inline-flex items-center justify-center text-sm font-medium transition-colors rounded-lg focus-visible:ring-ring whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center text-sm font-medium  rounded-full  focus-visible:ring-ring whitespace-nowrap focus-within:outline-2 outline transition-all ease-in-out duration-300  focus-within:outline-offset-2   disabled:pointer-events-none disabled:opacity-50;
 }
 .default {
-    @apply  shadow bg-primary text-amber-200  hover:bg-primary/90;
+    @apply shadow bg-primary text-secondary px-8  hover:bg-primary/90 focus-within:outline-primary;
 }
 .destructive {
-    @apply text-white bg-red-500 shadow  hover:bg-red-600;
+    @apply text-white bg-red-500 shadow  hover:bg-red-600 focus-within:outline-red-600;
 }
 
 .outline {
-    @apply border outline-none border-slate-400/35 text-slate-500;
+    @apply border outline-none border-slate-400/35 text-slate-500 focus-within:outline-slate-400;
 }
 
 .ghost {
     @apply text-primary  underline-offset-4 hover:underline;
 }
 
-.scroll{
+.input {
+    @apply flex h-10 w-full rounded-md border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 !important;
+}
+
+.scroll {
     width: 300px;
     height: 300px;
 }
 
-
 body {
     font-family: "Zain", sans-serif;
+
     direction: rtl;
     text-align: right;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {

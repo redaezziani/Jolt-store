@@ -5,13 +5,13 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use WireUi\Traits\Actions;
 class ProductsTable extends Component
 {
+    use Actions;
     use WithPagination;
 
     public $search = "";
-
 
     protected $queryString = ['search'];
 
@@ -24,8 +24,10 @@ class ProductsTable extends Component
             $this->dispatch('close-product-delete-model');
         }
 
-        // if it doesn't exist, do nothing
-
+        $this->notification()->success(
+            $title = 'تم إنشاء الخصم بنجاح',
+            $description = 'تم إنشاء الخصم الخاص بك بنجاح'
+        );
         $this->dispatch('close-product-delete-model');
     }
 

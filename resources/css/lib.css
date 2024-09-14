@@ -1,6 +1,6 @@
 
 :root{
-    --bg-color: #e5e5e5;
+    --bg-color: #e5e5e500;
 }
 
  ::-webkit-scrollbar {
@@ -10,12 +10,12 @@
     background: var(--bg-color);
 }
 ::-webkit-scrollbar-thumb {
-    background: #374151;
+    background: #ffffff00;
     border-radius: 10px;
     transition: all 0.3s;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #115e59;
+    background: #0077df;
 }
 
 

@@ -29,45 +29,12 @@
                 @foreach ($cartItems as $item)
                     <div class="w-full flex gap-3  justify-between items-center">
                         <div class="flex w-full justify-start items-start gap-2">
-                            <img src="{{ asset('storage/' . $item->product->cover_img) }}"
-                                alt="{{ $item->product->name }}" class="w-14 h-14 object-cover rounded-md">
-                            <div class="flex flex-col justify-start items-start">
-                                <h3 class="  text-neutral-600 text-sm font-medium line-clamp-1">
-                                    {{ $item->product->name }}
-                                </h3>
- <p class=" text-sm  mt-3 text-slate-600">
-                                    @php
-                                        $discountValue = optional($item->product->discounts->last())->value;
-                                    @endphp
-                                    {{-- لنأخذها ونحولها من سلسلة إلى عدد عشري --}}
-                                    @php
-                                        $discountValue = (float) $discountValue;
-                                    @endphp
-                                    {{-- لنأخذ السعر ونحوله من سلسلة إلى عدد عشري --}}
-                                    @php
-                                        $price = (float) $item->product->price;
-                                    @endphp
-                                    {{-- لنحسب الخصم --}}
-                                    @php
-                                        $discount = ($discountValue / 100) * $price;
-                                    @endphp
-                                    {{-- لنحسب السعر الجديد --}}
-                                    @php
-                                        $newPrice = $price - $discount;
-                                    @endphp
-                                    {{ $newPrice }}
-                                     x
-                                     {{ $item->quantity }}
-                                     =
-                                     درهم
-                                     {{ $newPrice * $item->quantity }}
-
-                                </p>
-                            </div>
-                        </div>
-
-                        {{-- <button wire:click="removeFromCart({{ $item->id }})"
-                            class="text-neutral-800 border border-neutral-400/35 rounded-md p-1">
+                            <span
+                            class=" size-14 relative"
+                            >
+                            <span
+                            class=" size-4 flex justify-center items-center absolute -top-1 -right-1 rounded-full bg-primary text-secondary p-0.5 cursor-pointer text-xs"
+                            wire:click='removeFromCart({{ $item->id }})'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
@@ -75,7 +42,47 @@
                                 <path d="M18 6l-12 12" />
                                 <path d="M6 6l12 12" />
                             </svg>
-                        </button> --}}
+
+                            </span>
+                            <img src="{{ asset('storage/' . $item->product->cover_img) }}"
+                                alt="{{ $item->product->name }}" class="w-14 h-14 object-cover rounded-md">
+                            </span>
+
+                            <div class="flex flex-col justify-start items-start">
+                                <h3 class="  text-neutral-600 text-sm font-medium line-clamp-1">
+                                    {{ $item->product->name }}
+                                </h3>
+ <p class=" text-sm  mt-3 text-slate-600">
+                                    @php
+                                        $discountValue = optional($item->product->discounts->last())->value;
+                                        $discountValue = (float) $discountValue;
+
+                                        $price = (float) $item->product->price;
+
+                                        $discount = ($discountValue / 100) * $price;
+                                        $newPrice = $price - $discount;
+                                    @endphp
+                                   <span
+                                   class=" flex gap-0.5 justify-start items-center"
+                                   >
+                                       {{ $item->quantity }}
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                       fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                       stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                       <path d="M18 6l-12 12" />
+                                       <path d="M6 6l12 12" />
+                                   </svg>
+                                    {{ number_format($newPrice, 2) }}
+                                    =
+                                    {{ number_format($newPrice * $item->quantity, 2) }}
+                                    درهم
+                                </span>
+
+
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             @endif
@@ -90,8 +97,8 @@
             </div>
         @endif
 
-        {{---if empty display the message --}}
-        @if ($cartItems)
+        {{---if empty display the message when the card is there and count <0 --}}
+        @if ($cartItems && count($cartItems) < 1)
             <div class="w-full flex justify-center items-center">
                 <p class="text-lg text-neutral-600">
                     لا يوجد منتجات في العربة
@@ -100,14 +107,14 @@
         @endif
         @if ($cartItems)
             <div class="flex w-full absolute bottom-0 left-0 bg-white p-2 gap-2 justify-start items-center">
-                <x-button wire:click='clearCart()' class=" ghost w-[30%]">
+                <x-my-button wire:click='clearCart()' class=" outline-none ring-none border-none   ghost w-[30%]">
                     تفريغ العربة
-                </x-button>
-                <x-button
+                </x-my-button>
+                <x-my-button
                 wire:click='checkout()'
                 wire:loading.attr="disabled"
                 id="checkout"
-                class=" default w-full flex gap-x-2 justify-center items-center ">
+                class="  text-secondary w-full flex bg-[#00e554]  gap-x-2 justify-center items-center ">
                 <div
                 wire:loading.class="hidden"
                 wire:target="#checkout"
@@ -137,7 +144,7 @@
                 class="animate-spin  hidden size-6 border-[3px] border-current border-t-transparent text-primary rounded-full dark:text-primary" role="status" aria-label="loading">
                     <span class="sr-only">Loading...</span>
                   </div>
-                </x-button>
+                </x-my-button>
             </div>
         @endif
     </aside>
