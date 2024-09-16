@@ -10,10 +10,10 @@
 @tailwind utilities;
 
 :root {
-    --primary: rgb(0, 67, 154);
+    --primary: #00439a;
     --secondary: #06182b;
     --rounded: 0rem;
-    --red-600: #dc2626;
+    --red-600: #b91111;
     --black-600: #18181c;
     --teal-600: #00e554;
     --amber-600: #688136;
@@ -28,7 +28,7 @@
 }
 
 button {
-    @apply inline-flex items-center justify-center text-sm font-medium  rounded-full  focus-visible:ring-ring whitespace-nowrap focus-within:outline-2 outline transition-all ease-in-out duration-300  focus-within:outline-offset-2   disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center text-sm font-medium  rounded-lg  focus-visible:ring-ring whitespace-nowrap focus-within:outline-2 outline transition-all ease-in-out duration-300  focus-within:outline-offset-2   disabled:pointer-events-none disabled:opacity-50;
 }
 .default {
     @apply shadow bg-primary text-secondary px-8  hover:bg-primary/90 focus-within:outline-primary;

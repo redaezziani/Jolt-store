@@ -11,20 +11,30 @@
             </svg>
         </div>
     </div>
+    <x-my-button wire:click='downloadCsvProductsFile()' class=" outline flex items-center justify-center gap-1 px-4 py-2">
+        <p>
+            تنزيل ملف CSV للمنتجات
+        </p>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"  fill="none">
+            <path d="M12 15L12 5M12 15C11.2998 15 9.99153 13.0057 9.5 12.5M12 15C12.7002 15 14.0085 13.0057 14.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5 19H19.0001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </x-my-button>
 
     <x-my-button
-    wire:click='deleteAllProducts()'
+    x-data
+    x-on:click="$dispatch('open-products-delete-model')"
     class="outline flex items-center justify-center gap-1 px-4 py-2 ">
-    <p>
-        حذف الكل
-    </p>
-</x-my-button>
-<x-my-button
-x-data x-on:click="$dispatch('dashboard-sheet-bar-open')"
-class=" flex items-center justify-center default  gap-1   py-2 ">
-    <p>
-        إنشاء منتج
-    </p>
-</x-my-button>
+        <p>
+            حذف الكل
+        </p>
+    </x-my-button>
+    <x-my-button x-data x-on:click="$dispatch('dashboard-sheet-bar-open')"
+        class=" flex items-center justify-center default  gap-1   py-2 ">
+        <p>
+            إنشاء منتج
+        </p>
+    </x-my-button>
 
 </div>

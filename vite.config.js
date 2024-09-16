@@ -8,11 +8,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    // server: {
-    //     host: '192.168.79.148', // Your IP address
-    //     port: 3000, // Vite port
-    //     hmr: {
-    //         host: '192.168.79.148', // For Hot Module Replacement
-    //     },
-    // },
+    server: {
+        host: '192.168.1.98', // Your IP address
+        port: 3000, // Vite port
+        hmr: {
+            host: '192.168.1.98', // For Hot Module Replacement
+        },
+    },
 });

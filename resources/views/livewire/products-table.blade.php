@@ -5,23 +5,9 @@ class="mt-5 flex w-full flex-col">
     <div class="flex w-full ">
         @include('components.custom.product.top-bar')
     </div>
-    {{-- زر الإنشاء --}}
-    <div id="delete-model"
-        class="invisible fixed left-0 top-0 z-[99] flex h-screen w-full items-center justify-center overflow-hidden bg-black/40">
-        <section
-            class="flex h-44 w-[30rem] flex-col items-start justify-start gap-2 rounded-md border border-slate-400/30 bg-white p-4">
-            <h2 class="font-medium text-red-500">حذف المنتج</h2>
-            <h3 class="text-slate-400">
-                هل أنت متأكد من أنك تريد حذف هذا المنتج؟
-            </h3>
-            <div class="mt-10 flex w-full items-center justify-end gap-2">
-                <x-my-button class="outline" id="cancle-button">إلغاء</x-my-button>
-                <x-my-button wire:click="deleteProduct()" class="default">
-                    تأكيد
-                </x-my-button>
-            </div>
-        </section>
-    </div>
+    <x-delete-all-products-model
+    
+    />
     <div class="-m-1.5  mt-10 overflow-x-auto">
         <div class="inline-block  min-w-full p-1.5 align-middle">
             <div class="overflow-hidden  rounded-lg border">

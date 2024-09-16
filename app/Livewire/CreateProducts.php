@@ -46,11 +46,11 @@ class CreateProducts extends Component
     protected $rules = [
         'name' => 'required',
         'description' => 'required',
-        'cover_img' => 'nullable|image|max:1024',
+        'cover_img' => 'nullable|image|max:2024',
         'quantity' => 'required|integer|min:0',
         'price' => 'required|numeric|min:0',
         'sizes' => 'required',
-        'prev_imgs.*' => 'nullable|image|max:1024',
+        'prev_imgs.*' => 'nullable|image|max:7024',
         'discount_value' => 'nullable|numeric|min:0', // Example validation for discount value
         'discount_start' => 'nullable|date',
         'discount_end' => 'nullable|date',
