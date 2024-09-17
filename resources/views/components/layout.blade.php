@@ -21,7 +21,9 @@
     <wireui:scripts />
 </head>
 
-<body class="relative flex flex-col  items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden">
+<body class="relative flex flex-col  items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden"
+
+    style="text-align: {{ App::getLocale() === 'ar' ? 'right !important' : 'left !important' , 'direction: ' . (App::getLocale() === 'ar' ? 'rtl !important' : 'ltr !important') }}">
     <x-notifications z-index="z-[999]" />
     {{ $slot }}
     <!-- Scripts -->

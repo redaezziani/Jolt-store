@@ -8,7 +8,7 @@ class LanguageController extends Controller
 {
     public function switchLanguage($locale)
     {
-        if (in_array($locale, ['en', 'ar'])) { // You can add more languages here
+        if (in_array($locale, ['en', 'ar', 'fr'])) {
             session()->put('locale', $locale);
             app()->setLocale($locale);
         }
