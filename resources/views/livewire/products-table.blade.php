@@ -6,7 +6,7 @@ class="mt-5 flex w-full flex-col">
         @include('components.custom.product.top-bar')
     </div>
     <x-delete-all-products-model
-    
+
     />
     <div class="-m-1.5  mt-10 overflow-x-auto">
         <div class="inline-block  min-w-full p-1.5 align-middle">
@@ -59,7 +59,7 @@ class="mt-5 flex w-full flex-col">
                                     <div class="text-sm text-slate-900">{{ $product->description }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-slate-900">{{ $product->price }}</div>
+                                    <div class="text-sm text-slate-900">{{ number_format($product->price, 2) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-slate-900">{{ $product->quantity }}</div>

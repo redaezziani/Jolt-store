@@ -66,7 +66,8 @@ class AddToCart extends Component
     {
         $this->rating = $rating;
     }
-    public function addComment(){
+    public function addComment()
+    {
 
 
 
@@ -76,7 +77,7 @@ class AddToCart extends Component
             return redirect()->route('login');
         }
 
-        $ADD= Comment::create([
+        $ADD = Comment::create([
             'comment_text' => $this->commentText,
             'rating' => $this->rating,
             'product_id' => $this->product->id,
@@ -113,14 +114,14 @@ class AddToCart extends Component
     {
         $this->quantity = $quantity;
     }
+
+
     public function addToCart($productId)
     {
         $product = Product::find($productId);
+
         if (!$product) {
-            $this->notification()->error(
-                $title = 'حدث خطأ',
-                $description = 'حدث خطأ أثناء إضافة المنتج إلى السلة.'
-            );
+            $this->notification()->error('حدث خطأ', 'حدث خطأ أثناء إضافة المنتج إلى السلة.');
             return;
         }
 
@@ -128,18 +129,25 @@ class AddToCart extends Component
             return redirect()->route('login');
         }
 
+        // Validate the inputs
         $this->validate([
-            'size' => 'required|string',
-            'color' => 'required|string',
             'quantity' => 'required|integer|min:1'
         ]);
 
-        // if no color or size is selected, use the first available color and size
-        if (!$this->color || !$this->size) {
-            $this->color = explode('@', $product->colors)[0];
-            $this->size = explode('@', $product->sizes)[0];
-        }
+        // Handle the case where product does not have colors or sizes
+        if (!$product->colors && !$product->sizes) {
+            $this->color = '';
+            $this->size = '';
+        } else {
+            // Default to the first available color and size if not selected
+            if (!$this->color) {
+                $this->color = $product->colors ? explode('@', $product->colors)[0] : '';
+            }
 
+            if (!$this->size) {
+                $this->size = $product->sizes ? explode('@', $product->sizes)[0] : '';
+            }
+        }
 
         $cart = CartModel::firstOrCreate(['user_id' => Auth::id()]);
         $cartItem = $cart->items()->where('product_id', $productId)
@@ -149,16 +157,15 @@ class AddToCart extends Component
 
         $price = $product->price;
         $discountValue = optional($product->discounts->last())->value;
+
         if ($discountValue) {
             $discountValue = floatval($discountValue);
-            $price = floatval($price); // Ensure $price is a float
-            $discount = ($discountValue / 100) * $price; // Calculate discount without using number_format
-            $price -= $discount; // Subtract the discount from the original price
-            $price = number_format($price, 2); // Format the final price to 2 decimal places
+            $price = floatval($price);
+            $discount = ($discountValue / 100) * $price;
+            $price -= $discount;
         }
 
-        $price = floatval($price);
-        $price = number_format($price, 2);
+        $formattedPrice = number_format($price, 2);
 
         if ($cartItem) {
             $cartItem->quantity += $this->quantity;
@@ -167,49 +174,45 @@ class AddToCart extends Component
             $cart->items()->create([
                 'product_id' => $productId,
                 'quantity' => $this->quantity,
-                'price' => $price,
+                'price' => $formattedPrice,
                 'size' => $this->size,
                 'color' => $this->color,
             ]);
         }
 
-        $this->notification()->success(
-            $title = 'تمت الإضافة بنجاح',
-            $description = 'تمت إضافة المنتج إلى السلة بنجاح.'
-        );
-        // reset the selected color, size, and quantity
+        $this->notification()->success('تمت الإضافة بنجاح', 'تمت إضافة المنتج إلى السلة بنجاح.');
         $this->color = '';
         $this->size = '';
         $this->quantity = 1;
     }
 
 
+
     public function render()
-{
-    // Retrieve comments for the current product
-    $comments = Comment::where('product_id', $this->product->id)
-        ->with('user')
-        ->latest()
-        ->get();
+    {
+        // Retrieve comments for the current product
+        $comments = Comment::where('product_id', $this->product->id)
+            ->with('user')
+            ->latest()
+            ->get();
 
-    // Get total number of comments
-    $totalComments = $comments->count();
+        // Get total number of comments
+        $totalComments = $comments->count();
 
-    // Group ratings by their value and count how many times each rating was given
-    $ratings = Comment::selectRaw('rating, COUNT(*) as count')
-        ->where('product_id', $this->product->id)
-        ->groupBy('rating')
-        ->orderBy('rating', 'desc')
-        ->get();
+        // Group ratings by their value and count how many times each rating was given
+        $ratings = Comment::selectRaw('rating, COUNT(*) as count')
+            ->where('product_id', $this->product->id)
+            ->groupBy('rating')
+            ->orderBy('rating', 'desc')
+            ->get();
 
-    return view('livewire.add-to-cart', [
-        'selectedColor' => $this->color,
-        'selectedSize' => $this->size,
-        'currentQuantity' => $this->quantity,
-        'comments' => $comments,
-        'ratings' => $ratings,
-        'totalComments' => $totalComments, // Pass total number of comments to the view
-    ]);
-}
-
+        return view('livewire.add-to-cart', [
+            'selectedColor' => $this->color,
+            'selectedSize' => $this->size,
+            'currentQuantity' => $this->quantity,
+            'comments' => $comments,
+            'ratings' => $ratings,
+            'totalComments' => $totalComments, // Pass total number of comments to the view
+        ]);
+    }
 }

@@ -18,6 +18,7 @@ class Product extends Model
         'prev_imgs',
         'quantity',
         'rating',
+        'price',
         'sizes',
         'colors',
         'shipping',
@@ -25,11 +26,14 @@ class Product extends Model
         'slug',
     ];
 
+    protected $casts = [
+        'price' => 'decimal:2',
+    ];
+
     protected static function boot()
     {
         parent::boot();
 
-        // Generate or update slug before creating or updating the product
         static::creating(function ($product) {
             $product->slug = Str::slug($product->name);
         });
@@ -38,13 +42,14 @@ class Product extends Model
             $product->slug = Str::slug($product->name);
         });
 
-        // Invalidate cache when product is created, updated, or deleted
         static::saved(function ($product) {
-            Cache::forget('new_arrivals_' . request()->filter);
+            $filter = request()->filter ?? 'default';
+            Cache::forget('new_arrivals_' . $filter);
         });
 
         static::deleted(function ($product) {
-            Cache::forget('new_arrivals_' . request()->filter);
+            $filter = request()->filter ?? 'default';
+            Cache::forget('new_arrivals_' . $filter);
         });
     }
 
