@@ -15,8 +15,9 @@
         <p class=" text-slate-600 mt-0 text-base">
             {{ $product->description }}
         </p>
+        {{-- if the product have a sizes --}}
+        @if ($product->sizes)
         <div class="flex gap-5 flex-wrap">
-
             <div class="flex flex-col gap-3 justify-start items-start">
                 <p class=" text-slate-800 font-semibold text-lg">
                     الأحجام
@@ -40,11 +41,13 @@
                     @endforeach
                 </div>
             </div>
-
+            {{--if the product have a colors --}}
+            @if ($product->colors)
             <div class="flex flex-col gap-3 justify-start items-start">
                 <p class=" text-slate-800 font-semibold text-lg">
                     الألوان
                 </p>
+
                 <div class="w-full flex gap-3 flex-wrap justify-start items-center">
                     {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
                     @foreach (explode('@', $product->colors) as $color)
@@ -64,7 +67,9 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
+        @endif
 
         {{-- the quantity of the product --}}
         <div class="flex justify-start items-center gap-5 ">

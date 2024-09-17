@@ -26,8 +26,8 @@
     <div class="col-span-2  bg-white">
         <h2 class="text-lg font-semibold text-slate-600">معلومات الشحن</h2>
         <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
-        <form
-         class="border-r flex flex-col gap-4 pb-3 justify-start items-start border-slate-400/35 px-2" wire:submit.prevent="createOrder()"
+        <div
+         class="border-r flex flex-col gap-4 pb-3 justify-start items-start border-slate-400/35 px-2"
         >
 
             <div class="flex w-full gap-2 mt-5  justify-start items-center">
@@ -107,6 +107,7 @@
             </div>
             <div class="flex w-full gap-x-3 ">
                 <x-my-button
+                wire:click="PayWithStripe()"
                 class=" outline w-full flex justify-center items-center gap-2"
                 >
                     <span>
@@ -125,7 +126,8 @@
                     <img src="/paypal.svg" class=" w-7 aspect-auto " />
                 </x-my-button>
             </div>
-            <button type="submit"
+            <button
+            wire:click="PayOnDelivery()"
                 class="w-full hover:bg-primary rounded-full py-3 px-4 bg-primary text-white font-semibold  shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 الدفع عند الاستلام
             </button>

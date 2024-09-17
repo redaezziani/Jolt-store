@@ -75,7 +75,7 @@
                     </button>
                 @endforeach
             </div>
-            <x-input wire:model.live.debounce="search" type="text" placeholder="البحث عن المنتجات ..."
+            <x-my-input wire:model.live.debounce="search" type="text" placeholder="البحث عن المنتجات ..."
                      class="w-full md:w-72 mt-4 md:mt-0"/>
         </div>
 
