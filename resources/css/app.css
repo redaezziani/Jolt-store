@@ -34,11 +34,11 @@ button {
     @apply shadow bg-primary text-secondary px-8  hover:bg-primary/90 focus-within:outline-primary;
 }
 .destructive {
-    @apply text-white bg-red-500 shadow  hover:bg-red-600 focus-within:outline-red-600;
+    @apply text-white bg-red-500 shadow px-8  hover:bg-red-600 focus-within:outline-red-600;
 }
 
 .outline {
-    @apply border outline-none border-slate-400/35 text-slate-500 focus-within:outline-slate-400;
+    @apply border outline-none border-slate-400/35 px-8 text-slate-500 focus-within:outline-slate-400;
 }
 
 .ghost {

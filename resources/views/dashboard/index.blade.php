@@ -36,9 +36,6 @@
             </article>
         </section>
 
-        <livewire:create-category />
-
-
         </div>
 
 </x-dashboard-layout>

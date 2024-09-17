@@ -3,7 +3,6 @@
     description="هذه هي صفحة تفاصيل المنتج. يمكنك العثور على جميع المعلومات حول المنتج هنا."
     keywords="منتج، تفاصيل، معلومات">
     >
-
     <div class="w-full mt-24  gap-0 px-3 overflow-x-hidden lg:max-w-[75%] grid md:grid-cols-3">
         <div class="col-span-3 overflow-hidden flex">
             @include('components.products-list-path-link')

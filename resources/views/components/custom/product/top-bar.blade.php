@@ -11,6 +11,15 @@
             </svg>
         </div>
     </div>
+    <x-my-button
+    x-data
+    x-on:click="$dispatch('category-side-bar-open')"
+    class=" outline flex items-center justify-center gap-1 px-4 py-2">
+        {{--this is to create a new cat--}}
+        <p>
+            إنشاء فئة
+        </p>
+    </x-my-button>
     <x-my-button wire:click='downloadCsvProductsFile()' class=" outline flex items-center justify-center gap-1 px-4 py-2">
         <p>
             تنزيل ملف CSV للمنتجات
@@ -25,8 +34,10 @@
     <x-my-button
     x-data
     x-on:click="$dispatch('open-products-delete-model')"
-    class="outline flex items-center justify-center gap-1 px-4 py-2 ">
-        <p>
+    class=" destructive flex items-center justify-center gap-1 px-4 py-2 ">
+        <p
+        class=""
+        >
             حذف الكل
         </p>
     </x-my-button>
