@@ -126,11 +126,11 @@
                     <img src="/paypal.svg" class=" w-7 aspect-auto " />
                 </x-my-button>
             </div>
-            <button
+            <x-my-button
             wire:click="PayOnDelivery()"
-                class="w-full hover:bg-primary rounded-full py-3 px-4 bg-primary text-white font-semibold  shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                class="w-full default">
                 الدفع عند الاستلام
-            </button>
+            </x-my-button>
         </form>
     </div>
 </div>
