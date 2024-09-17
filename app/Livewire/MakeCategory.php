@@ -5,9 +5,12 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
+use WireUi\Traits\Actions;
+
 
 class MakeCategory extends Component
 {
+    use Actions;
     use WithFileUploads;
 
     public $name = '';
@@ -49,7 +52,11 @@ class MakeCategory extends Component
 
         // Reset form fields
         $this->reset();
-        session()->flash('message', 'تم إنشاء الفئة بنجاح!');
+        $this->dispatch('category-side-bar-close');
+        $this->notification()->success(
+            $title = '  تم إنشاء الفئة بنجاح.',
+            $description =  'تم إنشاء الفئة بنجاح ويمكنك الآن إضافة منتجات لها.'
+        );
     }
 
     public function render()
