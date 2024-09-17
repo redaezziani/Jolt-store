@@ -52,14 +52,14 @@ class NewArrivals extends Component
         });
 
         // Manually paginate the cached results
-        $paginatedResults = $new_arrivals->forPage($currentPage, 8);
+        $paginatedResults = $new_arrivals->forPage($currentPage, 10);
         $totalResults = $new_arrivals->count();
 
         // Create a paginator instance for the cached results
         $new_arrivals_paginated = new LengthAwarePaginator(
             $paginatedResults,
             $totalResults,
-            8,
+            10,
             $currentPage,
             ['path' => url()->current(), 'query' => request()->query()]
         );

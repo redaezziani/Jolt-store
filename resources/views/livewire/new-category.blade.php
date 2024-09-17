@@ -12,7 +12,7 @@
             <h3 class=" text-neutral-50 text-3xl font-bold">
                 {{ $latestCategory->name }}
             </h3>
-            <p class=" text-base text-neutral-50/90 line-clamp-4">
+            <p class=" text-base text-neutral-50/90 line-clamp-2 lg:line-clamp-4">
                 {{ $latestCategory->description }}
             </p>
 

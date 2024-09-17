@@ -9,7 +9,7 @@ class RandomProducts extends Component
 {
     public function render()
     {
-        $randomProducts = Product::inRandomOrder()->take(8)->get();
+        $randomProducts = Product::inRandomOrder()->take(10)->get();
         return view('livewire.random-products', compact('randomProducts'));
     }
 }

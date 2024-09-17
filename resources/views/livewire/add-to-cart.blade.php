@@ -9,15 +9,28 @@
             class=" text-slate-700 -mt-2 underline underline-offset-2 text-lg ">
             {{ $product->category->name }}
         </a>
-        <h2 class=" text-slate-900 uppercase text-xl font-bold">
+        <h2 class=" text-slate-900 mt-5 uppercase text-xl font-bold">
             {{ $product->name }}
         </h2>
         <p class=" text-slate-600 mt-0 text-base">
             {{ $product->description }}
         </p>
+
+        <div class="flex gap-x-1 justify-start items-center">
+            @for ($i = 1; $i <= 5; $i++)
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    class="icon icon-tabler icon-tabler-star {{ $i <= $product->rating ? 'text-orange-500' : 'text-slate-400' }}"
+                    fill="currentColor">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
+                </svg>
+            @endfor
+        </div>
+
         {{-- if the product have a sizes --}}
         @if ($product->sizes)
-        <div class="flex gap-5 flex-wrap">
+        <div class="flex gap-5 mt-2 flex-wrap">
             <div class="flex flex-col gap-3 justify-start items-start">
                 <p class=" text-slate-800 font-semibold text-lg">
                     الأحجام
@@ -31,7 +44,7 @@
                                 <input value="{{ $size }}" aria-label="size" hidden class=" peer hidden"
                                     type="radio" name="size" id="size-{{ $size }}">
                                 <div {{-- -add the ring if he the selectedSize is equal to the size --}}
-                                    class="  w-14 px-3 text-sm h-8 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                    class="  w-9 p-1 text-sm h-9 flex justify-center items-center rounded-lg border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
                                     <span class=" text-sm">
                                         {{ $size }}
                                     </span>
@@ -43,7 +56,7 @@
             </div>
             {{--if the product have a colors --}}
             @if ($product->colors)
-            <div class="flex flex-col gap-3 justify-start items-start">
+            <div class="flex flex-col  gap-3 justify-start items-start">
                 <p class=" text-slate-800 font-semibold text-lg">
                     الألوان
                 </p>
@@ -58,8 +71,9 @@
                                     type="radio" name="color" id="color-{{ $color }}">
                                 <div style="
                                   background-color: {{$color}}
+
                                   "
-                                    class="  w-8  text-sm h-8 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                    class="  w-9  text-sm h-9 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
 
                                 </div>
                             </label>
