@@ -32,7 +32,7 @@
     </button>
 @endforeach
     </div>
-    <div class="w-full mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="w-full mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         @foreach ($new_arrivals as $product)
             @include('components.custom.product.product-card', ['product' => $product])
         @endforeach

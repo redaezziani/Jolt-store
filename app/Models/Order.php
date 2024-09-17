@@ -24,7 +24,8 @@ class Order extends Model
         'total',
         'phone',
         'city',
-        'address'
+        'address',
+        'type'
     ];
 
     public function items()

@@ -11,7 +11,7 @@ class DiscountSeeder extends Seeder
 {
     public function run()
     {
-        $products = Product::orderBy('id', 'desc')->take(8)->get();
+        $products = Product::orderBy('id', 'asc')->take(8)->get();
 
         $discounts = [
             ['name' => 'تخفيضات الصيف', 'value' => 15.00],

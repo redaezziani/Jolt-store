@@ -208,6 +208,8 @@ class CreateOrder extends Component
                     'currency' => 'MAD',
                     'product_data' => [
                         'name' => $item->product->name,
+                        // get the image fron the storage cover_image
+                        'images' => [asset('storage/' . $item->product->cover_img)],
                     ],
                     'unit_amount' => $item->price * 100,
                 ],

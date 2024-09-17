@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('status')->default('pending');
             $table->string('phone'); // Phone number
             $table->string('city'); // City
+            $table->string('type')->default('cash'); // Payment type
             $table->text('address'); // Address
             $table->timestamps();
         });

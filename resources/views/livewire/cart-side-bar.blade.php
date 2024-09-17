@@ -30,11 +30,11 @@
             <p class="text-2xl font-semibold text-neutral-800">
                 عربة التسوق الخاصة بك
             </p>
-            <button
-                x-on:click="open = false"
-                class="text-neutral-800 p-1"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+
+                <svg
+                 x-on:click="open = false"
+                class="text-neutral-800"
+                xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icon-tabler-x"
                 >
@@ -42,7 +42,6 @@
                     <path d="M18 6l-12 12" />
                     <path d="M6 6l12 12" />
                 </svg>
-            </button>
         </div>
         <div class="flex flex-col mt-4 w-full justify-start items-start gap-3">
             @if ($cartItems && count($cartItems) > 0)
@@ -126,18 +125,21 @@
                     wire:click='checkout()'
                     wire:loading.attr="disabled"
                     id="checkout"
-                    class="text-secondary w-full flex bg-[#00e554] gap-x-2 justify-center items-center"
+                    class="text-secondary w-full flex bg-[#e11d48] gap-x-2 justify-center items-center"
                 >
                     <div
                         wire:loading.class="hidden"
                         wire:target="#checkout"
                         class="flex gap-x-2 justify-center items-center"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none">
-                            <path d="M19.5 17.5C19.5 18.8807 18.3807 20 17 20C15.6193 20 14.5 18.8807 14.5 17.5C14.5 16.1193 15.6193 15 17 15C18.3807 15 19.5 16.1193 19.5 17.5Z" stroke="currentColor" stroke-width="1.5" />
-                            <path d="M9.5 17.5C9.5 18.8807 8.38071 20 7 20C5.61929 20 4.5 18.8807 4.5 17.5C4.5 16.1193 5.61929 15 7 15C8.38071 15 9.5 16.1193 9.5 17.5Z" stroke="currentColor" stroke-width="1.5" />
-                            <path d="M14.5 17.5H9.5M19.5 17.5H20.2632C20.4831 17.5 20.5931 17.5 20.6855 17.4885C21.3669 17.4036 21.9036 16.8669 21.9885 16.1855C22 16.0931 22 15.9831 22 15.7632V13C22 9.41015 19.0899 6.5 15.5 6.5H7.08696C7.03745 6.5 6.98967 6.50058 6.9427 6.50162C6.85222 6.51607 6.76578 6.5409 6.68355 6.57493C6.60993 6.60532 6.53966 6.638 6.47343 6.67196C6.14816 6.8833 5.94435 7.22488 5.82316 7.61554C5.80819 7.64735 5.79468 7.67944 5.78167 7.71179L4.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"  fill="none">
+                        <circle cx="17" cy="18" r="2" stroke="currentColor" stroke-width="1.5" />
+                        <circle cx="7" cy="18" r="2" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M5 17.9724C3.90328 17.9178 3.2191 17.7546 2.73223 17.2678C2.24536 16.7809 2.08222 16.0967 2.02755 15M9 18H15M19 17.9724C20.0967 17.9178 20.7809 17.7546 21.2678 17.2678C22 16.5355 22 15.357 22 13V11H17.3C16.5555 11 16.1832 11 15.882 10.9021C15.2731 10.7043 14.7957 10.2269 14.5979 9.61803C14.5 9.31677 14.5 8.94451 14.5 8.2C14.5 7.08323 14.5 6.52485 14.3532 6.07295C14.0564 5.15964 13.3404 4.44358 12.4271 4.14683C11.9752 4 11.4168 4 10.3 4H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2 8H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2 11H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14.5 6H16.3212C17.7766 6 18.5042 6 19.0964 6.35371C19.6886 6.70742 20.0336 7.34811 20.7236 8.6295L22 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
                         <span>إتمام الطلب</span>
                     </div>
                     <div
