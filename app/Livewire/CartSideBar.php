@@ -1,27 +1,34 @@
 <?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection; // Import Collection
 
 class CartSideBar extends Component
 {
-    public $cartItems = [];
+    /** @var Collection $cartItems */
+    public $cartItems;
+
     public $total = 0;
+    public $quantityMin = 1;
+    public $quantityMax = 10;
 
     public function mount()
     {
+        // Initialize $cartItems as a collection
+        $this->cartItems = collect();
         $this->loadCartItems();
     }
 
     public function loadCartItems()
     {
         if (auth()->check()) {
-            $cart = CartModel::where('user_id', auth()->id())->first();
+            $cart = CartModel::where('user_id', auth()->id())->with('items.product.discounts')->first();
             if ($cart) {
-                $this->cartItems = $cart->items;
+                $this->cartItems = $cart->items; // This is already a collection
                 $this->calculateTotal();
             }
         }
@@ -29,14 +36,13 @@ class CartSideBar extends Component
 
     public function calculateTotal()
     {
-        $this->total = 0; // Reset the total before recalculating
-        foreach ($this->cartItems as $item) {
+        $this->total = $this->cartItems->sum(function ($item) {
             $discountValue = optional($item->product->discounts->last())->value ?? 0;
             $price = (float) $item->product->price;
             $discount = ($discountValue / 100) * $price;
             $newPrice = $price - $discount;
-            $this->total += $newPrice * $item->quantity;
-        }
+            return $newPrice * $item->quantity;
+        });
     }
 
     public function removeFromCart($itemId)
@@ -44,7 +50,27 @@ class CartSideBar extends Component
         $cartItem = CartItem::find($itemId);
         if ($cartItem) {
             $cartItem->delete();
-            $this->loadCartItems(); // Reload the cart items and recalculate the total after removing the item
+            $this->loadCartItems();
+        }
+    }
+
+    public function decreaseQuantity($itemId)
+    {
+        $cartItem = CartItem::find($itemId);
+        if ($cartItem && $cartItem->quantity > $this->quantityMin) {
+            $cartItem->quantity--;
+            $cartItem->save();
+            $this->loadCartItems();
+        }
+    }
+
+    public function increaseQuantity($itemId)
+    {
+        $cartItem = CartItem::find($itemId);
+        if ($cartItem && $cartItem->quantity < $this->quantityMax) {
+            $cartItem->quantity++;
+            $cartItem->save();
+            $this->loadCartItems();
         }
     }
 
@@ -53,15 +79,9 @@ class CartSideBar extends Component
         if (auth()->check()) {
             $cart = CartModel::where('user_id', auth()->id())->first();
             if ($cart) {
-                // Delete all cart items for the current user's cart
                 $cart->items()->delete();
-
-                // Reset the cart items and total
-                $this->cartItems = [];
+                $this->cartItems = collect(); // Reset to an empty collection
                 $this->total = 0;
-
-                // Optionally, you can also delete the cart itself
-                // $cart->delete();
             }
         }
     }
@@ -79,5 +99,3 @@ class CartSideBar extends Component
         ]);
     }
 }
-
-?>

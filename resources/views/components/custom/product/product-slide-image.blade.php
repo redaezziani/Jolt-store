@@ -4,7 +4,7 @@
 
     <!-- Main Image -->
     <div aria-label="product-image"
-        class="w-full flex justify-center border relative overflow-hidden rounded-none border-slate-400/35 bg-slate-300  items-center aspect-[9/12]">
+        class="w-full flex justify-center rounded-lg  relative overflow-hidden   bg-slate-300  items-center aspect-[9/12]">
         <span class=" absolute z-10 bg-slate-300 animate-pulse">
 
         </span>
@@ -16,7 +16,7 @@
         @foreach (explode('@', $product->prev_imgs) as $img)
             <div x-on:click="if($event.currentTarget.getAttribute('aria-label') === 'prev-image') currentImage = '{{ asset('storage/' . $img) }}'"
                 aria-label="prev-image"
-                class="w-20 flex border border-slate-400/35 justify-end rounded-none items-end max-h-32 overflow-hidden">
+                class="w-20 flex rounded-lg   justify-end  items-end max-h-32 overflow-hidden">
                 <img src="{{ asset('storage/' . $img) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
             </div>
         @endforeach

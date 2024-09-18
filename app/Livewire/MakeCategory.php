@@ -20,7 +20,7 @@ class MakeCategory extends Component
     protected $rules = [
         'name' => 'required|string|max:255',
         'description' => 'nullable|string|max:1000',
-        'cover_img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2MB Max
+        'cover_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // 2MB Max
     ];
 
     protected $messages = [

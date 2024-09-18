@@ -26,9 +26,7 @@
     <div class="col-span-2  bg-white">
         <h2 class="text-lg font-semibold text-slate-600">معلومات الشحن</h2>
         <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
-        <div
-         class="border-r flex flex-col gap-4 pb-3 justify-start items-start border-slate-400/35 px-2"
-        >
+        <div class="border-r flex flex-col gap-4 pb-3 justify-start items-start border-slate-400/35 px-2">
 
             <div class="flex w-full gap-2 mt-5  justify-start items-center">
                 <div class="w-full flex justify-start items-start gap-3 flex-col lg:w-1/2">
@@ -105,32 +103,35 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
+            @if ($hasPaidShipping)
+            <div class="w-full bg-green-400/20 flex justify-center items-center rounded-lg h-16 p-2  gap-x-2">
+
+                <x-label  class="text-green-500">
+                    سيتم إضافة 50 درهم كتكلفة شحن لهذا الطلب لأنه أقل من 500 درهم
+                </x-label>
+            </div>
+            @endif
+
             <div class="flex w-full gap-x-3 ">
-                <x-my-button
-                wire:click="PayWithStripe()"
-                class=" outline w-full flex justify-center items-center gap-2"
-                >
+                <x-my-button wire:click="PayWithStripe()"
+                    class=" outline w-full flex justify-center items-center gap-2">
                     <span>
                         الدفع عبر البطاقة
 
                     </span>
-                <img src="/stripe.svg" class=" w-7 aspect-auto " />
+                    <img src="/stripe.svg" class=" w-7 aspect-auto " />
                 </x-my-button>
 
-                <x-my-button
-                class=" outline w-full flex justify-center items-center gap-2"
-                >
+                <x-my-button class=" outline w-full flex justify-center items-center gap-2">
                     <span>
                         الدفع عبر باي بال
                     </span>
                     <img src="/paypal.svg" class=" w-7 aspect-auto " />
                 </x-my-button>
             </div>
-            <x-my-button
-            wire:click="PayOnDelivery()"
-                class="w-full default">
+            <x-my-button wire:click="PayOnDelivery()" class="w-full default">
                 الدفع عند الاستلام
             </x-my-button>
-        </form>
+            </form>
+        </div>
     </div>
-</div>

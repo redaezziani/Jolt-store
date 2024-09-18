@@ -112,7 +112,7 @@ class="mt-5 flex w-full flex-col">
                 </table>
             </div>
         </div>
-        <div class="w-[99%] px-3 mt-2">
+        <div class="w-[99%] px-3 py-2 mt-2">
             {{ $products->links('livewire::simple-tailwind') }}
         </div>
     </div>

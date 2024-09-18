@@ -204,6 +204,7 @@ class AddToCart extends Component
             ->where('product_id', $this->product->id)
             ->groupBy('rating')
             ->orderBy('rating', 'desc')
+            ->limit(6) // Limit the results to 6
             ->get();
 
         return view('livewire.add-to-cart', [
@@ -212,7 +213,7 @@ class AddToCart extends Component
             'currentQuantity' => $this->quantity,
             'comments' => $comments,
             'ratings' => $ratings,
-            'totalComments' => $totalComments, // Pass total number of comments to the view
+            'totalComments' => $totalComments, 
         ]);
     }
 }

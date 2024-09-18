@@ -1,4 +1,4 @@
-<div  x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
+<div x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
     x-on:keydown.shift.tab="open = false" x-on:side-bar-open.window="open = true" x-on:side-bar-close.window="open = false"
     x-on:click.outside="open = false" x-show="open" x-cloak
     class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0">
@@ -22,7 +22,7 @@
                 <path d="M6 6l12 12" />
             </svg>
         </div>
-        <div class="flex flex-col mt-4 w-full justify-start items-start gap-3">
+        <div class="flex flex-col mt-4 w-full justify-start items-start gap-6">
             @if ($cartItems && count($cartItems) > 0)
                 @foreach ($cartItems as $item)
                     <div class="w-full flex gap-3 justify-between items-center">
@@ -41,13 +41,13 @@
                                     </svg>
                                 </span>
                                 <img src="{{ asset('storage/' . $item->product->cover_img) }}"
-                                    alt="{{ $item->product->name }}" class="w-14 h-14 object-cover rounded-md">
+                                    alt="{{ $item->product->name }}" class="w-14 aspect-[9/11] object-cover rounded-md">
                             </span>
                             <div class="flex flex-col justify-start items-start">
-                                <h3 class="text-neutral-600 text-sm font-medium line-clamp-1">
+                                <h3 class="text-slate-800 text-sm font-medium line-clamp-1">
                                     {{ $item->product->name }}
                                 </h3>
-                                <p class="text-sm mt-3 text-slate-600">
+                                <p class="text-sm  text-slate-600">
                                     @php
                                         $discountValue = optional($item->product->discounts->last())->value;
                                         $discountValue = (float) $discountValue;
@@ -71,6 +71,20 @@
                                         درهم
                                     </span>
                                 </p>
+                                {{--lets make a comp that add or update the qua--}}
+                                <div class="flex gap-2 justify-start items-center">
+                                    <button wire:click='increaseQuantity({{ $item->id }})'
+                                        class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-lg bg-slate-200 text-slate-700 font-semibold p-1">
+                                        +
+                                    </button>
+                                    <span class="text-xs text-neutral-600">
+                                        {{ $item->quantity }}
+                                    </span>
+                                    <button wire:click='decreaseQuantity({{ $item->id }})'
+                                        class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-lg bg-slate-200 text-slate-700 font-semibold p-1">
+                                        -
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,25 +110,18 @@
                     تفريغ العربة
                 </x-my-button>
                 <x-my-button wire:click='checkout()' wire:loading.attr="disabled" id="checkout"
-                    class="text-secondary w-full flex bg-[#e11d48] gap-x-2 justify-center items-center">
+                    class="text-secondary w-full flex bg-[#2563eb] gap-x-2 justify-center items-center">
                     <div wire:loading.class="hidden" wire:target="#checkout"
                         class="flex gap-x-2 justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
-                            fill="none">
-                            <circle cx="17" cy="18" r="2" stroke="currentColor" stroke-width="1.5" />
-                            <circle cx="7" cy="18" r="2" stroke="currentColor" stroke-width="1.5" />
-                            <path
-                                d="M5 17.9724C3.90328 17.9178 3.2191 17.7546 2.73223 17.2678C2.24536 16.7809 2.08222 16.0967 2.02755 15M9 18H15M19 17.9724C20.0967 17.9178 20.7809 17.7546 21.2678 17.2678C22 16.5355 22 15.357 22 13V11H17.3C16.5555 11 16.1832 11 15.882 10.9021C15.2731 10.7043 14.7957 10.2269 14.5979 9.61803C14.5 9.31677 14.5 8.94451 14.5 8.2C14.5 7.08323 14.5 6.52485 14.3532 6.07295C14.0564 5.15964 13.3404 4.44358 12.4271 4.14683C11.9752 4 11.4168 4 10.3 4H2"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2 8H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M2 11H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M14.5 6H16.3212C17.7766 6 18.5042 6 19.0964 6.35371C19.6886 6.70742 20.0336 7.34811 20.7236 8.6295L22 11"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                            <path d="M3 9l4 0" />
                         </svg>
                         <span>إتمام الطلب</span>
                     </div>

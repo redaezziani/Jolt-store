@@ -20,6 +20,8 @@ class CreateOrder extends Component
     public $zipCode;
     public $cartItems = [];
     public $total = 0;
+    // lets add a var to check if any of the items in the cart has a Paid Shipping
+    public $hasPaidShipping = false;
     protected $rules = [
         'firstname' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
@@ -62,7 +64,18 @@ class CreateOrder extends Component
                 $this->cartItems = $cart->items;
                 $this->calculateTotal();
             }
+
+            for
+            ($i = 0; $i < count($this->cartItems); $i++) {
+                if ($this->cartItems[$i]->product->shipping == 'Paid Shipping') {
+                    $this->hasPaidShipping = true;
+                    break;
+                }
+            }
         }
+
+        // lets check if any of the items in the cart has a Paid Shipping
+
     }
 
     public function calculateTotal()
@@ -227,6 +240,7 @@ class CreateOrder extends Component
                 'mode' => 'payment',
                 'success_url' => route('order-success'),
                 'cancel_url' => route('home'),
+                
             ]);
 
             // Redirect to the Checkout Session
@@ -239,6 +253,7 @@ class CreateOrder extends Component
         return view('livewire.create-order', [
             'cartItems' => $this->cartItems,
             'total' => $this->total,
+            'hasPaidShipping' => $this->hasPaidShipping,
         ]);
     }
 }
