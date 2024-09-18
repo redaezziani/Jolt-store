@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Facades\Cache;
 use App\Models\Category;
 use Livewire\WithPagination;
 use App\Models\Product;
@@ -31,41 +30,25 @@ class NewArrivals extends Component
 
     public function render()
     {
-        // Use the current page number in the cache key
+        // Fetch products based on the filter
+        if ($this->filter) {
+            $query = Product::whereHas('category', function ($query) {
+                $query->where('slug', $this->filter);
+            })->orderBy('created_at', 'desc');
+        } else {
+            $query = Product::orderBy('created_at', 'desc');
+        }
+
+        // Paginate the query results
         $currentPage = $this->getPage();
-        $cacheKey = 'new_arrivals_' . $this->filter . '_page_' . $currentPage;
+        $perPage = 10;
+        $products = $query->paginate($perPage, ['*'], 'page', $currentPage);
 
-        // Retrieve or cache the query results
-        $new_arrivals = Cache::remember($cacheKey, 60, function () {
-            if ($this->filter) {
-                return Product::whereHas('category', function ($query) {
-                    $query->where('slug', $this->filter);
-                })->orderBy('created_at', 'desc')->get();
-            } else {
-                return Product::orderBy('created_at', 'desc')->get();
-            }
-        });
-
-        // Cache categories separately
-        $categories = Cache::remember('categories', 60, function () {
-            return Category::inRandomOrder()->limit(4)->get();
-        });
-
-        // Manually paginate the cached results
-        $paginatedResults = $new_arrivals->forPage($currentPage, 10);
-        $totalResults = $new_arrivals->count();
-
-        // Create a paginator instance for the cached results
-        $new_arrivals_paginated = new LengthAwarePaginator(
-            $paginatedResults,
-            $totalResults,
-            10,
-            $currentPage,
-            ['path' => url()->current(), 'query' => request()->query()]
-        );
+        // Fetch categories without caching
+        $categories = Category::inRandomOrder()->limit(4)->get();
 
         return view('livewire.new-arrivals', [
-            'new_arrivals' => $new_arrivals_paginated,
+            'new_arrivals' => $products,
             'categories' => $categories
         ]);
     }
