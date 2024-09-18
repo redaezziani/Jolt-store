@@ -35,7 +35,7 @@ return [
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
     ],
     'google' => [
-        'name' => 'Google',
+        'name' => 'جوجل',
         'scopes' => null,
         'parameters' => null,
         'stateless' => true,

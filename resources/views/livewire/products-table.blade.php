@@ -78,9 +78,15 @@ class="mt-5 flex w-full flex-col">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-slate-900">
                                         @if ($product->shipping == 'Paid Shipping')
-                                            <span class="text-red-700   px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
+                                        <x-badge
+                                         flat
+                                         negative
+                                         label="{{ $product->shipping }}" />
                                         @else
-                                            <span class="text-primary   px-1 py-0.5 rounded-md">{{ $product->shipping }}</span>
+                                        <x-badge
+                                         flat
+                                         positive
+                                         label="{{ $product->shipping }}" />
                                         @endif
 
                                     </div>

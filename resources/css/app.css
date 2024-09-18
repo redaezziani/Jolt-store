@@ -10,7 +10,7 @@
 @tailwind utilities;
 
 :root {
-    --primary: #00439a;
+    --primary: rgb(36, 99, 235);
     --secondary: #06182b;
     --rounded: 0rem;
     --red-600: #b91111;

@@ -70,7 +70,7 @@
             <p class="text-base text-center max-w-3xl text-neutral-800">
                 {{ __('check_out_random_categories') }}
             </p>
-            {{-- <livewire:random-categories /> --}}
+            <livewire:rand-categories />
             <a href="{{ route('products-index') }}"></a>
         </section>
     </div>
