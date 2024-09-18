@@ -38,13 +38,8 @@ class NewArrivals extends Component
         } else {
             $query = Product::orderBy('created_at', 'desc');
         }
+        $products = $query->paginate(10,pageName: 'new-arrivals');
 
-        // Paginate the query results
-        $currentPage = $this->getPage();
-        $perPage = 10;
-        $products = $query->paginate($perPage, ['*'], 'page', $currentPage);
-
-        // Fetch categories without caching
         $categories = Category::inRandomOrder()->limit(4)->get();
 
         return view('livewire.new-arrivals', [

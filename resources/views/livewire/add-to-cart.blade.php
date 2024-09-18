@@ -16,7 +16,7 @@
             {{ $product->description }}
         </p>
 
-        <div class="flex gap-x-1 justify-start items-center">
+        <div class="flex gap-x-1 justify-start items-start text-slate-400">
             @for ($i = 1; $i <= 5; $i++)
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                     class="icon icon-tabler icon-tabler-star {{ $i <= $product->rating ? 'text-orange-500' : 'text-slate-400' }}"
@@ -26,6 +26,10 @@
                         d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
                 </svg>
             @endfor
+            ({{ $product->rating }}/5)
+            <p>
+                {{ $product->comments->count() }} تعليق
+            </p>
         </div>
 
         {{-- if the product have a sizes --}}
@@ -34,6 +38,12 @@
                 <div class="flex flex-col gap-3 justify-start items-start">
                     <p class=" text-slate-800 font-semibold text-lg">
                         الأحجام
+                        {{-- display a alret if count of product q is less then 5 --}}
+                        @if ($product->quantity < 5)
+                            <span class=" text-amber-400 text-sm">
+                                (الكمية محدودة)
+                            </span>
+                        @endif
                     </p>
                     <div class="w-full flex gap-3 flex-wrap justify-start items-center">
                         {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
@@ -121,35 +131,7 @@
             </div>
             @include('components.custom.product.quantity-input', ['currentQuantity' => $currentQuantity])
         </div>
-
-        <div class="w-full">
-        </div>
-        <div class="flex mt-4  gap-2 justify-start items-start">
-            <span
-                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white  shadow-sm ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                    color="#000000" fill="none">
-                    <path
-                        d="M19.5 17.5C19.5 18.8807 18.3807 20 17 20C15.6193 20 14.5 18.8807 14.5 17.5C14.5 16.1193 15.6193 15 17 15C18.3807 15 19.5 16.1193 19.5 17.5Z"
-                        stroke="currentColor" stroke-width="1.5" />
-                    <path
-                        d="M9.5 17.5C9.5 18.8807 8.38071 20 7 20C5.61929 20 4.5 18.8807 4.5 17.5C4.5 16.1193 5.61929 15 7 15C8.38071 15 9.5 16.1193 9.5 17.5Z"
-                        stroke="currentColor" stroke-width="1.5" />
-                    <path
-                        d="M14.5 17.5H9.5M15 15.5V7C15 5.58579 15 4.87868 14.5607 4.43934C14.1213 4 13.4142 4 12 4H5C3.58579 4 2.87868 4 2.43934 4.43934C2 4.87868 2 5.58579 2 7V15C2 15.9346 2 16.4019 2.20096 16.75C2.33261 16.978 2.52197 17.1674 2.75 17.299C3.09808 17.5 3.56538 17.5 4.5 17.5M15.5 6.5H17.3014C18.1311 6.5 18.5459 6.5 18.8898 6.6947C19.2336 6.8894 19.4471 7.2451 19.8739 7.95651L21.5725 10.7875C21.7849 11.1415 21.8911 11.3186 21.9456 11.5151C22 11.7116 22 11.918 22 12.331V15C22 15.9346 22 16.4019 21.799 16.75C21.6674 16.978 21.478 17.1674 21.25 17.299C20.9019 17.5 20.4346 17.5 19.5 17.5"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                {{-- if shepping is Paid Shipping well transl it to arabic and do same for Free --}}
-                @if ($product->shipping == 'Paid Shipping')
-                    الشحن مدفوع
-                @else
-                    الشحن مجاني
-                @endif
-            </span>
-
-
-        </div>
-        <div class="flex w-full md:w-fit gap-x-3 md:gap-x-5 mt-5 pb-3 justify-start items-center">
+        <div class="flex w-full  md:w-fit gap-x-3 md:gap-x-5 mt-10 pb-3 justify-start items-center">
             <x-my-button id="add-to-cart" wire:loading.attr="disabled" wire:click="addToCart({{ $product->id }})"
                 class=" default  font-bold w-1/2 flex gap-x-2 justify-center items-center">
                 <!-- Spinner displayed during loading -->
@@ -184,6 +166,39 @@
                 </div>
             </x-my-button>
             @include('components.check-order')
+        </div>
+
+        <div class="flex mt-4  gap-2 flex-col justify-start items-start">
+            <div class="flex gap-2 justify-start items-start">
+                <svg class="text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewBox="0 0 24 24" fill="currentColor"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-map-pin">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z" />
+                </svg>
+                <p class="text-slate-400 text-sm">
+                    منتجاتنا تأتي مباشرة من المغرب
+                </p>
+
+            </div>
+
+            <div class="flex gap-2 justify-start items-start">
+                <svg class="text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewBox="0 0 24 24" fill="currentColor"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-clock">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-5 2.66a1 1 0 0 0 -.993 .883l-.007 .117v5l.009 .131a1 1 0 0 0 .197 .477l.087 .1l3 3l.094 .082a1 1 0 0 0 1.226 0l.094 -.083l.083 -.094a1 1 0 0 0 0 -1.226l-.083 -.094l-2.707 -2.708v-4.585l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
+                </svg>
+                <p class="text-slate-400 text-sm">
+                    التوصيل في غضون <strong class=" underline underline-offset-2">3 أيام</strong> كحد أقصى إذا تم
+                    <strong class=" underline underline-offset-2">دفع تكلفة الشحن</strong>، وإلا فقد يستغرق التوصيل حتى
+                    <strong class=" underline underline-offset-2">7 أيام</strong>.
+                </p>
+            </div>
+
+
         </div>
     </div>
     <div class=" w-full mt-5 col-span-3  gap-0  overflow-x-hidden justify-start items-start ">
@@ -258,51 +273,74 @@
             أضف تعليقك
         </p>
 
-        <div class=" relative overflow-hidden max-w-xl pb-5 px-1 pt-2 mt-5 flex gap-3 justify-start items-start flex-col">
+        <div
+            class=" relative overflow-hidden max-w-xl pb-5 px-1 pt-2 mt-5 flex gap-3 justify-start items-start flex-col">
             <textarea wire:model.live.lazydebounce.250ms="commentText" placeholder="أضف تعليقك هنا"
                 class="flex w-full rounded-md border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 h-24">
                </textarea>
-               <div x-data="{ currentVal: 3 }" class="flex items-center gap-1">
+            <div x-data="{ currentVal: 3 }" class="flex items-center gap-1">
                 <label for="oneStar" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
                     <span class="sr-only">one star</span>
-                    <input x-model="currentVal" id="oneStar" type="radio" class="sr-only" name="rating" value="1">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" :class="currentVal > 0 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd">
+                    <input x-model="currentVal" id="oneStar" type="radio" class="sr-only" name="rating"
+                        value="1">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                        fill="currentColor" class="w-5 h-5"
+                        :class="currentVal > 0 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd">
                     </svg>
                 </label>
 
                 <label for="twoStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
                     <span class="sr-only">two stars</span>
-                    <input x-model="currentVal" id="twoStars" type="radio" class="sr-only" name="rating" value="2">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" :class="currentVal > 1 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd">
+                    <input x-model="currentVal" id="twoStars" type="radio" class="sr-only" name="rating"
+                        value="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                        fill="currentColor" class="w-5 h-5"
+                        :class="currentVal > 1 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd">
                     </svg>
                 </label>
 
                 <label for="threeStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
                     <span class="sr-only">three stars</span>
-                    <input x-model="currentVal" id="threeStars" type="radio" class="sr-only" name="rating" value="3">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" :class="currentVal > 2 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd">
+                    <input x-model="currentVal" id="threeStars" type="radio" class="sr-only" name="rating"
+                        value="3">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                        fill="currentColor" class="w-5 h-5"
+                        :class="currentVal > 2 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd">
                     </svg>
                 </label>
 
                 <label for="fourStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
                     <span class="sr-only">four stars</span>
-                    <inpu
-
-                    wire:model='rating'
-                    t x-model="currentVal" id="fourStars" type="radio" class="sr-only" name="rating" value="4">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" :class="currentVal > 3 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd">
-                    </svg>
+                    <inpu wire:model='rating' t x-model="currentVal" id="fourStars" type="radio" class="sr-only"
+                        name="rating" value="4">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-5 h-5"
+                            :class="currentVal > 3 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd">
+                        </svg>
                 </label>
 
                 <label for="fiveStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
                     <span class="sr-only">five stars</span>
-                    <input x-model="currentVal" id="fiveStars" type="radio" class="sr-only" name="rating" value="5">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" :class="currentVal > 4 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd">
+                    <input x-model="currentVal" id="fiveStars" type="radio" class="sr-only" name="rating"
+                        value="5">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                        fill="currentColor" class="w-5 h-5"
+                        :class="currentVal > 4 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd">
                     </svg>
                 </label>
             </div>

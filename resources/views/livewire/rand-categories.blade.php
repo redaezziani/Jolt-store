@@ -27,11 +27,8 @@
                                 <path d="M5 12l4 -4" />
                             </svg>
                         </button>
-
                     </a>
                  </div>
-
-
               </div>
           @endforeach
     </div>
