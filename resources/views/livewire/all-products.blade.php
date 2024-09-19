@@ -9,8 +9,14 @@
 
             <section title="ترتيب حسب السعر" class="w-full flex flex-col gap-3">
                 <p class="text-primary font-medium">ترتيب حسب السعر</p>
-
-                @foreach([1 => 'أقل من 50 درهم مغربي', 2 => 'بين 50 و100 درهم مغربي', 3 => 'بين 100 و200 درهم مغربي', 4 => 'أكثر من 200 درهم مغربي'] as $value => $label)
+                {{--TODO: Add wire:fix all --}}
+                @foreach([
+                    5 => 'عرض الكل',
+                    1 => 'أقل من 50 درهم',
+                    2 => 'من 50 إلى 100 درهم',
+                    3 => 'من 100 إلى 200 درهم',
+                    4 => 'أكثر من 200 درهم',
+                ] as $value => $label)
                     <div class="flex gap-2 justify-start items-center relative">
                         <div class="flex gap-3">
                             <label class="cursor-pointer">
@@ -37,8 +43,11 @@
             title="الشحن"
              class="w-full flex flex-col gap-3">
                 <p class="text-primary font-medium">الشحن</p>
-
-                @foreach([1 => 'مجاني', 2 => 'مدفوع'] as $value => $label)
+                @foreach([
+                    3 => 'الكل',
+                    1 => 'مجاني',
+                    2 => 'مدفوع'
+                    ] as $value => $label)
                     <div class="flex gap-2 justify-start items-center relative">
                         <div class="flex gap-3">
                             <label class="cursor-pointer">
@@ -60,6 +69,67 @@
                 @endforeach
 
             </section>
+
+            <section
+            title="الحجم"
+            class="w-full flex flex-col gap-3">
+            <p class="text-primary font-medium">
+                اختر الحجم
+            </p>
+            <div class="w-full flex gap-3 max-w-80 flex-wrap justify-start items-center">
+            @foreach ($sizes as $size)
+                <div class="flex gap-3">
+                    <label class="cursor-pointer" for="size-{{ $size }}" wire:click='applySizeFilter("{{ $size }}")'>
+                        <input
+                            value="{{ $size }}"
+                            aria-label="size"
+                            hidden
+                            class="peer hidden"
+                            type="radio"
+                            name="size"
+                            id="size-{{ $size }}"
+                        >
+                        <div
+                            class="w-9 p-1 text-sm h-9 flex justify-center items-center rounded-lg border border-slate-400/35 transition duration-300
+                                peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                            <span class="text-sm">
+                                {{ $size }}
+                            </span>
+                        </div>
+                    </label>
+                </div>
+            @endforeach
+            </div>
+        </section>
+        <section
+    title="اللون"
+    class="w-full flex flex-col gap-3">
+    <p class="text-primary font-medium">
+        اختر اللون
+    </p>
+    <div class="w-full flex gap-3 max-w-80 flex-wrap justify-start items-center">
+    @foreach ($colors as $color)
+        <div class="flex gap-3">
+            <label class="cursor-pointer" for="color-{{ $color }}"
+                wire:click='applyColorFilter("{{ $color }}")'>
+                <input
+                    value="{{ $color }}"
+                    aria-label="color"
+                    hidden
+                    class="peer hidden"
+                    type="radio"
+                    name="color"
+                    id="color-{{ $color }}"
+                >
+                <div style="background-color: {{ $color }};"
+                    class="w-9 h-9 flex justify-center items-center rounded-full border border-slate-400/35 transition duration-300
+                        peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 peer-checked:border-transparent">
+                </div>
+            </label>
+        </div>
+    @endforeach
+    </div>
+</section>
 
         </div>
     </div>

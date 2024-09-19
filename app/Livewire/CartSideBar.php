@@ -86,10 +86,6 @@ class CartSideBar extends Component
         }
     }
 
-    public function checkout()
-    {
-        return redirect()->route('order-index');
-    }
 
     public function render()
     {

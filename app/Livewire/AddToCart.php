@@ -19,7 +19,7 @@ class AddToCart extends Component
     public $color = '';
     public $quantity = 1;
     public $commentText;
-    public $rating = 5; // Default rating
+    public $rating = 4;
 
     protected $rules = [
         'commentText' => 'required|min:3',
@@ -61,6 +61,35 @@ class AddToCart extends Component
             $description = 'تم حذف تعليقك بنجاح.'
         );
     }
+
+    public function toggleVisibility($commentId)
+{
+    $comment = Comment::find($commentId);
+    if (!$comment) {
+        $this->notification()->error(
+            $title = 'حدث خطأ',
+            $description = 'لم يتم العثور على التعليق.'
+        );
+        return;
+    }
+
+    if ($comment->user_id !== Auth::id()) {
+        $this->notification()->error(
+            $title = 'حدث خطأ',
+            $description = 'لا يمكنك تعديل تعليق لم تقم بإضافته.'
+        );
+        return;
+    }
+
+    // Toggle the visibility status
+    $comment->status = $comment->status === 'show' ? 'hide' : 'show';
+    $comment->save();
+
+    $this->notification()->success(
+        $title = 'تم التحديث بنجاح',
+        $description = 'تم تغيير حالة التعليق بنجاح.'
+    );
+}
 
     public function setRating($rating)
     {
@@ -213,7 +242,7 @@ class AddToCart extends Component
             'currentQuantity' => $this->quantity,
             'comments' => $comments,
             'ratings' => $ratings,
-            'totalComments' => $totalComments, 
+            'totalComments' => $totalComments,
         ]);
     }
 }

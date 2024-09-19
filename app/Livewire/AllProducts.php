@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
@@ -10,12 +11,24 @@ class AllProducts extends Component
 {
     use WithPagination;
 
-    public $filter = '';
-    public $search = '';
-    public $sortPrice = null;
-    public $shipping = null;
+    public $filter = ''; // Category filter
+    public $search = ''; // Search keyword
+    public $sortPrice = null; // Price sorting
+    public $shipping = null; // Shipping filter
+    public $color = null; // Color filter
+    public $size = null; // Size filter
 
-    protected $queryString = ['filter', 'search', 'sortPrice', 'shipping'];
+    public $sizes = [];
+    public $colors= [];
+
+    protected $queryString = [
+        'filter' => 'filter-category',
+        'search' => 'filter-search',
+        'sortPrice' => 'sort-price',
+        'shipping' => 'filter-shipping',
+        'color' => 'filter-color',
+        'size' => 'filter-size'
+    ];
 
     public function applyFilter($filter)
     {
@@ -29,27 +42,90 @@ class AllProducts extends Component
         $this->resetPage(); // Reset pagination when sort changes
     }
 
-    public function applySortShipping ($applySortShipping)
+    public function applySortShipping($shipping)
     {
-        $this->shipping = $applySortShipping;
-        $this->resetPage(); // Reset pagination when sort changes
+        $this->shipping = $shipping;
+        $this->resetPage(); // Reset pagination when shipping filter changes
     }
+
+    public function applyColorFilter($color)
+    {
+        $this->color = $color;
+        $this->resetPage(); // Reset pagination when color filter changes
+    }
+
+    public function applySizeFilter($size)
+    {
+        $this->size = $size;
+        $this->resetPage(); // Reset pagination when size filter changes
+    }
+
+    public function mount()
+    {
+        // Fetch all distinct sizes from products
+        $sizes = Product::select('sizes')
+            ->whereNotNull('sizes') // Ensure size is not null
+            ->distinct()
+            ->pluck('sizes')
+            ->toArray();
+
+        // Process sizes to handle potential formatting issues and duplicates
+        $this->sizes = collect($sizes)
+            ->flatMap(function ($size) {
+                // Handle cases where sizes might be separated by special delimiters
+                return explode('@', $size); // Split sizes if they are separated by '@' or other delimiters
+            })
+            ->map(function ($size) {
+                return trim($size); // Trim any extra spaces
+            })
+            ->unique()
+            ->sort() // Optional: sort sizes if needed
+            ->values()
+            ->toArray();
+
+        // Fetch all distinct colors from products
+        $colors = Product::select('colors')
+            ->whereNotNull('colors') // Ensure color is not null
+            ->distinct()
+            ->pluck('colors')
+            ->toArray();
+
+        // Process colors to handle potential formatting issues and duplicates
+        $this->colors = collect($colors)
+            ->flatMap(function ($color) {
+                // Handle cases where colors might be separated by special delimiters
+                return explode('@', $color); // Split colors if they are separated by '@' or other delimiters
+            })
+            ->map(function ($color) {
+                return trim($color); // Trim any extra spaces
+            })
+            ->unique()
+            ->sort() // Optional: sort colors if needed
+            ->values()
+            ->toArray();
+    }
+
 
     public function render()
     {
         $query = Product::query();
 
-         switch ($this->shipping) {
+        // Apply shipping filter
+        switch ($this->shipping) {
             case 1:
                 $query->where('shipping', 'Free Shipping');
                 break;
             case 2:
                 $query->where('shipping', 'Paid Shipping');
                 break;
+            case 3:
+                // this is get all products
+                break;
             default:
-                $query->where('shipping', 'Free Shipping');
+                // No shipping filter applied
                 break;
         }
+
         // Apply category filter
         if ($this->filter) {
             $query->whereHas('category', function ($query) {
@@ -62,6 +138,7 @@ class AllProducts extends Component
             $query->where('name', 'like', '%' . $this->search . '%');
         }
 
+        // Apply price sorting
         switch ($this->sortPrice) {
             case 1:
                 $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) < ?', [50]);
@@ -75,17 +152,36 @@ class AllProducts extends Component
             case 4:
                 $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) > ?', [200]);
                 break;
+            case 5:
+                // this is get all products
+
+                break;
             default:
-                $query->whereRaw('CAST(REPLACE(price, ",", ".") AS DECIMAL(10,2)) > ?', [0]);
+                // No price filter applied
                 break;
         }
+
+        // Apply color filter
+        if ($this->color) {
+            $query->where('colors', 'like', '%' . $this->color . '%');
+        }
+
+        // Apply size filter
+        if ($this->size) {
+            $query->where('sizes', 'like', '%' . $this->size . '%');
+        }
+
+        // Get products with sorting and pagination
         $products = $query->orderBy('created_at', 'desc')->paginate(16);
+
+        // Fetch categories for display
         $categories = Category::inRandomOrder()->limit(4)->get();
 
         return view('livewire.all-products', [
             'products' => $products,
             'categories' => $categories,
+            'sizes' => $this->sizes,
+            'colors' => $this->colors,
         ]);
     }
 }
-?>

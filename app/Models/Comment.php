@@ -9,7 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['comment_text', 'product_id', 'user_id', 'rating'];
+    protected $fillable = ['comment_text', 'product_id', 'user_id', 'rating', 'status'];
 
     /**
      * Get the product that the comment belongs to.

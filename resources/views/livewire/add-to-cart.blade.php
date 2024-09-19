@@ -9,9 +9,10 @@
             class=" text-slate-700 -mt-2 underline underline-offset-2 text-lg ">
             {{ $product->category->name }}
         </a>
-        <h2 class=" text-slate-900 mt-5 uppercase text-xl font-bold">
+        <h2 class="text-slate-900 mt-5 text-xl font-bold uppercase flex items-center">
             {{ $product->name }}
         </h2>
+
         <p class=" text-slate-600 mt-0 text-base">
             {{ $product->description }}
         </p>
@@ -45,7 +46,7 @@
                             </span>
                         @endif
                     </p>
-                    <div class="w-full flex gap-3 flex-wrap justify-start items-center">
+                    <div class="w-full flex gap-3 max-w-60 flex-wrap justify-start items-center">
                         {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
                         @foreach (explode('@', $product->sizes) as $size)
                             <div class="flex gap-3">
@@ -81,11 +82,9 @@
                                             class=" peer hidden" type="radio" name="color"
                                             id="color-{{ $color }}">
                                         <div style="
-                                  background-color: {{ $color }}
-
+                                  background-color: {{ $color }};
                                   "
-                                            class="  w-9  text-sm h-9 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
-
+                                            class="  w-9  text-sm h-9 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300  peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 peer-checked:border-transparent">
                                         </div>
                                     </label>
                                 </div>
@@ -198,6 +197,25 @@
                 </p>
             </div>
 
+            @if ($product->discounts->count() > 0)
+                <div class="flex gap-2 justify-start items-start">
+                    <svg class="text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                        viewBox="0 0 24 24" fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-tag">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M11.172 2a3 3 0 0 1 2.121 .879l7.71 7.71a3.41 3.41 0 0 1 0 4.822l-5.592 5.592a3.41 3.41 0 0 1 -4.822 0l-7.71 -7.71a3 3 0 0 1 -.879 -2.121v-5.172a4 4 0 0 1 4 -4zm-3.672 3.5a2 2 0 0 0 -1.995 1.85l-.005 .15a2 2 0 1 0 2 -2" />
+                    </svg>
+                    <p class="text-slate-400 text-sm">
+                        هذا المنتج يحتوي على خصم
+                        <strong
+                            class=" underline
+                underline-offset-2">{{ optional($product->discounts->last())->value }}%</strong>
+                    </p>
+
+                </div>
+            @endif
+
 
         </div>
     </div>
@@ -243,27 +261,44 @@
                 </p>
             @else
                 @foreach ($comments as $comment)
-                    <article class="flex gap-2 gap-x-3 w-72 overflow-hidden justify-start items-start">
-                        <div class="flex h-full flex-col gap-2 justify-start items-center">
-                            <div class="h-9 w-9 overflow-hidden bg-slate-100 border border-slate-400/35 rounded-full">
-                                {{-- get the image from the storage/app/public/auth/ --}}
-                                <img src="{{ asset('storage/auth/' . 'd-avatar.avif') }}" alt="profile photo"
-                                    class="object-cover w-full h-full">
+                    @if ($comment->status === 'show' || $comment->user_id === Auth::id())
+                        <article
+                            class="flex gap-2 gap-x-3 bg-slate-100 rounded-lg p-2 justify-start items-start
+                {{ $comment->status != 'show' && $comment->user_id === Auth::id() ? 'opacity-50 ' : '' }}">
+                            <div class="flex h-full flex-col gap-2 justify-start items-center">
+                                <div
+                                    class="h-9 w-9 overflow-hidden bg-slate-100 border border-slate-400/35 rounded-full">
+                                    {{-- get the image from the storage/app/public/auth/ --}}
+                                    <img src="{{ asset('storage/auth/' . 'd-avatar.avif') }}" alt="profile photo"
+                                        class="object-cover w-full h-full">
+                                </div>
                             </div>
-                        </div>
+                            <div class="w-full flex justify-between items-center">
+                                <div class="flex max-w-[40rem]  justify-start w-full items-start flex-col">
+                                    <p class="text-slate-800 font-semibold text-lg">
+                                        {{ $comment->user->name }}
+                                    </p>
+                                    <p title="time" class="text-slate-600 text-sm">
+                                        {{ $comment->created_at->diffForHumans() }}
+                                    </p>
+                                    <p class="text-slate-500 line-clamp-3 mt-5 text-base">
+                                        {{ $comment->comment_text }}
+                                    </p>
+                                </div>
+                                @if ($comment->user_id === Auth::id())
+                                    <x-dropdown>
+                                        <x-dropdown.item icon="eye" label="تبديل الرؤية"
+                                            wire:click="toggleVisibility({{ $comment->id }})" />
+                                        <x-dropdown.item icon="trash" label="حذف التعليق"
+                                            wire:click="deleteComment({{ $comment->id }})" />
+                                    </x-dropdown>
+                                @endif
 
-                        <div class="flex  justify-start w-full items-start flex-col">
-                            <p class="text-slate-800 font-semibold text-lg">
-                                {{ $comment->user->name }}
-                            </p>
-                            <p title="time" class="text-slate-600 text-sm">
-                                {{ $comment->created_at->diffForHumans() }}
-                            </p>
-                            <p class="text-slate-500 line-clamp-3 mt-5 text-base">
-                                {{ $comment->comment_text }}
-                            </p>
-                        </div>
-                    </article>
+
+                            </div>
+
+                        </article>
+                    @endif
                 @endforeach
             @endif
 
@@ -277,74 +312,79 @@
             class=" relative overflow-hidden max-w-xl pb-5 px-1 pt-2 mt-5 flex gap-3 justify-start items-start flex-col">
             <textarea wire:model.live.lazydebounce.250ms="commentText" placeholder="أضف تعليقك هنا"
                 class="flex w-full rounded-md border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 h-24">
-               </textarea>
-            <div x-data="{ currentVal: 3 }" class="flex items-center gap-1">
-                <label for="oneStar" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
-                    <span class="sr-only">one star</span>
-                    <input x-model="currentVal" id="oneStar" type="radio" class="sr-only" name="rating"
-                        value="1">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
-                        fill="currentColor" class="w-5 h-5"
-                        :class="currentVal > 0 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd"
-                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                            clip-rule="evenodd">
-                    </svg>
-                </label>
+            </textarea>
+            <div class="flex gap-x-2 justify-start items-start">
 
-                <label for="twoStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
-                    <span class="sr-only">two stars</span>
-                    <input x-model="currentVal" id="twoStars" type="radio" class="sr-only" name="rating"
-                        value="2">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
-                        fill="currentColor" class="w-5 h-5"
-                        :class="currentVal > 1 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd"
-                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                            clip-rule="evenodd">
-                    </svg>
-                </label>
-
-                <label for="threeStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
-                    <span class="sr-only">three stars</span>
-                    <input x-model="currentVal" id="threeStars" type="radio" class="sr-only" name="rating"
-                        value="3">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
-                        fill="currentColor" class="w-5 h-5"
-                        :class="currentVal > 2 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd"
-                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                            clip-rule="evenodd">
-                    </svg>
-                </label>
-
-                <label for="fourStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
-                    <span class="sr-only">four stars</span>
-                    <inpu wire:model='rating' t x-model="currentVal" id="fourStars" type="radio" class="sr-only"
-                        name="rating" value="4">
+                <div x-data="{ currentVal: @entangle('rating') }" class="flex items-center gap-1">
+                    <label for="oneStar" class="cursor-pointer transition hover:scale-125">
+                        <span class="sr-only">One star</span>
+                        <input x-model="currentVal" id="oneStar" type="radio" class="sr-only" name="rating"
+                            value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                             fill="currentColor" class="w-5 h-5"
-                            :class="currentVal > 3 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
+                            :class="currentVal >= 1 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
                             <path fill-rule="evenodd"
                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                clip-rule="evenodd">
+                                clip-rule="evenodd"></path>
                         </svg>
-                </label>
+                    </label>
 
-                <label for="fiveStars" class="cursor-pointer transition hover:scale-125 has-[:focus]:scale-125">
-                    <span class="sr-only">five stars</span>
-                    <input x-model="currentVal" id="fiveStars" type="radio" class="sr-only" name="rating"
-                        value="5">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
-                        fill="currentColor" class="w-5 h-5"
-                        :class="currentVal > 4 ? 'text-amber-500' : 'text-neutral-600 dark:text-neutral-300'">
-                        <path fill-rule="evenodd"
-                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                            clip-rule="evenodd">
-                    </svg>
-                </label>
+                    <label for="twoStars" class="cursor-pointer transition hover:scale-125">
+                        <span class="sr-only">Two stars</span>
+                        <input x-model="currentVal" id="twoStars" type="radio" class="sr-only" name="rating"
+                            value="2">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-5 h-5"
+                            :class="currentVal >= 2 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </label>
+
+                    <label for="threeStars" class="cursor-pointer transition hover:scale-125">
+                        <span class="sr-only">Three stars</span>
+                        <input x-model="currentVal" id="threeStars" type="radio" class="sr-only" name="rating"
+                            value="3">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-5 h-5"
+                            :class="currentVal >= 3 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </label>
+
+                    <label for="fourStars" class="cursor-pointer transition hover:scale-125">
+                        <span class="sr-only">Four stars</span>
+                        <input x-model="currentVal" id="fourStars" type="radio" class="sr-only" name="rating"
+                            value="4">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-5 h-5"
+                            :class="currentVal >= 4 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </label>
+
+                    <label for="fiveStars" class="cursor-pointer transition hover:scale-125">
+                        <span class="sr-only">Five stars</span>
+                        <input x-model="currentVal" id="fiveStars" type="radio" class="sr-only" name="rating"
+                            value="5">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-5 h-5"
+                            :class="currentVal >= 5 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </label>
+                </div>
+                <p class="text-slate-400 text-sm">
+                    (قم بتقييم المنتج)
+                </p>
             </div>
-
             <div class="flex gap-x-2  w-full md:w-96">
                 <x-my-button id="add-comment(4)" wire:loading.attr="disabled" wire:click="addComment"
                     class="default ">

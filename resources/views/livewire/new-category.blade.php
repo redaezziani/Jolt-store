@@ -16,7 +16,7 @@
                 {{ $latestCategory->description }}
             </p>
 
-            <a href="{{ route('categories-show', ['slug' => $latestCategory->slug]) }}">
+         <a href="{{ url('/products?filter=' . $latestCategory->slug) }}">
 
                 <button class="  font-medium w-32  rounded-full text-primary px-7 py-2.5  bg-white hover:bg-white/90">
                     Shop Now

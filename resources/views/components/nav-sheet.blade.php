@@ -15,15 +15,16 @@
             <p class=" text-primary font-bold flex gap-0 items-center justify-start text-3xl">
                 جولت
             </p>
-            <button x-on:click="open = false" class="text-slate-700  p-1 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                <svg
+                class="text-slate-700 ""
+                 x-on:click="open = false"
+                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-x">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M18 6l-12 12" />
                     <path d="M6 6l12 12" />
                 </svg>
-            </button>
         </div>
         <p class="text-lg mt-5 font-semibold text-slate-700">
             القائمة الرئيسية

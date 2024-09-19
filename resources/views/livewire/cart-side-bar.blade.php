@@ -8,7 +8,7 @@
         x-transition:enter-start="transform -translate-x-full" x-transition:enter-end="transform translate-x-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform translate-x-0"
         x-transition:leave-end="transform -translate-x-full"
-        class="w-96 z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
+        class="w-[20rem] z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
         <div class="w-full flex justify-between items-center">
             <p class="text-2xl font-semibold text-neutral-800">
                 عربة التسوق الخاصة بك
@@ -109,7 +109,9 @@
                 <x-my-button wire:click='clearCart()' class="outline-none ring-none border-none ghost w-[30%]">
                     تفريغ العربة
                 </x-my-button>
-                <x-my-button wire:click='checkout()' wire:loading.attr="disabled" id="checkout"
+
+
+                <x-my-button wire:loading.attr="disabled" id="checkout"
                     class="text-secondary w-full flex bg-[#2563eb] gap-x-2 justify-center items-center">
                     <div wire:loading.class="hidden" wire:target="#checkout"
                         class="flex gap-x-2 justify-center items-center">
@@ -149,6 +151,7 @@
                         </svg>
                     </div>
                 </x-my-button>
+
             </div>
         @endif
     </aside>

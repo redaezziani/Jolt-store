@@ -87,6 +87,35 @@
             <livewire:best-products />
             <a href="{{ route('products-index') }}"></a>
         </section>
+
+        <section class="mt-10 w-full pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
+            <h3 class="text-neutral-900 flex gap-x-2 justify-start items-center text-3xl font-bold">
+                <span class="w-14 bg-slate-900 h-1"></span>
+                {{ __('subscribe') }}
+                <span class="w-14 bg-slate-900 h-1"></span>
+            </h3>
+
+            <p class="text-base text-center max-w-3xl text-neutral-800">
+                {{ __('subscribe_newsletter') }}
+            </p>
+            <div class="w-full bg-primary   min-h-80 flex justify-center items-center ">
+                <div class="felx">
+                    <input
+                    class=" bg-white rounded-none lg:w-96"
+                    type="email"
+                    placeholder="أدخل بريدك الإلكتروني"
+                     />
+
+                     <button
+                     class=" bg-slate-900 text-white rounded-none px-3 py-2 h-full"
+                     >
+                     اشتراك
+                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.6"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l4 4" /><path d="M5 12l4 -4" /></svg>
+                     </button>
+                </div>
+            </div>
+            <a href="{{ route('products-index') }}"></a>
+        </section>
     </div>
     <div class="w-full grid md:max-w-7xl grid-cols-1 md:grid-cols-3 justify-center items-center">
         @include('components.custom.footer-page')
