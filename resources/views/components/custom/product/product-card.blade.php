@@ -1,6 +1,6 @@
 <article
 x-data="{
-    currentImageIndex: 0,
+    currentImageIndex: 1,
     images: {{ json_encode(array_merge([asset('storage/' . $product->cover_img)], array_map(fn($img) => asset('storage/' . $img), explode('@', $product->prev_imgs)))) }},
     nextImage() {
         this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
@@ -16,7 +16,9 @@ x-data="{
         class="relative select-none flex justify-center items-center overflow-hidden rounded-md w-full aspect-[9/12] h-auto"
     >
     <span class="absolute z-10 top-3 right-3 flex justify-center items-center">
-        <span class="rounded-full cursor-pointer" @click="nextImage()">
+        <span
+         class="rounded-full cursor-pointer"
+         @click="nextImage()">
             <svg
                 class="text-slate-500 transition-all border-e-slate-300 ease-in-out hover:scale-105"
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +36,9 @@ x-data="{
                 <path d="M9 6l6 6l-6 6" />
             </svg>
         </span>
-        <span class="rounded-full cursor-pointer transition-all border-e-slate-300 ease-in-out hover:scale-105" @click="prevImage()">
+        <span class="rounded-full cursor-pointer transition-all border-e-slate-300 ease-in-out hover:scale-105"
+        @click="prevImage()"
+        >
             <svg
                 class="text-slate-500 transition-all border-e-slate-300 ease-in-out hover:scale-105"
                 xmlns="http://www.w3.org/2000/svg"
