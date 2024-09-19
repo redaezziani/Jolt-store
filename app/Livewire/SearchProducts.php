@@ -10,7 +10,8 @@ class SearchProducts extends Component
 {
     use WithPagination;
     public $search = '';
-    protected $queryString = ['search'];
+    protected $queryString = ['search' =>['as'=> 'product-search']];
+
     public function render()
     {
         if (strlen($this->search) < 1) {
@@ -20,6 +21,7 @@ class SearchProducts extends Component
         $products = Product::where('name', 'like', '%' . $this->search . '%')
             ->orWhere('description', 'like', '%' . $this->search . '%')
             ->paginate(4);
+
 
         return view('livewire.search-products', ['products' => $products]);
     }

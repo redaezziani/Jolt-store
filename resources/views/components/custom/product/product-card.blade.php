@@ -1,52 +1,58 @@
 <article
-    x-data="{
-        currentImageIndex: 0,
-        images: {{ json_encode(array_merge([asset('storage/' . $product->cover_img)], array_map(fn($img) => asset('storage/' . $img), explode('@', $product->prev_imgs)))) }}
-    }"
+x-data="{
+    currentImageIndex: 0,
+    images: {{ json_encode(array_merge([asset('storage/' . $product->cover_img)], array_map(fn($img) => asset('storage/' . $img), explode('@', $product->prev_imgs)))) }},
+    nextImage() {
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    },
+    prevImage() {
+        this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+    }
+}"
     class="w-full flex flex-col justify-start items-center relative"
 >
     <div
         {{-- href="{{ route('products-show-details', $product->slug) }}" --}}
         class="relative select-none flex justify-center items-center overflow-hidden rounded-md w-full aspect-[9/12] h-auto"
     >
-        <span class="absolute z-10 top-3 right-3 flex justify-center items-center">
-            <span class="rounded-full cursor-pointer" @click="currentImageIndex = (currentImageIndex + 1) % images.length">
-                <svg
-                    class="text-slate-500 transition-all border-e-slate-300 ease-in-out hover:scale-105"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icon-tabler-chevron-right"
-                >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M9 6l6 6l-6 6" />
-                </svg>
-            </span>
-            <span class="rounded-full cursor-pointer transition-all border-e-slate-300 ease-in-out hover:scale-105" @click="currentImageIndex = (currentImageIndex - 1 + images.length) % images.length">
-                <svg
-                    class="text-slate-500 transition-all border-e-slate-300 ease-in-out hover:scale-105"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icon-tabler-chevron-left"
-                >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M15 6l-6 6l6 6" />
-                </svg>
-            </span>
+    <span class="absolute z-10 top-3 right-3 flex justify-center items-center">
+        <span class="rounded-full cursor-pointer" @click="nextImage()">
+            <svg
+                class="text-slate-500 transition-all border-e-slate-300 ease-in-out hover:scale-105"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icon-tabler-chevron-right"
+            >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 6l6 6l-6 6" />
+            </svg>
         </span>
+        <span class="rounded-full cursor-pointer transition-all border-e-slate-300 ease-in-out hover:scale-105" @click="prevImage()">
+            <svg
+                class="text-slate-500 transition-all border-e-slate-300 ease-in-out hover:scale-105"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icon-tabler-chevron-left"
+            >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M15 6l-6 6l6 6" />
+            </svg>
+        </span>
+    </span>
         <img
             :src="images[currentImageIndex]"
             alt="{{ $product->name }}"
