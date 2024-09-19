@@ -19,16 +19,17 @@ class AllProducts extends Component
     public $size = null; // Size filter
 
     public $sizes = [];
-    public $colors= [];
+    public $colors = [];
 
     protected $queryString = [
-        'filter' => 'filter-category',
-        'search' => 'filter-search',
-        'sortPrice' => 'sort-price',
-        'shipping' => 'filter-shipping',
-        'color' => 'filter-color',
-        'size' => 'filter-size'
+        'filter' => ['as' => 'filter_category'],
+        'search' => ['as' => 'filter_search'],
+        'sortPrice' => ['as' => 'sort_price'],
+        'shipping' => ['as' => 'filter_shipping'],
+        'color' => ['as' => 'filter_color'],
+        'size' => ['as' => 'filter_size'],
     ];
+
 
     public function applyFilter($filter)
     {
@@ -105,6 +106,18 @@ class AllProducts extends Component
             ->toArray();
     }
 
+    public function resetFilters()
+    {
+        $this->filter = '';
+        $this->search = '';
+        $this->sortPrice = null;
+        $this->shipping = null;
+        $this->color = null;
+        $this->size = null;
+
+        $this->resetPage();
+        $this->reset('filter', 'search', 'sortPrice', 'shipping', 'color', 'size');
+    }
 
     public function render()
     {
