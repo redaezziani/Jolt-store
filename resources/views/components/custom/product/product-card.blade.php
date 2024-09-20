@@ -13,9 +13,14 @@ x-data="{
 >
     <div
         {{-- href="{{ route('products-show-details', $product->slug) }}" --}}
-        class="relative select-none flex justify-center items-center overflow-hidden rounded-md w-full aspect-[9/12] h-auto"
+        class="relative  select-none flex justify-center items-center overflow-hidden rounded-md w-full aspect-[9/12] h-auto"
     >
-    <span class="absolute z-10 top-3 right-3 flex justify-center items-center">
+    <span
+    class=" w-full h-full z-10 absolute bg-slate-300 animate-pulse duration-300 ease-in-out"
+    >
+
+    </span>
+    <span class="absolute z-30 top-3 right-3 flex justify-center items-center">
         <span
          class="rounded-full cursor-pointer"
          @click="nextImage()">
@@ -60,7 +65,7 @@ x-data="{
         <img
             :src="images[currentImageIndex]"
             alt="{{ $product->name }}"
-            class="w-full hover:scale-105 duration-500 transition-all ease-in-out h-full object-cover"
+            class="w-full hover:scale-105 z-20 duration-500 transition-all ease-in-out h-full object-cover"
         >
     </div>
     <div class="flex w-full justify-between items-center gap-2">

@@ -4,7 +4,7 @@
         @foreach ($categories as $category)
         <button
         wire:click="applyFilter('{{ $category->slug }}')"
-        class="rounded-full bg-white border text-neutral-700 cursor-pointer transition-all ease-in-out duration-300 px-3 py-0.5 text-sm
+        class="rounded-full bg-white border text-neutral-700 w-[45%] truncate  md:w-fit cursor-pointer transition-all ease-in-out duration-300 px-3 py-0.5 text-sm
         {{ $filter === $category->slug ? 'border-neutral-400 text-neutral-700 hover:border-neutral-400' : 'border-neutral-400/35 hover:border-neutral-400' }}"
     >
         {{$category->name}}

@@ -12,9 +12,11 @@
         x-transition:leave-end="transform translate-y-full"
         class="w-full h-screen z-10 absolute left-0 bottom-0  flex bg-white flex-col gap-4 justify-start items-start p-4">
         <div class="w-full flex  justify-between items-center">
-            <p class=" text-primary font-bold flex gap-0 items-center justify-start text-3xl">
+            <a
+            href="/"
+            class=" text-primary font-bold flex gap-0 items-center justify-start text-3xl">
                 جولت
-            </p>
+            </a>
                 <svg
                 class="text-slate-700 ""
                  x-on:click="open = false"
