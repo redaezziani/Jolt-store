@@ -24,7 +24,7 @@ class NewArrivals extends Component
     public function placeholder()
     {
         return <<<'html'
-          <p> data ....</p>
+          <p> loading data ....</p>
           html;
     }
 

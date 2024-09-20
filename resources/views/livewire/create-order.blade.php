@@ -9,6 +9,19 @@
                 <div class="flex flex-col gap-2">
                     <h3 class="text-lg font-semibold text-slate-800">{{ $cartItems[0]->product->name }}</h3>
                     <p class="text-slate-600 line-clamp-2">{{ $cartItems[0]->product->description }}</p>
+                    @if ($cartItems[0]->size)
+                    <div class="flex gap-x-1 justify-start items-center">
+                        <p class="text-slate-600 font-medium">
+                             الحجم :
+                        </p>
+                        <p
+                        class=" text-slate-600 font-bold"
+                        >
+                            {{$cartItems[0]->size}}
+                        </p>
+                    </div>
+                    @endif
+
                     <p class="text-lg font-semibold text-slate-800">{{ $cartItems[0]->product->price }} درهم</p>
                 </div>
             </div>

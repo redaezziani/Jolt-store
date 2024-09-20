@@ -75,9 +75,9 @@
                 @endforeach
 
             </section>
-            <div aria-label="تصفية المنتجات" class="divide-y divide-slate-200">
+            <div aria-label="تصفية المنتجات" class="divide-y  divide-slate-200">
                 <!-- Accordion item -->
-                <div x-data="{ expanded: false }" class="py-2">
+                <div x-data="{ expanded: false }" class="">
                     <h2>
                         <span id="sizes-section" type="button"
                             class="flex items-center justify-between w-full text-left font-semibold py-2"

@@ -1,4 +1,8 @@
-Dashboard =>
-- get total order price on this mounth
-- get total client on  this mounth
-- get total products expense
+
+
+
+
+--fix:sizes text form = "Ahjjam" to "ma9assat"
+
+--add:improve te ui in the order page also the subs message email
+
