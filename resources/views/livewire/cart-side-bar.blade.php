@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
+<div x-data="{ open: true }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
     x-on:keydown.shift.tab="open = false" x-on:side-bar-open.window="open = true" x-on:side-bar-close.window="open = false"
     x-on:click.outside="open = false" x-show="open" x-cloak
     class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0">
@@ -71,6 +71,19 @@
                                         درهم
                                     </span>
                                 </p>
+                              <div class="flex justify-start items-center gap-2">
+                                <p
+                                 class="text-sm  text-slate-600"
+                                >
+                                    {{ $item->size }}
+                                </p>
+
+                                <span
+                                style="background: {{ $item->color }} "
+                                class=" p-2 rounded-lg "
+                                >
+                               </span>
+                              </div>
                                 {{--lets make a comp that add or update the qua--}}
                                 <div class="flex gap-2 justify-start items-center">
                                     <button wire:click='increaseQuantity({{ $item->id }})'
@@ -109,8 +122,9 @@
                 <x-my-button wire:click='clearCart()' class="outline-none ring-none border-none ghost w-[30%]">
                     تفريغ العربة
                 </x-my-button>
-
-
+                <a
+                class=" w-full"
+                href="{{ route('order-index') }}">
                 <x-my-button wire:loading.attr="disabled" id="checkout"
                     class="text-secondary w-full flex bg-[#2563eb] gap-x-2 justify-center items-center">
                     <div wire:loading.class="hidden" wire:target="#checkout"
@@ -151,6 +165,7 @@
                         </svg>
                     </div>
                 </x-my-button>
+                </a>
 
             </div>
         @endif
