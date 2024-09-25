@@ -65,6 +65,7 @@
                     @endphp
                     {{ $newPrice }} DH
                 </p>
+                
             </div>
         </div>
     </div>

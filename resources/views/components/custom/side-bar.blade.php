@@ -1,5 +1,5 @@
-<aside class=" w-96  left-0 top-0 h-screen sticky hidden  md:flex flex-col gap-4 justify-start items-center px-2 py-2">
-    <aside class="flex  flex-col w-full h-screen mt-8  px-5 py-8">
+<aside class=" w-96  left-0 top-0 h-screen  border-l   border-slate-400/35  sticky hidden  md:flex flex-col gap-4 justify-start items-center px-2 py-2">
+    <aside class="flex  flex-col w-full h-full mt-8  px-5 py-8">
         <a href="{{ route('dashboard-index') }}" class="flex mt-16 items-center justify-start ">
 
         </a>
@@ -7,7 +7,7 @@
         <div class="flex flex-col justify-between flex-1 mt-6">
             <nav class="-mx-3 space-y-3 ">
                 <a href="{{ route('dashboard-index') }}"
-                    class="flex items-end px-3 py-2 text-slate-100 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-white">
+                    class="flex items-end px-3 py-2 text-slate-800 font-bold transition-colors duration-500 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-primary ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -18,7 +18,7 @@
                 </a>
 
                 <a href="{{ route('dashboard-products-index') }}"
-                    class="flex items-end px-3 py-2 text-slate-100 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-white">
+                    class="flex items-end px-3 py-2 text-slate-800 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-primary ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round"
@@ -39,7 +39,7 @@
 
 
                 <a href="{{ route('dashboard-orders-index') }}"
-                    class="flex items-end px-3 py-2 text-slate-100 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-white">
+                    class="flex items-end px-3 py-2 text-slate-800 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-primary ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round"
@@ -57,7 +57,7 @@
                 </a>
 
                 <a href="{{ route('dashboard-customers-index') }}"
-                    class="flex items-end px-3 py-2 text-slate-100 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-white">
+                    class="flex items-end px-3 py-2 text-slate-800 font-bold transition-colors duration-300 transform rounded-lg dark:text-amber-300  dark:hover:bg-slate-800 dark:hover:text-slate-200 hover:text-primary ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-star">

@@ -2,7 +2,7 @@
 
 <x-layout>
     @include('components.nav-sheet')
-    <livewire:cart-side-bar wire:poll.150ms />
+    <livewire:cart-side-bar wire:poll.5000ms />
     <livewire:search-products>
         <x-slot name="title">
             {{ $title }}
@@ -44,11 +44,11 @@
                             class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'category' ? 'active' : '' }}">
                             {{ __('category') }}
                         </a>
-                        <a href="#"
+                        <a href="{{ route('about') }}"
                             class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
                             {{ __('about_us') }}
                         </a>
-                        <a href="#"
+                        <a href="{{ route('contact') }}"
                             class="text-sm font-semibold text-slate-50 {{ Route::currentRouteName() == 'sold' ? 'active' : '' }}">
                             {{ __('contact_us') }}
                         </a>

@@ -9,8 +9,8 @@
         @else
             <x-dynamic-component
                 :component="WireUi::component('icon')"
-                class="w-4 h-4 text-secondary-500 hover:text-secondary-700
-                     dark:hover:text-secondary-600 transition duration-150 ease-in-out"
+                class="w-4 h-4 text-slate-500 hover:text-slate-700
+                     dark:hover:text-slate-600 transition duration-150 ease-in-out"
                 name="dots-vertical"
             />
         @endif
@@ -30,8 +30,8 @@
         ]) }}
         style="display: none;"
         @unless($persistent) x-on:click="close" @endunless>
-        <div class="relative {{ $height }} soft-scrollbar overflow-auto border border-secondary-200
-                    rounded-lg shadow-lg p-1 bg-white dark:bg-secondary-800 dark:border-secondary-600">
+        <div class="relative {{ $height }} soft-scrollbar  overflow-auto border border-slate-200
+                    rounded-lg shadow-lg p-1 bg-white text-slate-500 dark:bg-slate-800 dark:border-slate-600">
             {{ $slot }}
         </div>
     </div>

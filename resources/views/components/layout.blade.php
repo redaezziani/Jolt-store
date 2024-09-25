@@ -21,10 +21,12 @@
     <script src="{{asset('app-CbVi_I5T.js')}}"></script> --}}
     @livewireStyles
     <wireui:scripts />
+    @trixassets
 </head>
 
 <body class="relative flex flex-col  items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden" >
     <x-notifications z-index="z-[999]" />
+
     {{ $slot }}
     <!-- Scripts -->
     @livewireScripts

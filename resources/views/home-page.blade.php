@@ -3,33 +3,29 @@
     description="{{ __('hero_description') }}"
     keywords="متجر جولت، تسوق، خصم 60٪، منتجات، جودة، سعر">
     <div
-        class="w-full h-96 lg:h-[90vh] overflow-hidden relative border-b border-slate-300/35 flex justify-start items-start gap-4 flex-col">
-        <div class="flex z-10 p-3 max-w-7xl mx-auto flex-col gap-4 mt-32">
-            <h2 id="hero-title" class="text-3xl lg:text-7xl max-w-4xl text-white">
-                {{ __('hero_title') }}
-            </h2>
-            <p id="hero-description" class="text-lg lg:text-2xl max-w-4xl text-white">
-                {{ __('hero_description') }}
-            </p>
+        class="w-full h-96 lg:h-[90vh] bg-slate-200  flex justify-center items-center overflow-hidden relative ">
+        <section
+        class="grid lg:grid-cols-5 h-2/3  gap-x-3  w-full lg:grid-rows-2 md:max-w-[100%] lg:max-w-[78%] px-3  "
+        >
+        <div
+        class=" col-span-2 row-span-3   bg-white border-l border-slate-400/35"
+        >
 
-            <a id="hero-button" href="{{ route('products-index') }}">
-                <button class="font-medium w-32 rounded-full text-slate-800 px-7 py-2.5 bg-white hover:bg-white/90">
-                    {{ __('shop_now') }}
-                </button>
-            </a>
         </div>
-        <img src="{{ asset('storage/hero.jpg') }}" alt="{{ __('hero_title') }}"
-            class="absolute -z-[1] object-cover top-0 left-0 w-full h-full">
-        <img src="{{ asset('storage/star-1.png') }}" alt="Star Image"
-            class="absolute left-16 bottom-20 z-10 w-14 object-cover">
-        <img src="{{ asset('storage/star-2.png') }}" alt="Star Image"
-            class="absolute right-32 top-32 z-10 w-14 object-cover">
-        <div class="flex absolute right-4 bottom-10 gap-x-3 z-10">
-            <span class="w-8 bg-white h-0.5"></span>
-            <span class="w-8 bg-white h-0.5"></span>
-            <span class="w-8 bg-white h-0.5"></span>
-            <span class="w-8 bg-white h-0.5"></span>
+        <div class="col-span-3  gap-y-3 row-span-3   grid grid-rows-2 ">
+            <span
+
+            class=" row-span-1  bg-white w-full"
+            >
+
+            </span>
+            <span
+            class=" row-span-1  bg-white w-full"
+            >
+
+            </span>
         </div>
+        </section>
     </div>
     <div class="relative flex items-center flex-col justify-start w-full min-h-screen gap-2 overflow-hidden">
         <section class="mt-10 pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">

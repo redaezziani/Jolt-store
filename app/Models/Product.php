@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Te7aHoudini\LaravelTrix\Traits\HasTrixRichText;
 
 class Product extends Model
 {
     use HasFactory;
+    use HasTrixRichText;
 
     protected $fillable = [
         'name',

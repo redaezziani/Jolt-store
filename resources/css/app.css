@@ -1,24 +1,20 @@
-@font-face {
+@import url('https://fonts.googleapis.com/css2?family=Zain:wght@200;300;400;700;800;900&display=swap');
+
+/* @font-face {
     font-family: "Zain";
     src: url("./Zain-Regular.ttf");
     font-weight: 900;
     font-style: normal;
-}
+} */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --primary: rgb(36, 99, 235);
-    --secondary: #06182b;
-    --rounded: 0rem;
-    --red-600: #b91111;
-    --black-600: #18181c;
-    --teal-600: #00e554;
-    --amber-600: #688136;
-    --indigo-600: #4f46e5;
-    --v: #7c3aed;
+    --primary: #3b6bd3;
+    --rounded : 0.375rem;
+    --secondary: #ffffff;
 }
 
 @layer utilities {
@@ -27,11 +23,13 @@
     }
 }
 
+
+
 button {
-    @apply inline-flex items-center justify-center text-sm font-medium  rounded-xl  focus-visible:ring-ring whitespace-nowrap focus-within:outline-2 outline transition-all ease-in-out duration-300  focus-within:outline-offset-2   disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center text-sm font-medium  rounded-lg  focus-visible:ring-ring whitespace-nowrap focus-within:outline-2 outline transition-all ease-in-out duration-300   focus-within:outline-offset-2   disabled:pointer-events-none disabled:opacity-50;
 }
 .default {
-    @apply  bg-primary text-secondary px-8  hover:bg-primary/90  border border-blue-700  focus-within:outline-primary;
+    @apply  bg-primary text-secondary  px-8 h-[40px]   hover:bg-primary/90     focus-within:outline-primary;
 }
 .destructive {
     @apply text-white bg-red-500  px-8 border border-red-700  hover:bg-red-600 focus-within:outline-red-600;
@@ -46,7 +44,7 @@ button {
 }
 
 .input {
-    @apply flex h-10 w-full rounded-xl border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 !important;
+    @apply flex h-10 w-full rounded-lg border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 !important;
 }
 
 .scroll {

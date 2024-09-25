@@ -2,7 +2,6 @@
     <div class="col-span-3 overflow-hidden flex">
         @include('components.show-product-path-link', ['product' => $product])
     </div>
-
     @include('components.custom.product.product-slide-image')
     <div class="w-full md:w-2/3 flex gap-2 col-span-3 md:col-span-2  flex-col justify-start items-start">
         <a {{-- lets send the slug as query filter= --}} href="{{ route('products-index', ['filter' => $product->category->slug]) }}"
@@ -12,11 +11,9 @@
         <h2 class="text-slate-900 mt-5 text-xl font-bold uppercase flex items-center">
             {{ $product->name }}
         </h2>
-
         <p class=" text-slate-600 mt-0 text-base">
             {{ $product->description }}
         </p>
-
         <div class="flex gap-x-1 justify-start items-start text-slate-400">
             @for ($i = 1; $i <= 5; $i++)
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -32,8 +29,6 @@
                 {{ $product->comments->count() }} تعليق
             </p>
         </div>
-
-        {{-- if the product have a sizes --}}
         @if ($product->sizes)
             <div class="flex gap-5 mt-2 flex-wrap">
                 <div class="flex flex-col gap-3 justify-start items-start">
@@ -71,7 +66,6 @@
                         <p class=" text-slate-800 font-semibold text-lg">
                             الألوان
                         </p>
-
                         <div class="w-full flex gap-3 flex-wrap justify-start items-center">
                             {{-- first take the string from sizes and remove the @ bettwen each size then turn it to arry --}}
                             @foreach (explode('@', $product->colors) as $color)
@@ -94,15 +88,11 @@
                 @endif
             </div>
         @endif
-
-        {{-- the quantity of the product --}}
         <div class="flex justify-start items-center gap-5 ">
-
             <div class="flex gap-3">
                 <p class=" text-lg line-through mt-2 text-slate-400">
                     {{ $product->price }}
                 </p>
-
                 <p class=" text-lg font-bold mt-2 text-primary">
                     @php
                         $discountValue = optional($product->discounts->last())->value;
@@ -112,13 +102,11 @@
                         $price = (float) $product->price;
 
                         $discount = ($discountValue / 100) * $price;
-                  
+
                         $newPrice = $price - $discount;
                     @endphp
                     {{ $newPrice }} درهم مغربي
-
                 </p>
-
             </div>
             @include('components.custom.product.quantity-input', ['currentQuantity' => $currentQuantity])
         </div>
@@ -158,7 +146,6 @@
             </x-my-button>
             @include('components.check-order')
         </div>
-
         <div class="flex mt-4  gap-2 flex-col justify-start items-start">
             <div class="flex gap-2 justify-start items-start">
                 <svg class="text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -171,9 +158,7 @@
                 <p class="text-slate-400 text-sm">
                     منتجاتنا تأتي مباشرة من المغرب
                 </p>
-
             </div>
-
             <div class="flex gap-2 justify-start items-start">
                 <svg class="text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                     viewBox="0 0 24 24" fill="currentColor"
@@ -188,7 +173,6 @@
                     <strong class=" underline underline-offset-2">7 أيام</strong>.
                 </p>
             </div>
-
             @if ($product->discounts->count() > 0)
                 <div class="flex gap-2 justify-start items-start">
                     <svg class="text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -207,8 +191,6 @@
 
                 </div>
             @endif
-
-
         </div>
     </div>
     <div class=" w-full mt-5 col-span-3  gap-0  overflow-x-hidden justify-start items-start ">
@@ -217,7 +199,6 @@
             <ul class="space-y-3 w-full">
                 @foreach ($ratings as $rating)
                     @php
-                        // Calculate the percentage width based on total number of comments
                         $percentage = $totalComments > 0 ? ($rating->count / $totalComments) * 100 : 0;
                     @endphp
                     <li class="flex flex-col gap-2 w-full">
@@ -234,18 +215,13 @@
                             <span
                                 class="text-sm font-semibold text-slate-500">{{ number_format($percentage, 1) }}%</span>
                         </div>
-
                     </li>
                 @endforeach
             </ul>
         </div>
-
-
-
         <p class=" text-slate-600 underline underline-offset-2  text-base">
             التعليقات والآراء
         </p>
-
         <section class="flex w-full mt-5 justify-start items-start flex-col gap-3">
             @if ($comments->isEmpty())
                 <p class=" text-slate-600 text-base">
@@ -255,16 +231,8 @@
                 @foreach ($comments as $comment)
                     @if ($comment->status === 'show' || $comment->user_id === Auth::id())
                         <article
-                            class="flex gap-2 gap-x-3 bg-slate-100 rounded-lg p-2 justify-start items-start
+                            class="flex gap-2 gap-x-3  p-2 justify-start items-start
                 {{ $comment->status != 'show' && $comment->user_id === Auth::id() ? 'opacity-50 ' : '' }}">
-                            <div class="flex h-full flex-col gap-2 justify-start items-center">
-                                <div
-                                    class="h-9 w-9 overflow-hidden bg-slate-100 border border-slate-400/35 rounded-full">
-                                    {{-- get the image from the storage/app/public/auth/ --}}
-                                    <img src="{{ asset('storage/auth/' . 'd-avatar.avif') }}" alt="profile photo"
-                                        class="object-cover w-full h-full">
-                                </div>
-                            </div>
                             <div class="w-full flex justify-between items-center">
                                 <div class="flex max-w-[40rem]  justify-start w-full items-start flex-col">
                                     <p class="text-slate-800 font-semibold text-lg">
@@ -273,22 +241,20 @@
                                     <p title="time" class="text-slate-600 text-sm">
                                         {{ $comment->created_at->diffForHumans() }}
                                     </p>
-                                    <p class="text-slate-500 line-clamp-3 mt-5 text-base">
+                                    <p class="text-slate-500 line-clamp-3 mt-2  text-sm">
                                         {{ $comment->comment_text }}
                                     </p>
                                 </div>
                                 @if ($comment->user_id === Auth::id())
-                                    <x-dropdown>
+                                    <x-dropdown
+                                    >
                                         <x-dropdown.item icon="eye" label="تبديل الرؤية"
                                             wire:click="toggleVisibility({{ $comment->id }})" />
                                         <x-dropdown.item icon="trash" label="حذف التعليق"
                                             wire:click="deleteComment({{ $comment->id }})" />
                                     </x-dropdown>
                                 @endif
-
-
                             </div>
-
                         </article>
                     @endif
                 @endforeach

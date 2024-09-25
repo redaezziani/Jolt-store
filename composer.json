@@ -20,10 +20,12 @@
         "ramsey/uuid": "^4.7",
         "resend/resend-laravel": "^0.14.0",
         "stripe/stripe-php": "^7.0",
+        "te7a-houdini/laravel-trix": "^3.0",
         "tonysm/rich-text-laravel": "^1.7",
         "wireui/wireui": "^1.19"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",

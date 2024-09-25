@@ -1,4 +1,4 @@
-<div x-data x-on:click="$dispatch('side-bar-open')" wire:poll.100ms
+<div x-data x-on:click="$dispatch('side-bar-open')" wire:poll.5000ms
     class=" flex justify-center cursor-pointer items-center relative" href="">
     {{-- render the span just if he auth --}}
     @if (Auth::check())

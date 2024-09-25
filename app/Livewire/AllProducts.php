@@ -18,6 +18,7 @@ class AllProducts extends Component
     public $color = null; // Color filter
     public $size = null; // Size filter
 
+    public $best=null;
     public $sizes = [];
     public $colors = [];
 
@@ -28,6 +29,7 @@ class AllProducts extends Component
         'shipping' => ['as' => 'filter_shipping'],
         'color' => ['as' => 'filter_color'],
         'size' => ['as' => 'filter_size'],
+        'best'=> ['as'=>'best_products'],
     ];
 
 
@@ -123,6 +125,11 @@ class AllProducts extends Component
     {
         $query = Product::query();
 
+        if ($this->best){
+         $data = Product::orderBy('rating', 'desc')->paginate(16);
+        //  dd($data);
+        }
+
         // Apply shipping filter
         switch ($this->shipping) {
             case 1:
@@ -150,6 +157,8 @@ class AllProducts extends Component
         if (!empty($this->search)) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
+
+
 
         // Apply price sorting
         switch ($this->sortPrice) {

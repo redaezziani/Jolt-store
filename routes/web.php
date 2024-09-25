@@ -12,6 +12,14 @@ Route::get('/', function () {
     return view('home-page');
 })->name('home');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::get('/products', function () {
     return view('products.index');
 })->name('products-index');
@@ -60,7 +68,7 @@ Route::get('/profile', function () {
 // dashboard routes
 Route::get('/dashboard', function () {
     return view('dashboard.index');
-})->name('dashboard-index');
+})->middleware('OnlyAdmin')->name('dashboard-index');
 
 Route::get('/dashboard/products/create', function () {
     return view('dashboard.products.create');

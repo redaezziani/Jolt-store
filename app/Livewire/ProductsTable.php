@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire;
 
 use App\Models\Product;
@@ -8,51 +7,49 @@ use Livewire\WithPagination;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 
-
 class ProductsTable extends Component
 {
-    use Actions;
-    use WithPagination;
+    use Actions, WithPagination;
 
     public $search = "";
+    public $filter = "";
+    public $selectedProducts = [];
+    public $order = "desc";
 
-    protected $queryString = ['search'];
+    protected $queryString = [
+        'search' => ['as' => 'search_query'],
+        'filter' => ['as' => 'filter_query'],
+        'order' => ['as' => 'order_query']
+    ];
 
-    public function  deleteProduct($id)
+    public function deleteProduct($id)
     {
-        // first check if the product exists
-        if (Product::find($id)) {
-            // if it exists, delete it
-            Product::find($id)->delete();
-            $this->dispatch('close-product-delete-model');
-        }
+        // Use findOrFail for better performance and error handling
+        Product::findOrFail($id)->delete();
+        $this->dispatch('close-product-delete-model');
 
         $this->notification()->success(
-            $title = 'تم إنشاء الخصم بنجاح',
-            $description = 'تم إنشاء الخصم الخاص بك بنجاح'
+            title: 'تم حذف المنتج بنجاح',
+            description: 'تم حذف المنتج المحدد.'
         );
-        $this->dispatch('close-product-delete-model');
     }
+
     public function saveCsvProductsFile()
     {
-        try {
-            // Validate the uploaded file
-            $this->validate([
-                'csvFile' => 'required|mimes:csv,txt|max:2048', // Accepts CSV files with a max size of 2MB
-            ]);
+        $this->validate([
+            'csvFile' => 'required|mimes:csv,txt|max:2048',
+        ]);
 
-            // Read the file
+        try {
             $filePath = $this->csvFile->getRealPath();
             $file = fopen($filePath, 'r');
+            fgetcsv($file); // Skip the header row
 
-            // Skip the header row (optional)
-            fgetcsv($file);
+            // Prepare an array to hold products
+            $productsToInsert = [];
 
-            // Process each row in the CSV
             while (($row = fgetcsv($file)) !== false) {
-                // Assuming CSV columns match the fillable attributes in this order:
-                // name, description, cover_img, prev_imgs, quantity, rating, sizes, colors, shipping, category_id
-                Product::create([
+                $productsToInsert[] = [
                     'name' => $row[0],
                     'description' => $row[1],
                     'cover_img' => $row[2],
@@ -63,92 +60,112 @@ class ProductsTable extends Component
                     'colors' => $row[7],
                     'shipping' => $row[8],
                     'category_id' => $row[9],
-                    'slug' => Str::slug($row[0]), // Generate slug from the product name
-                ]);
+                    'slug' => Str::slug($row[0]),
+                    'created_at' => now(), // Adding timestamps
+                    'updated_at' => now(),
+                ];
             }
 
-            // Close the file
             fclose($file);
 
-            // Notification for success
+            // Use insert for batch processing
+            Product::insert($productsToInsert);
+
             $this->notification()->success(
-                $title = 'تم رفع الملف بنجاح',
-                $description = 'تم استيراد المنتجات من ملف CSV بنجاح.'
+                title: 'تم رفع الملف بنجاح',
+                description: 'تم استيراد المنتجات من ملف CSV بنجاح.'
             );
         } catch (\Exception $e) {
-            // Handle the error
             $this->notification()->error(
-                $title = 'فشل الرفع',
-                $description = 'حدث خطأ أثناء استيراد المنتجات: ' . $e->getMessage()
+                title: 'فشل الرفع',
+                description: 'حدث خطأ أثناء استيراد المنتجات: ' . $e->getMessage()
             );
         }
     }
 
-    public function downloadCsvProductsFile()
+    public function deleteSelectedProducts()
     {
-        try {
-            // Set headers for the CSV file
-            $headers = ['name', 'description', 'cover_img', 'prev_imgs', 'quantity', 'rating', 'sizes', 'colors', 'shipping', 'category_id', 'slug'];
+        if ($this->selectedProducts) {
+            Product::destroy($this->selectedProducts); // Faster delete
+            $this->reset('selectedProducts');
+            $this->notification()->success(
+                title: 'تم الحذف بنجاح',
+                description: 'تم حذف المنتجات المحددة بنجاح.'
+            );
+        }
+    }
 
-            return response()->streamDownload(function () use ($headers) {
-                // Open a temporary output stream
+    public function exportSelectedProducts()
+    {
+        if ($this->selectedProducts) {
+            return response()->streamDownload(function () {
+                $products = Product::findMany($this->selectedProducts);
                 $output = fopen('php://output', 'w');
+                fputcsv($output, ['name', 'description', 'price', 'quantity', 'sizes', 'colors', 'category_id']);
 
-                // Add UTF-8 BOM to the CSV file
-                fwrite($output, "\xEF\xBB\xBF");
-
-                // Output the headers
-                fputcsv($output, $headers);
-
-                // Fetch all products from the database
-                $products = Product::all();
-
-                // Output each product's data as a row in the CSV
                 foreach ($products as $product) {
                     fputcsv($output, [
                         $product->name,
                         $product->description,
-                        $product->cover_img,
-                        $product->prev_imgs,
+                        $product->price,
                         $product->quantity,
-                        $product->rating,
                         $product->sizes,
                         $product->colors,
-                        $product->shipping,
                         $product->category_id,
-                        $product->slug,
                     ]);
                 }
-
-                // Close the output stream
                 fclose($output);
-            }, 'products.csv', [
-                'Content-Type' => 'text/csv; charset=UTF-8',
-                'Content-Disposition' => 'attachment; filename="products.csv"',
-            ]);
-        } catch (\Exception $e) {
-            // Handle the error
-            $this->notification()->error(
-                $title = 'فشل التنزيل',
-                $description = 'حدث خطأ أثناء تنزيل المنتجات: ' . $e->getMessage()
-            );
+            }, 'selected_products.csv', ['Content-Type' => 'text/csv']);
         }
+
+        $this->notification()->success(
+            title: 'تم التصدير بنجاح',
+            description: 'تم تصدير المنتجات المحددة بنجاح.'
+        );
     }
 
-
-    public function deleteAllProducts()
+    public function setFilter($filter)
     {
+        $this->filter = $filter;
+        $this->resetPage();
+    }
 
-        Product::truncate();
+    public function toggleOrder()
+    {
+        $this->order = $this->order === "asc" ? "desc" : "asc";
     }
 
     public function render()
     {
+        $productsQuery = Product::with('category');
+
         if ($this->search) {
-            $products = Product::where('name', 'like', '%' . $this->search . '%')->paginate(9);
-        } else {
-            $products = Product::paginate(9);
+            $productsQuery->where('name', 'like', '%' . $this->search . '%');
         }
-        return view('livewire.products-table', compact('products'));
+
+        // Apply filter
+        if ($this->filter) {
+            switch ($this->filter) {
+                case 'category':
+                    $productsQuery->orderBy('category_id');
+                    break;
+                case 'price':
+                    $productsQuery->orderBy('price');
+                    break;
+                case 'quantity':
+                    $productsQuery->orderBy('quantity');
+                    break;
+                case 'date':
+                    $productsQuery->orderBy('created_at');
+                    break;
+            }
+        }
+
+        // Apply order
+        $productsQuery->orderBy('created_at', $this->order);
+        $selectedFilter = $this->filter;
+
+        $products = $productsQuery->paginate(9);
+        return view('livewire.products-table', compact('products', 'selectedFilter'));
     }
 }

@@ -1,50 +1,52 @@
 <div
 wire:poll.750ms
-class="mt-5 flex w-full flex-col">
+class="mt-5 flex w-full flex-col bg-white p-2 rounded-xl">
     {{-- شريط البحث --}}
     <div class="flex w-full ">
         @include('components.custom.product.top-bar')
     </div>
-    <x-delete-all-products-model
-
-    />
-    <div class="-m-1.5  mt-10 overflow-x-auto">
-        <div class="inline-block  min-w-full p-1.5 align-middle">
-            <div class="overflow-hidden  rounded-lg border">
+    <x-delete-all-products-model/>
+    <div class="-m-1.5  mt-3  overflow-x-auto">
+        <div class="inline-block   min-w-full p-1.5 align-middle">
+            <div class="overflow-hidden border border-slate-400/35  rounded-lg ">
                 <table class="min-w-full divide-y divide-slate-200">
                     <thead class="bg-slate-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
+
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
+
+                            </th>
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 اسم المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 وصف المنتج
                             </th>
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
-                                سعر المنتج
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
+                                سعر
                             </th>
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
-                                كمية المنتج
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
+                                كمية 
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 حجم المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 لون المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 فئة المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase text-slate-500">
+                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 شحن المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-end text-xs font-medium uppercase text-slate-500">
+                            <th scope="col" class="px-6 py-5 text-end text-xs font-meboldppercase text-slate-507">
                                 الإجراءات
                             </th>
                         </tr>
@@ -52,41 +54,57 @@ class="mt-5 flex w-full flex-col">
                     <tbody class="divide-y divide-slate-200">
                         @foreach ($products as $product)
                             <tr>
+
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-slate-900">{{ $product->name }}</div>
+                                 <x-checkbox wire:model="selectedProducts" value="{{ $product->id }}"/>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap max-w-44 truncate">
+                                    <div class="text-sm text-slate-500">{{ $product->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap max-w-[22rem] truncate line-clamp-1">
-                                    <div class="text-sm text-slate-900">{{ $product->description }}</div>
+                                    <div class="text-sm text-slate-500">{{ $product->description }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-slate-900">{{ number_format($product->price, 2) }}</div>
+                                    <div class="text-sm text-slate-500">{{ number_format($product->price, 2) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-slate-900">{{ $product->quantity }}</div>
+                                    <div class="text-sm text-slate-500">{{ $product->quantity }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-slate-900">
+                                    <div class="text-sm font-medium text-slate-500">
                                         {{ str_replace('@', ' ', $product->sizes) }}
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-slate-500 whitespace-nowrap">
                                    {{ str_replace('@', ' ', $product->colors) }}
                                 </td>
                                 <td class="px-6 py-4 truncate line-clamp-1 w-32 whitespace-nowrap">
-                                    <div class="text-sm text-slate-900">{{ $product->category->name }}</div>
+                                    <div class="text-sm text-slate-500">{{ $product->category->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-slate-900">
+                                    <div class="text-sm text-slate-500">
                                         @if ($product->shipping == 'Paid Shipping')
-                                        <x-badge
-                                         flat
-                                         negative
-                                         label="{{ $product->shipping }}" />
+                                        <span
+                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center font-bold "
+                                        >
+                                        <span
+                                        class=" rounded-full bg-slate-300 animate-pulse size-2"
+                                        >
+
+                                        </span>
+                                        شحن مدفوع
+                                        </span>
                                         @else
-                                        <x-badge
-                                         flat
-                                         positive
-                                         label="{{ $product->shipping }}" />
+                                        <span
+                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center font-bold "
+                                        >
+                                        <span
+                                        class=" rounded-full bg-green-300 animate-pulse size-2"
+                                        >
+
+                                        </span>
+                                        شحن مجاني
+                                        </span>
                                         @endif
 
                                     </div>

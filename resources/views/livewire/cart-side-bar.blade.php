@@ -1,4 +1,4 @@
-<div x-data="{ open: true }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
+<div x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
     x-on:keydown.shift.tab="open = false" x-on:side-bar-open.window="open = true" x-on:side-bar-close.window="open = false"
     x-on:click.outside="open = false" x-show="open" x-cloak
     class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0">
