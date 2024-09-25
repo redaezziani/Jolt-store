@@ -2,6 +2,8 @@
     <x-sheet-bar>
         <livewire:create-products>
     </x-sheet-bar>
+    <livewire:make-category>
+
 
     <div class="w-full flex justify-between mt-4 items-start flex-wrap">
         <div class="flex flex-col gap-2">
@@ -14,10 +16,18 @@
         </div>
 
         <div class="flex gap-3 justify-start items-center">
+            <x-my-button
+            x-data
+            x-on:click="$dispatch('category-side-bar-open')"
+            class="flex items-center justify-center outline gap-1 py-1">
+                <p>
+                    إنشاء فئة جديدة
+                </p>
+            </x-my-button>
             <x-my-button x-data x-on:click="$dispatch('dashboard-sheet-bar-open')"
                 class="flex items-center justify-center default gap-1 py-1">
                 <p>
-                    إنشاء منتج
+                    إنشاء منتج جديد
                 </p>
             </x-my-button>
         </div>

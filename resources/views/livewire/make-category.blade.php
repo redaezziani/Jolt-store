@@ -1,7 +1,9 @@
 <div x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
     x-on:keydown.shift.tab="open = false" x-on:category-side-bar-open.window="open = true"
     x-on:category-side-bar-close.window="open = false" x-on:click.outside="open = false" x-show="open"
-    class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0">
+    class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0"
+    style="display: none;"
+    >
     <div x-on:click="open = false" class="w-full z-[1] overflow-hidden h-screen backdrop-blur-sm bg-black/20"></div>
 
     <aside x-show="open" x-transition:enter="transition ease-out duration-200"

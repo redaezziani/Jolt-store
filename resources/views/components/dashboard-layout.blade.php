@@ -13,7 +13,6 @@
     <div class="relative  flex items-center   justify-start w-full h-screen  overflow-hidden">
         @include('components.custom.sheet-side')
         @include('components.custom.side-bar')
-        <livewire:make-category>
 
             <div
                 class="w-full h-screen relative   overflow-x-hidden overflow-y-auto flex flex-col gap-4 justify-start items-center bg-slate-100 ">
