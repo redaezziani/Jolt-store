@@ -85,15 +85,4 @@
             </svg>
         </span>
     </div>
-    {{-- <x-my-button x-data x-on:click="$dispatch('dashboard-sheet-bar-open')"
-        class=" flex items-center justify-center default  gap-1   py-1 ">
-        <p>
-            إنشاء منتج
-        </p>
-    </x-my-button> --}}
-    {{-- <div class="flex justify-end mb-4">
-        <x-button wire:click="deleteSelectedProducts" :disabled="count($selectedProducts) === 0">Delete Selected</x-button>
-        <x-button wire:click="exportSelectedProducts" :disabled="count($selectedProducts) === 0">Export Selected</x-button>
-    </div> --}}
-
 </div>

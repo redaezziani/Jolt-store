@@ -1,19 +1,29 @@
-<x-dashboard-layout
-    title="Products"
-    description="Products"
-    keywords="Products"
->
-<x-sheet-bar>
-<livewire:create-products>
+<x-dashboard-layout title="المنتجات" description="صفحة إدارة المنتجات" keywords="المنتجات, إدارة المنتجات, تسوق">
+    <x-sheet-bar>
+        <livewire:create-products>
+    </x-sheet-bar>
 
-</x-sheet-bar>
-<div class="flex flex-col gap-2 justify-start items-start gap-x-2">
-    <h3 class="text-2xl font-bold text-slate-800">
-        صفحة المنتجات
-    </h3>
-    <p class="text-slate-500">
-        هذه هي صفحة المنتجات
-    </p>
-</div>
-<livewire:products-table>
+    <div class="w-full flex justify-between mt-4 items-start flex-wrap">
+        <div class="flex flex-col gap-2">
+            <h2 class="text-xl font-bold text-slate-700">
+                صفحة إدارة المنتجات
+            </h2>
+            <p class="text-slate-500 text-sm">
+                مرحباً بكم في صفحة إدارة المنتجات، يمكنك من هنا إضافة وتعديل وحذف المنتجات بكل سهولة.
+            </p>
+        </div>
+
+        <div class="flex gap-3 justify-start items-center">
+            <x-my-button x-data x-on:click="$dispatch('dashboard-sheet-bar-open')"
+                class="flex items-center justify-center default gap-1 py-1">
+                <p>
+                    إنشاء منتج
+                </p>
+            </x-my-button>
+        </div>
+    </div>
+
+    <livewire:products-admin-top-cards wire:poll.500ms>
+
+    <livewire:products-table>
 </x-dashboard-layout>

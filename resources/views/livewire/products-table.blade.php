@@ -1,6 +1,5 @@
 <div
-wire:poll.750ms
-class="mt-5 flex w-full flex-col bg-white p-2 rounded-xl">
+class="mt-5 flex w-full flex-col bg-white p-2 rounded-lg border border-slate-400/35">
     {{-- شريط البحث --}}
     <div class="flex w-full ">
         @include('components.custom.product.top-bar')
@@ -27,7 +26,7 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-xl">
                                 سعر
                             </th>
                             <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
-                                كمية 
+                                كمية
                             </th>
 
                             <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
@@ -85,10 +84,10 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-xl">
                                     <div class="text-sm text-slate-500">
                                         @if ($product->shipping == 'Paid Shipping')
                                         <span
-                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center font-bold "
+                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center f "
                                         >
                                         <span
-                                        class=" rounded-full bg-slate-300 animate-pulse size-2"
+                                        class=" rounded-full bg-slate-300  size-2"
                                         >
 
                                         </span>
@@ -96,10 +95,10 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-xl">
                                         </span>
                                         @else
                                         <span
-                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center font-bold "
+                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center  "
                                         >
                                         <span
-                                        class=" rounded-full bg-green-300 animate-pulse size-2"
+                                        class=" rounded-full bg-green-500  size-2"
                                         >
 
                                         </span>
