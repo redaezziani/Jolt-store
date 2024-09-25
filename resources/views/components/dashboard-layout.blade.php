@@ -15,11 +15,11 @@
         @include('components.custom.side-bar')
 
             <div
-                class="w-full h-screen relative   overflow-x-hidden overflow-y-auto flex flex-col gap-4 justify-start items-center bg-slate-100 ">
+                class="w-full h-screen relative   overflow-x-hidden overflow-y-auto flex flex-col gap-4 justify-start items-center bg-slate-50 ">
 
 
 
-                <div class="w-full flex mt-5 flex-col gap-4  md:mt-10 max-w-[95%] p-4  justify-start items-start">
+                <div class="w-full flex mt-5 flex-col gap-4  md:mt-0 max-w-[95%] p-4  justify-start items-start">
                     {{ $slot }}
                 </div>
             </div>

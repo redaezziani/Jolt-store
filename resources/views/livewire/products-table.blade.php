@@ -33,9 +33,6 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-lg border border-slate-400
                                 حجم المنتج
                             </th>
 
-                            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
-                                لون المنتج
-                            </th>
 
                             <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase text-slate-700">
                                 فئة المنتج
@@ -73,9 +70,6 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-lg border border-slate-400
                                     <div class="text-sm font-medium text-slate-500">
                                         {{ str_replace('@', ' ', $product->sizes) }}
                                     </div>
-                                </td>
-                                <td class="px-6 py-4 text-slate-500 whitespace-nowrap">
-                                   {{ str_replace('@', ' ', $product->colors) }}
                                 </td>
                                 <td class="px-6 py-4 truncate line-clamp-1 w-32 whitespace-nowrap">
                                     <div class="text-sm text-slate-500">{{ $product->category->name }}</div>

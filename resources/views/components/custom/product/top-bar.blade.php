@@ -1,4 +1,4 @@
-<div class="w-full flex gap-3 mt-5 justify-between items-center ">
+<div class="w-full flex gap-3 mt-5 justify-between flex-wrap items-center ">
 
     {{-- lets make here a tap bar using alpine js and tailiwnd css --}}
     <div x-data="{ activeTab: @entangle('filter') }" class="flex gap-2 p-1.5 bg-slate-100 rounded-lg">
@@ -34,23 +34,9 @@
     </div>
 
 
-    <div class="flex gap-3 justify-start items-center">
+    <div class="flex gap-3 justify-start flex-wrap items-center">
 
-            <x-dropdown
-        >
-        <x-dropdown.item
-        icon="save"
-        label="تصدير المحدد"
-        :disabled="count($selectedProducts) === 0"
-        wire:click="exportSelectedProducts"
-        />
-        <x-dropdown.item
-        icon="trash" class=" text-red-500"
-        label="حذف المحدد"
-        :disabled="count($selectedProducts) === 0"
-        wire:click="deleteSelectedProducts"
-        />
-        </x-dropdown>
+
         <div class="relative w-[20rem] flex justify-start items-center">
             <x-my-input wire:model.live="search" type='text' placeholder="ابحث عن أي شيء..." class="w-full " />
             <div class="size-8 bg-white flex justify-center items-center text-slate-500 absolute left-1 ">
@@ -64,8 +50,20 @@
                 </svg>
             </div>
         </div>
-
-
+        <x-dropdown>
+            <x-dropdown.item
+            icon="save"
+            label="تصدير المحدد"
+            :disabled="count($selectedProducts) === 0"
+            wire:click="exportSelectedProducts"
+            />
+            <x-dropdown.item
+            icon="trash" class=" text-red-500"
+            label="حذف المحدد"
+            :disabled="count($selectedProducts) === 0"
+            wire:click="deleteSelectedProducts"
+            />
+            </x-dropdown>
         <span
         wire:click="toggleOrder()"
         x-data="{ isActivated: false }"
@@ -84,5 +82,6 @@
                 <path d="M18 6l0 12" />
             </svg>
         </span>
+
     </div>
 </div>

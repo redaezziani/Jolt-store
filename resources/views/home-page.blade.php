@@ -1,7 +1,7 @@
 <x-store-layout
     title="{{ __('hero_title') }}"
     description="{{ __('hero_description') }}"
-    keywords="متجر جولت، تسوق، خصم 60٪، منتجات، جودة، سعر">
+    keywords="متجر {{env('APP_NAME')}} تسوق، خصم 60٪، منتجات، جودة، سعر">
     <div
         class="w-full h-96 lg:h-[90vh] bg-slate-200  flex justify-center items-center overflow-hidden relative ">
         <section

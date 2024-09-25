@@ -5,7 +5,7 @@
     <livewire:make-category>
 
 
-    <div class="w-full flex justify-between mt-4 items-start flex-wrap">
+    <div class="w-full flex justify-between mt-4 gap-3 items-start flex-wrap">
         <div class="flex flex-col gap-2">
             <h2 class="text-xl font-bold text-slate-700">
                 صفحة إدارة المنتجات
@@ -19,13 +19,13 @@
             <x-my-button
             x-data
             x-on:click="$dispatch('category-side-bar-open')"
-            class="flex items-center justify-center outline gap-1 py-1">
+            class="flex items-center w-full justify-center outline gap-1 py-1">
                 <p>
                     إنشاء فئة جديدة
                 </p>
             </x-my-button>
             <x-my-button x-data x-on:click="$dispatch('dashboard-sheet-bar-open')"
-                class="flex items-center justify-center default gap-1 py-1">
+                class="flex items-center bg-white w-full justify-center default gap-1 py-1">
                 <p>
                     إنشاء منتج جديد
                 </p>

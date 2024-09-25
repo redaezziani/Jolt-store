@@ -12,21 +12,28 @@
         x-transition:leave-end="transform -translate-x-full"
         class="w-96 z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
         <div class="w-full flex justify-between items-center">
-            <p class="text-2xl font-semibold text-neutral-800">
+            <p class="text-2xl font-semibold text-slate-800">
                 إنشاء فئة جديدة للمنتجات
             </p>
-            <button x-on:click="open = false" class="text-neutral-800 p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                <svg
+                x-on:click="open = false" class="text-slate-800 "
+                xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icon-tabler-x">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M18 6l-12 12" />
                     <path d="M6 6l12 12" />
                 </svg>
-            </button>
         </div>
 
-        <form wire:submit.prevent="createCategory" class="flex w-full flex-col gap-4">
+        <form
+         wire:submit.prevent="createCategory"
+        class="flex w-full flex-col gap-4 h-full justify-between items-start">
+            @csrf
+            <div
+            class="w-full flex-col gap-4 h-full justify-between items-start"
+            >
+
             <div class="flex flex-col gap-1">
                 <h1 class="text-slate-800 text-lg font-semibold">
                     إنشاء فئة
@@ -40,7 +47,9 @@
                 <x-label for="name">
                     اسم الفئة
                 </x-label>
-                <x-my-input wire:model="name" type="text" placeholder="" name="name" />
+                <x-my-input
+                class="w-full"
+                 wire:model="name" type="text" placeholder="" name="name" />
                 @error('name')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -50,7 +59,9 @@
                 <x-label for="description">
                     وصف الفئة
                 </x-label>
-                <x-my-input wire:model="description" type="text" placeholder="" name="description" />
+                <x-my-input
+                class="w-full"
+                wire:model="description" type="text" placeholder="" name="description" />
                 @error('description')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -84,6 +95,7 @@
                         class=" w-full max-96 aspect-[9/8] md:max-w-lg  object-cover rounded-md">
                 @endif
             </div>
+        </div>
 
             <div class="flex gap-x-4 w-full justify-end">
                 <x-my-button class="outline w-full">

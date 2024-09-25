@@ -15,7 +15,7 @@
             <a
             href="/"
             class=" text-primary font-bold flex gap-0 items-center justify-start text-3xl">
-                جولت
+                {{ env('APP_NAME', 'Default App Name') }}
             </a>
                 <svg
                 class="text-slate-700 ""
