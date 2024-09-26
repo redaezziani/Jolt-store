@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "arielmejiadev/larapex-charts": "^8.1",
         "devdojo/auth": "^1.0",
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",

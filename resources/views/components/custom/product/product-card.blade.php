@@ -41,7 +41,7 @@
         <div class="flex flex-col gap-1 mt-2">
             @if ($product->discounts->count() > 0)
                 <span
-                    class="overflow-hidden flex justify-start rounded-sm w-fit items-center min-w-32 bg-[#2563eb] text-secondary line-clamp-1 truncate text-xs font-bold px-2 py-1">
+                    class="overflow-hidden flex justify-start rounded-sm w-fit items-center min-w-32 bg-primary text-secondary line-clamp-1 truncate text-xs font-bold px-2 py-1">
                     {{ $product->discounts->last()->name }} {{ $product->discounts->last()->value }}% off
                     <hr class="border-dashed border-r w-10 rotate-90 border-white h-full">
                 </span>
@@ -65,7 +65,7 @@
                     @endphp
                     {{ $newPrice }} DH
                 </p>
-                
+
             </div>
         </div>
     </div>
