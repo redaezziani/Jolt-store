@@ -10,15 +10,12 @@
     <title>{{ $title ?? 'My App' }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="icon" href="{{ asset('favicon.ico') }}" />
-    {{-- <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.css" rel="stylesheet"> --}}
-    <!-- Styles -->
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-BTVpG8X0.css ') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-CCJSjwJX.css') }}" /> <!-- If you have a lib.css built --> --}}
+    <script src="{{ asset('build/assets/app-CCJSjwJX.js') }}" defer></script>
     @vite('resources/css/app.css')
     @vite('resources/css/lib.css')
     @vite('resources/js/app.js')
-    {{-- <link rel="stylesheet" href="{{asset('app-BXysfPCT.css')}}">
-    <script src="{{asset('app-CbVi_I5T.js')}}"></script> --}}
     @livewireStyles
     <wireui:scripts />
     @trixassets
@@ -31,5 +28,4 @@
     <!-- Scripts -->
     @livewireScripts
 </body>
-
 </html>

@@ -10,7 +10,7 @@
             </p>
         </div>
     </div>
-    <section class=" w-full grid   mt-5 lg:h-[48rem] grid-cols-1 lg:grid-rows-6 gap-3 lg:grid-cols-4">
+    <section class=" w-full grid   mt-5 lg:h-[45rem] grid-cols-1 lg:grid-rows-6 gap-3 lg:grid-cols-4">
         <livewire:total-orders>
         <livewire:total-revenue>
         <livewire:total-products-sold>
