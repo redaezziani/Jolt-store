@@ -3,5 +3,7 @@
     <p class="text-slate-500 text-sm">
         إجمالي الإيرادات التي تم تحقيقها من خلال الطلبات
     </p>
-    <p class="text-xl lg:text-xl font-bold mt-3 text-primary/80">{{ $totalRevenue }} درهم</p>
+    <p class="text-xl lg:text-xl font-bold mt-3 text-primary/80">
+        {{ $totalRevenue }}
+         درهم</p>
 </article>

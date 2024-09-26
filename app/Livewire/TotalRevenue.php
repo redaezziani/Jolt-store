@@ -11,7 +11,7 @@ class TotalRevenue extends Component
 
     public function mount()
     {
-        $this->totalRevenue = Order::sum('total');
+        $this->totalRevenue = round(Order::sum('total'), 2);
     }
     public function render()
     {
