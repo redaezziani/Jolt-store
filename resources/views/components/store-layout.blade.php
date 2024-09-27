@@ -2,7 +2,7 @@
 
 <x-layout>
     @include('components.nav-sheet')
-    <livewire:cart-side-bar wire:poll.5000ms />
+    <livewire:cart-side-bar/>
     <livewire:search-products>
         <x-slot name="title">
             {{ $title }}
@@ -91,7 +91,7 @@
                         <p>{{ __('search') }}</p>
                     </div>
                     <div class="text-sm font-semibold hidden sm:flex gap-x-2 justify-start items-center text-slate-50">
-                        <livewire:bag-cart />
+                        <livewire:bag-cart/>
                         @auth
                             <div class="flex justify-start gap-x-2 items-center">
                                 <a class="text-sm font-semibold flex gap-x-2 justify-start items-center text-slate-50">

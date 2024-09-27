@@ -17,14 +17,14 @@
         <div class="flex gap-x-1 justify-start items-start text-slate-400">
             @for ($i = 1; $i <= 5; $i++)
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    class="icon icon-tabler icon-tabler-star {{ $i <= $product->rating ? 'text-orange-500' : 'text-slate-400' }}"
+                    class="icon icon-tabler icon-tabler-star {{ $i <= $product->rating ? 'text-amber-400' : 'text-slate-400' }}"
                     fill="currentColor">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path
                         d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
                 </svg>
             @endfor
-            ({{ $product->rating }}/5)
+            ({{ round($product->rating,2) }}/5)
             <p>
                 {{ $product->comments->count() }} تعليق
             </p>
@@ -91,7 +91,7 @@
         <div class="flex justify-start items-center gap-5 ">
             <div class="flex gap-3">
                 <p class=" text-lg line-through mt-2 text-slate-400">
-                    {{ $product->price }}
+                    {{ round($product->price, 2) }}
                 </p>
                 <p class=" text-lg font-bold mt-2 text-primary">
                     @php
@@ -105,7 +105,7 @@
 
                         $newPrice = $price - $discount;
                     @endphp
-                    {{ $newPrice }} درهم مغربي
+                    {{ round($newPrice,2) }} درهم مغربي
                 </p>
             </div>
             @include('components.custom.product.quantity-input', ['currentQuantity' => $currentQuantity])
@@ -209,7 +209,7 @@
                             <div
                                 class="relative flex justify-start items-center overflow-hidden w-full bg-slate-200 rounded-full h-2">
                                 <span
-                                    class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full"
+                                    class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full"
                                     style="width: {{ $percentage }}%;"></span>
                             </div>
                             <span

@@ -3,7 +3,9 @@
 
 
         <div class="flex flex-col w-full  flex-1">
-            <a class="text-slate-700 font-semibold flex gap-0 items-center justify-start text-xl" href="{{ route('home') }}">
+            <a
+            class="text-slate-700 font-semibold flex gap-0 items-center justify-start text-xl"
+             href="{{ route('home') }}">
                 <svg class="w-8 h-8 text-primary"
                      version="1.1"
                      id="Layer_1"
@@ -31,7 +33,7 @@
             </a>
             <nav class="-mx-3 space-y-3 mt-14 ">
                 <a href="{{ route('dashboard-index') }}"
-                    class="flex items-end px-3 py-2  text-slate-600 font-bold transition-colors duration-500 transform rounded-lg  dark:hover:text-slate-200 hover:text-primary ">
+                class="flex items-end px-3 py-2 {{ Route::is('dashboard-index') ? 'bg-slate-50 text-primary' : 'text-slate-600' }} font-bold transition-colors duration-500 transform rounded-lg dark:hover:text-slate-200 hover:text-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +44,7 @@
                 </a>
 
                 <a href="{{ route('dashboard-products-index') }}"
-                    class="flex items-end px-3 py-2 bg-slate-50  text-primary font-bold transition-colors duration-300 transform rounded-lg  dark:hover:text-slate-200 hover:text-primary ">
+                class="flex items-end px-3 py-2 {{ Route::is('dashboard-products-index') ? 'bg-slate-50 text-primary' : 'text-slate-600' }} font-bold transition-colors duration-500 transform rounded-lg dark:hover:text-slate-200 hover:text-primary">
                     <svg
                     class="w-5 h-5"
                     id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5"  ><defs><style>.cls-637b82edf95e86b59c57a09b-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}</style></defs><polygon class="cls-637b82edf95e86b59c57a09b-1" points="14.86 22.5 9.14 22.5 9.14 3.41 12 1.5 14.86 3.41 14.86 22.5"></polygon><polygon class="cls-637b82edf95e86b59c57a09b-1" points="20.59 22.5 14.86 22.5 14.86 3.41 17.73 1.5 20.59 3.41 20.59 22.5"></polygon><polygon class="cls-637b82edf95e86b59c57a09b-1" points="9.14 22.5 3.41 22.5 3.41 3.41 6.27 1.5 9.14 3.41 9.14 22.5"></polygon><line class="cls-637b82edf95e86b59c57a09b-1" x1="5.32" y1="8.18" x2="7.23" y2="8.18"></line><line class="cls-637b82edf95e86b59c57a09b-1" x1="11.05" y1="8.18" x2="12.95" y2="8.18"></line><line class="cls-637b82edf95e86b59c57a09b-1" x1="16.77" y1="8.18" x2="18.68" y2="8.18"></line><line class="cls-637b82edf95e86b59c57a09b-1" x1="5.32" y1="17.73" x2="7.23" y2="17.73"></line><line class="cls-637b82edf95e86b59c57a09b-1" x1="11.05" y1="17.73" x2="12.95" y2="17.73"></line><line class="cls-637b82edf95e86b59c57a09b-1" x1="16.77" y1="17.73" x2="18.68" y2="17.73"></line></svg>
@@ -55,7 +57,7 @@
 
 
                 <a href="{{ route('dashboard-orders-index') }}"
-                    class="flex items-end px-3 py-2 text-slate-600 font-bold transition-colors duration-300 transform rounded-lg  dark:hover:text-slate-200 hover:text-primary ">
+                class="flex items-end px-3 py-2 {{ Route::is('dashboard-orders-index') ? 'bg-slate-50 text-primary' : 'text-slate-600' }} font-bold transition-colors duration-500 transform rounded-lg dark:hover:text-slate-200 hover:text-primary">
                     <svg
                     class="w-5 h-5"
                      id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" ><defs><style>.cls-637b87aff95e86b59c57a198-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}</style></defs><circle class="cls-637b87aff95e86b59c57a198-1" cx="6.27" cy="17.73" r="1.91"></circle><circle class="cls-637b87aff95e86b59c57a198-1" cx="17.73" cy="17.73" r="1.91"></circle><polyline class="cls-637b87aff95e86b59c57a198-1" points="4.36 17.73 1.5 17.73 1.5 4.36 18.68 4.36 18.68 8.18 20.59 12 22.5 13.07 22.5 17.73 19.64 17.73"></polyline><line class="cls-637b87aff95e86b59c57a198-1" x1="15.82" y1="17.73" x2="8.18" y2="17.73"></line><polyline class="cls-637b87aff95e86b59c57a198-1" points="20.59 12 14.86 12 14.86 8.18 18.68 8.18"></polyline></svg>
@@ -76,7 +78,8 @@
                     </span>
                 </a>
 
-                <a href="{{ route('dashboard-customers-index') }}"
+                <a
+                 href="{{ route('dashboard-customers-index') }}"
                     class="flex items-end px-3 py-2 text-slate-600 font-bold transition-colors duration-300 transform rounded-lg  dark:hover:text-slate-200 hover:text-primary ">
                     <svg
                     class="w-5 h-5"

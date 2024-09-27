@@ -1,4 +1,6 @@
-<div x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
+<div
+wire:poll.2000ms
+x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="open = false"
     x-on:keydown.shift.tab="open = false" x-on:side-bar-open.window="open = true" x-on:side-bar-close.window="open = false"
     x-on:click.outside="open = false" x-show="open" x-cloak
     class="w-full z-[999] overflow-hidden h-screen backdrop-blur-sm bg-black/10 fixed left-0 top-0">
@@ -29,7 +31,7 @@
                         <div class="flex w-full justify-start items-start gap-2">
                             <span class="relative size-14">
                                 <span
-                                    class="size-4 flex justify-center items-center absolute -top-1 -right-1 rounded-full bg-primary text-secondary p-0.5 cursor-pointer text-xs"
+                                    class="size-4 flex justify-center items-center absolute -top-1 -right-1 rounded-full bg-primary text-white p-0.5 cursor-pointer text-xs"
                                     wire:click='removeFromCart({{ $item->id }})'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -71,19 +73,7 @@
                                         درهم
                                     </span>
                                 </p>
-                              <div class="flex justify-start items-center gap-2">
-                                <p
-                                 class="text-sm  text-slate-600"
-                                >
-                                    {{ $item->size }}
-                                </p>
 
-                                <span
-                                style="background: {{ $item->color }} "
-                                class=" p-2 rounded-lg "
-                                >
-                               </span>
-                              </div>
                                 {{--lets make a comp that add or update the qua--}}
                                 <div class="flex gap-2 justify-start items-center">
                                     <button wire:click='increaseQuantity({{ $item->id }})'
@@ -126,7 +116,7 @@
                 class=" w-full"
                 href="{{ route('order-index') }}">
                 <x-my-button  id="checkout"
-                    class="text-secondary w-full flex bg-primary gap-x-2 justify-center items-center">
+                    class=" text-white w-full flex bg-primary gap-x-2 justify-center items-center">
                     <div
                         class="flex gap-x-2 justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
