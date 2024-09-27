@@ -29,7 +29,7 @@ button {
     @apply inline-flex items-center justify-center text-sm font-medium  rounded-lg  focus-visible:ring-ring whitespace-nowrap focus-within:outline-2 outline transition-all ease-in-out duration-300   focus-within:outline-offset-2   disabled:pointer-events-none disabled:opacity-50;
 }
 .default {
-    @apply  bg-primary text-secondary  px-8 h-[40px]   hover:bg-primary/90     focus-within:outline-primary;
+    @apply  bg-primary text-white  px-8 h-[40px]   hover:bg-primary/90     focus-within:outline-primary;
 }
 .destructive {
     @apply text-white bg-red-500  px-8 border border-red-700   hover:bg-red-600 focus-within:outline-red-600;

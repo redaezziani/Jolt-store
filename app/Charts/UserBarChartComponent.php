@@ -36,7 +36,7 @@ class UserBarChartComponent
             ->addData('عدد المستخدمين', array_values($userData)) // Use the fetched user data
             ->setColors(['#ff6384']) // Set chart color
             ->setLabels($labels)
-            ->setHeight(300) // Set chart height
+            ->setHeight(280) // Set chart height
             ->setFontFamily('Zain'); // Set font family
     }
 }

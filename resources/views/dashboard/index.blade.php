@@ -11,6 +11,7 @@
         </div>
     </div>
     <section class=" w-full grid   mt-5 lg:h-[45rem] grid-cols-1 lg:grid-rows-6 gap-3 lg:grid-cols-4">
+
         <livewire:total-orders>
         <livewire:total-revenue>
         <livewire:total-products-sold>
@@ -50,8 +51,7 @@
         </div>
     </section>
 
-
-
+        <livewire:dashboard-orders-table>
     <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

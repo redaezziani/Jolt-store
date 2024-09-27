@@ -29,9 +29,12 @@ class SalesAreaChartComponent
         }
 
         return $this->chart->areaChart()
-            ->addData('مبيعات', array_values($salesData))
-            ->setColors(['#6366f1'])
-            ->setLabels($labels)
-            ->setFontFamily('Zain');
+        ->addData('مبيعات', array_values($salesData))
+        ->setColors(['#6366f1'])
+        ->setLabels($labels)
+        ->setStroke(1, ['#6366f1'], 'straight')
+        ->setGrid(opacity: '0.05')
+        ->setMarkers(['#ff6384', '#ff6384'], 4, 6)
+        ->setFontFamily('Zain');
     }
 }
