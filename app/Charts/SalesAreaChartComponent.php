@@ -14,28 +14,24 @@ class SalesAreaChartComponent
     {
         $this->chart = $chart;
     }
-
     public function build(): \ArielMejiaDev\LarapexCharts\AreaChart
     {
-        // Get sales data from the orders table with rounded totals
-        $salesData = Order::selectRaw('DATE(created_at) as date, ROUND(SUM(total), 2) as total') // Round the total to 2 decimal places
-            ->where('created_at', '>=', now()->subWeek()) // Filter for the past week
+        $salesData = Order::selectRaw('DATE(created_at) as date, ROUND(SUM(total), 2) as total')
+            ->where('created_at', '>=', now()->subWeek())
             ->groupBy('date')
             ->orderBy('date')
-            ->pluck('total', 'date') // Get total per date
+            ->pluck('total', 'date')
             ->toArray();
 
-        // Prepare the x-axis labels (dates)
         $labels = [];
         foreach ($salesData as $date => $total) {
-            $labels[] = Carbon::parse($date)->translatedFormat('l'); // Translated day names (e.g., Monday, Tuesday)
+            $labels[] = Carbon::parse($date)->translatedFormat('l');
         }
 
-        // Build the area chart
         return $this->chart->areaChart()
-            ->addData('مبيعات', array_values($salesData)) // Use the fetched sales data
-            ->setColors(['#6366f1']) // Set chart color
-            ->setLabels($labels) // Set labels for the x-axis
-            ->setFontFamily('Zain'); // Set font family
+            ->addData('مبيعات', array_values($salesData))
+            ->setColors(['#6366f1'])
+            ->setLabels($labels)
+            ->setFontFamily('Zain');
     }
 }

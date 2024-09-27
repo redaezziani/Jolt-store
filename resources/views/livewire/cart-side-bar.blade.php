@@ -125,9 +125,9 @@
                 <a
                 class=" w-full"
                 href="{{ route('order-index') }}">
-                <x-my-button wire:loading.attr="disabled" id="checkout"
-                    class="text-secondary w-full flex bg-[#2563eb] gap-x-2 justify-center items-center">
-                    <div wire:loading.class="hidden" wire:target="#checkout"
+                <x-my-button  id="checkout"
+                    class="text-secondary w-full flex bg-primary gap-x-2 justify-center items-center">
+                    <div
                         class="flex gap-x-2 justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -141,29 +141,7 @@
                         </svg>
                         <span>إتمام الطلب</span>
                     </div>
-                    <div wire:loading wire:target="#checkout" class="w-full flex justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <path d="M12 4V12H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M12 12L10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M12 12L14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M12 4L10 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M12 4L14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M6.1156 7.0657L6.55446 10.6164L7.964 11.8552L10.0504 7.79821L8.73376 6.33843L6.1156 7.0657Z"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M11.6416 12.6935L12.5967 14.0454L13.2811 14.2373L14.3968 12.7873L12.1864 12.3536L11.6416 12.6935Z"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </div>
+
                 </x-my-button>
                 </a>
 

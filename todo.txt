@@ -1,8 +1,4 @@
 
-
-
-
---fix:sizes text form = "Ahjjam" to "ma9assat"
-
---add:improve te ui in the order page also the subs message email
+--fix:sizes text from = "Ahjjam" to "ma9assat"
+--add:improve the UI in the order page also the subscription message email
 

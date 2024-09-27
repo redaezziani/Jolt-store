@@ -78,7 +78,7 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-lg border border-slate-400
                                     <div class="text-sm text-slate-500">
                                         @if ($product->shipping == 'Paid Shipping')
                                         <span
-                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center f "
+                                        class=" py-0.5 gap-x-1  rounded-lg  flex justify-center items-center f "
                                         >
                                         <span
                                         class=" rounded-full bg-slate-300  size-2"
@@ -89,7 +89,7 @@ class="mt-5 flex w-full flex-col bg-white p-2 rounded-lg border border-slate-400
                                         </span>
                                         @else
                                         <span
-                                        class=" py-0.5 gap-x-1 px-2 rounded-lg border border-s-teal-400/35 flex justify-center items-center  "
+                                        class=" py-0.5 gap-x-1  rounded-lg  flex justify-center items-center  "
                                         >
                                         <span
                                         class=" rounded-full bg-green-500  size-2"
