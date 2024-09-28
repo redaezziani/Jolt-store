@@ -21,13 +21,23 @@ class CartSideBar extends Component
             $discountValue = optional($item->product->discounts->last())->value ?? 0;
             $price = (float) $item->product->price;
             $discount = ($discountValue / 100) * $price;
-            return ($price - $discount) * $item->quantity; // Calculate new price and multiply by quantity
+            return ($price - $discount) * $item->quantity;
         });
+    }
+
+    public function increaseQuantity($id) {
+        $this->updateQuantity($id);
+        $this->calculateTotal();
+    }
+
+    public function decreaseQuantity($id) {
+        $this->updateQuantity($id, false);
+        $this->calculateTotal();
     }
 
     public function removeFromCart($itemId)
     {
-        CartItem::find($itemId)?->delete(); // Use null safe operator
+        CartItem::find($itemId)?->delete();
     }
 
     public function updateQuantity($itemId, $increment = true)
@@ -35,9 +45,9 @@ class CartSideBar extends Component
         $cartItem = CartItem::find($itemId);
         if ($cartItem) {
             if ($increment && $cartItem->quantity < $this->quantityMax) {
-                $cartItem->increment('quantity'); // Increase quantity
+                $cartItem->increment('quantity');
             } elseif (!$increment && $cartItem->quantity > $this->quantityMin) {
-                $cartItem->decrement('quantity'); // Decrease quantity
+                $cartItem->decrement('quantity');
             }
             $cartItem->save();
         }
@@ -48,9 +58,9 @@ class CartSideBar extends Component
         if (auth()->check()) {
             $cart = CartModel::where('user_id', auth()->id())->first();
             if ($cart) {
-                $cart->items()->delete(); // Delete all cart items
-                $this->cartItems = collect(); // Reset to an empty collection
-                $this->total = 0; // Reset total
+                $cart->items()->delete();
+                $this->cartItems = collect();
+                $this->total = 0;
             }
         }
     }
@@ -60,7 +70,7 @@ class CartSideBar extends Component
         if (auth()->check()) {
             $cart = CartModel::where('user_id', auth()->id())->with('items.product.discounts')->first();
             if ($cart) {
-                $this->cartItems = $cart->items; // This is already a collection
+                $this->cartItems = $cart->items;
                 $this->calculateTotal();
             }
         }

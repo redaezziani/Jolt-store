@@ -10,13 +10,12 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
         x-transition:enter-start="transform -translate-x-full" x-transition:enter-end="transform translate-x-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform translate-x-0"
         x-transition:leave-end="transform -translate-x-full"
-        class="w-[20rem] md:w-96 z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
+        class="w-[20rem] md:w-[35rem] z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
         <div class="w-full flex justify-between items-center">
-            <p class="text-2xl font-semibold text-neutral-800">
+            <p class="text-2xl font-semibold text-slate-800">
                 عربة التسوق الخاصة بك
             </p>
-
-            <svg x-on:click="open = false" class="text-neutral-800" xmlns="http://www.w3.org/2000/svg" width="14"
+            <svg x-on:click="open = false" class="text-slate-800" xmlns="http://www.w3.org/2000/svg" width="14"
                 height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-x">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -24,12 +23,15 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                 <path d="M6 6l12 12" />
             </svg>
         </div>
-        <div class="flex flex-col mt-4 w-full justify-start items-start gap-6">
+        @if ($cartItems && count($cartItems) > 0)
+        <p class="text-base text-secondary underline underline-offset-2 font-semibold"> عدد المنتجات في العربة : {{ count($cartItems) }}</p>
+        @endif
+        <div class="flex flex-col mt-4 w-full justify-start items-start gap-10 ">
             @if ($cartItems && count($cartItems) > 0)
                 @foreach ($cartItems as $item)
                     <div class="w-full flex gap-3 justify-between items-center">
                         <div class="flex w-full justify-start items-start gap-2">
-                            <span class="relative size-14">
+                            <span class="relative size-20">
                                 <span
                                     class="size-4 flex justify-center items-center absolute -top-1 -right-1 rounded-full bg-primary text-white p-0.5 cursor-pointer text-xs"
                                     wire:click='removeFromCart({{ $item->id }})'>
@@ -43,12 +45,17 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                                     </svg>
                                 </span>
                                 <img src="{{ asset('storage/' . $item->product->cover_img) }}"
-                                    alt="{{ $item->product->name }}" class="w-14 aspect-[9/11] object-cover rounded-md">
+                                    alt="{{ $item->product->name }}" class=" w-20 aspect-[9/12] object-cover rounded-none">
                             </span>
                             <div class="flex flex-col justify-start items-start">
                                 <h3 class="text-slate-800 text-sm font-medium line-clamp-1">
                                     {{ $item->product->name }}
                                 </h3>
+                                <p
+                                class="text-sm text-slate-600 line-clamp-1 max-w-80"
+                                >
+                                    {{ $item->product->description }}
+                                </p>
                                 <p class="text-sm  text-slate-600">
                                     @php
                                         $discountValue = optional($item->product->discounts->last())->value;
@@ -77,14 +84,14 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                                 {{--lets make a comp that add or update the qua--}}
                                 <div class="flex gap-2 justify-start items-center">
                                     <button wire:click='increaseQuantity({{ $item->id }})'
-                                        class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-lg bg-slate-200 text-slate-700 font-semibold p-1">
+                                        class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-none bg-slate-200 text-slate-700 font-semibold p-1">
                                         +
                                     </button>
-                                    <span class="text-xs text-neutral-600">
+                                    <span class="text-xs text-slate-600">
                                         {{ $item->quantity }}
                                     </span>
                                     <button wire:click='decreaseQuantity({{ $item->id }})'
-                                        class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-lg bg-slate-200 text-slate-700 font-semibold p-1">
+                                        class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-none bg-slate-200 text-slate-700 font-semibold p-1">
                                         -
                                     </button>
                                 </div>
@@ -94,14 +101,14 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                 @endforeach
             @elseif ($cartItems && count($cartItems) < 1)
                 <div class="w-full flex justify-center items-center">
-                    <p class="text-lg text-neutral-600">
+                    <p class="text-lg text-slate-600">
                         لا يوجد منتجات في العربة
                     </p>
                 </div>
             @endif
         </div>
         @if ($cartItems && count($cartItems) > 0)
-            <div class="w-full flex gap-2 justify-between items-center">
+            <div class="w-full flex gap-2 mt-5 justify-between items-center">
                 <p class="text-slate-600 capitalize">
                     إجمالي السعر للطلب هو : {{ $total }} درهم
                 </p>

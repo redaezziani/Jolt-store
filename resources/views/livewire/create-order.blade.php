@@ -3,28 +3,43 @@
         {{-- عرض أول عنصر في الطلب --}}
         <div class="w-full">
             <h2 class="text-lg font-semibold text-slate-600">تفاصيل الطلب</h2>
+            <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
+            @if ($cartItems && count($cartItems) > 0)
+
             <div class="flex gap-2 mt-4">
                 <img src="{{ asset('storage/' . $cartItems[0]->product->cover_img) }}" alt="صورة المنتج"
                     class="w-20 h-20 object-cover rounded-md">
                 <div class="flex flex-col gap-2">
                     <h3 class="text-lg font-semibold text-slate-800">{{ $cartItems[0]->product->name }}</h3>
                     <p class="text-slate-600 line-clamp-2">{{ $cartItems[0]->product->description }}</p>
+                    <div class="flex gap-x-2 justify-start items-center">
+
                     @if ($cartItems[0]->size)
                     <div class="flex gap-x-1 justify-start items-center">
-                        <p class="text-slate-600 font-medium">
-                             الحجم :
-                        </p>
+
                         <p
-                        class=" text-slate-600 font-bold"
+                        class=" text-slate-600"
                         >
+                        <strong>
+                            الحجم :
+                        </strong>
                             {{$cartItems[0]->size}}
                         </p>
                     </div>
                     @endif
 
-                    <p class="text-lg font-semibold text-slate-800">{{ $cartItems[0]->product->price }} درهم</p>
+                    <p class="text-slate-600 ">
+                        <strong>
+                            السعر:
+                        </strong>
+                        {{ $cartItems[0]->product->price }} درهم
+                    </p>
+                </div>
+
                 </div>
             </div>
+            @endif
+
         </div>
         <div class="mb-6">
             <h3 class="text-lg font-semibold text-slate-600 mb-4">ملخص الطلب</h3>
@@ -33,7 +48,11 @@
                     <li>{{ $item->product->name }} - {{ $item->quantity }} × {{ $item->product->price }} درهم</li>
                 @endforeach
             </ul>
-            <p class="text-lg font-bold text-slate-900 mt-4">الإجمالي: {{ $total }} درهم</p>
+            <p class="text-base text-secondary underline underline-offset-2 font-semibold mt-4">
+                إجمالي الطلب :
+                {{ round($total,2) }}
+            درهم</p>
+
         </div>
     </div>
     <div class="col-span-2  bg-white">

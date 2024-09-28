@@ -14,7 +14,7 @@
                         {{ $category->description }}
                     </p>
 
-                    <a href="{{ url('/products?filter=' . $category->slug) }}">
+                    <a href="{{ url('/products?filter_category=' . $category->slug) }}">
 
                         <button class="font-medium group w-32 rounded-full text-primary px-7 py-2.5 bg-white hover:bg-white/90">
                             الذهاب

@@ -14,6 +14,7 @@ class SalesAreaChartComponent
     {
         $this->chart = $chart;
     }
+
     public function build(): \ArielMejiaDev\LarapexCharts\AreaChart
     {
         $salesData = Order::selectRaw('DATE(created_at) as date, ROUND(SUM(total), 2) as total')
@@ -23,18 +24,31 @@ class SalesAreaChartComponent
             ->pluck('total', 'date')
             ->toArray();
 
+        // Use Carbon to get the correct day names and ensure unique labels
         $labels = [];
         foreach ($salesData as $date => $total) {
-            $labels[] = Carbon::parse($date)->translatedFormat('l');
+            $dayName = Carbon::parse($date)->translatedFormat('l');
+            // Only add unique day names
+            if (!in_array($dayName, $labels)) {
+                $labels[] = $dayName;
+            }
+        }
+
+        // Ensure the total array aligns with the labels
+        $totals = [];
+        foreach ($labels as $label) {
+            // Find the corresponding total for each label
+            $date = Carbon::now()->subWeek()->startOfDay()->addDays(array_search($label, $labels));
+            $totals[] = $salesData[$date->toDateString()] ?? 0;
         }
 
         return $this->chart->areaChart()
-        ->addData('مبيعات', array_values($salesData))
-        ->setColors(['#6366f1'])
-        ->setLabels($labels)
-        ->setStroke(1, ['#6366f1'], 'straight')
-        ->setGrid(opacity: '0.05')
-        ->setMarkers(['#ff6384', '#ff6384'], 4, 6)
-        ->setFontFamily('Zain');
+            ->addData('مبيعات', $totals)
+            ->setColors(['#6366f1'])
+            ->setLabels($labels)
+            ->setStroke(1, ['#6366f1'], 'straight')
+            // ->setGrid(opacity: '0.05')
+            ->setMarkers(['#6366f1', '#6366f1'], 4, 6)
+            ->setFontFamily('Zain');
     }
 }

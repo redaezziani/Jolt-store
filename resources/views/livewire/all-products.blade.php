@@ -37,11 +37,14 @@
                     <div class="flex gap-2 justify-start items-center relative">
                         <div class="flex gap-3">
                             <label class="cursor-pointer">
-                                <input value="{{ $value }}" wire:click='applySort({{ $value }})'
+                                <input
+                                x-data="{ selectedPrice: @entangle('selectedPrice').defer }"
+                                value="{{ $value }}" wire:click='applySort({{ $value }})'
                                     class="peer hidden" type="radio" name="price" id="price-{{ $value }}"
                                     {{ $sortPrice == $value ? 'checked' : '' }}>
                                 <span
-                                    class="block size-4 rounded-full ring-primary transition duration-300 peer-checked:bg-primary ring-2 ring-offset-2"></span>
+                                    class="block size-4 rounded-full ring-primary transition duration-300 peer-checked:bg-primary ring-2 ring-offset-2 {{ $sortPrice == $value ? 'bg-primary' : '' }}">
+                                </span>
                             </label>
                         </div>
                         <label class="text-slate-700 font-medium" for="price-{{ $value }}">
@@ -61,11 +64,14 @@
                     <div class="flex gap-2 justify-start items-center relative">
                         <div class="flex gap-3">
                             <label class="cursor-pointer">
-                                <input value="{{ $value }}" wire:click='applySortShipping({{ $value }})'
+                                <input
+                                x-data="{ selectedShipping: @entangle('selectedShipping').defer }"
+                                value="{{ $value }}" wire:click='applySortShipping({{ $value }})'
                                     class="peer hidden" type="radio" name="shipping"
                                     id="shipping-{{ $value }}">
                                 <span
-                                    class="block size-4 rounded-full ring-primary transition duration-300 peer-checked:bg-primary ring-2 ring-offset-2"></span>
+                                    class="block size-4 rounded-full ring-primary transition duration-300 peer-checked:bg-primary ring-2 ring-offset-2 {{ $selectedShipping == $value ? 'bg-primary' : '' }}">
+                                </span>
                             </label>
                         </div>
                         <label class="text-slate-700 font-medium" for="shipping-{{ $value }}">
@@ -104,11 +110,13 @@
                                 <div class="flex gap-3">
                                     <label class="cursor-pointer" for="size-{{ $size }}"
                                         wire:click='applySizeFilter("{{ $size }}")'>
-                                        <input value="{{ $size }}" aria-label="size" hidden class="peer hidden"
+                                        <input
+                                        x-data="{ selectedSize: @entangle('selectedSize').defer }"
+                                        value="{{ $size }}" aria-label="size" hidden class="peer hidden"
                                             type="radio" name="size" id="size-{{ $size }}">
                                         <div
                                             class="w-9 p-1 text-sm h-9 flex justify-center items-center rounded-lg border border-slate-400/35 transition duration-300
-                                        peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                        peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent {{ $selectedSize == $size ? 'ring-primary ring-2 ring-offset-2 border-transparent' : '' }}">
                                             <span class="text-sm">
                                                 {{ $size }}
                                             </span>
@@ -152,12 +160,16 @@
                                 <div class="flex gap-3">
                                     <label class="cursor-pointer" for="color-{{ $color }}"
                                         wire:click='applyColorFilter("{{ $color }}")'>
-                                        <input value="{{ $color }}" aria-label="color" hidden
+                                        <input
+                                          x-data="{ selectedColor: @entangle('selectedColor').defer }"
+                                         value="{{ $color }}"
+                                         aria-label="color" hidden
                                             class="peer hidden" type="radio" name="color"
                                             id="color-{{ $color }}">
                                         <div style="background-color: {{ $color }};"
                                             class="w-9 h-9 flex justify-center items-center rounded-full border border-slate-400/35 transition duration-300
-                                peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 peer-checked:border-transparent
+                                  {{ $selectedColor == $color ? 'ring-primary ring-2 ring-offset-2 border-transparent' : '' }}">
                                         </div>
                                     </label>
                                 </div>
@@ -170,18 +182,20 @@
     </div>
     <div class="col-span-3">
 
-        <div class=" w-full flex justify-between items-start flex-wrap">
-            <div wire:ignore class="flex max-w-xl justify-start items-center flex-wrap gap-3">
+        <div class=" w-full flex justify-start flex-col gap-3 items-start flex-wrap">
+            <x-my-input wire:model.live.debounce="search" type="text" placeholder="البحث عن المنتجات ..."
+            class=" md:w-72 flex h-10 w-full  border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 !important mt-4 md:mt-0" />
+            <div wire:ignore class="flex w-full justify-start items-center flex-wrap gap-3">
                 @foreach ($categories as $category)
-                    <button wire:click="applyFilter('{{ $category->slug }}')"
-                        class="rounded-full bg-white border text-slate-700 cursor-pointer transition-all ease-in-out duration-300 px-3 py-0.5 text-sm
-            {{ $filter === $category->slug ? 'border-slate-400 text-slate-700 hover:border-slate-400' : 'border-slate-400/35 hover:border-slate-400' }}">
+                    <button
+                    x-data="{ selectedCategory: @entangle('selectedCategory').defer }"
+                    wire:click="applyFilter('{{ $category->slug }}')"
+                        class="rounded-full bg-white border  cursor-pointer transition-all ease-in-out duration-300 px-3 py-0.5 text-sm {{ $selectedCategory == $category->slug ? 'border-primary text-primary' : 'border-slate-400' }}">
                         {{ $category->name }}
                     </button>
                 @endforeach
             </div>
-            <input wire:model.live.debounce="search" type="text" placeholder="البحث عن المنتجات ..."
-                class=" md:w-72 flex h-10 w-full rounded-md border border-slate-400/35 bg-transparent px-3 py-2 text-sm text-slate-600  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary   focus-visible:border-none   disabled:cursor-not-allowed disabled:opacity-50 !important mt-4 md:mt-0" />
+
         </div>
 
         @if ($products->count() > 0)

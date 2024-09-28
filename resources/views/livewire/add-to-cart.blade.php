@@ -24,7 +24,7 @@
                         d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
                 </svg>
             @endfor
-            ({{ round($product->rating,2) }}/5)
+            ({{ round($product->rating, 2) }}/5)
             <p>
                 {{ $product->comments->count() }} تعليق
             </p>
@@ -49,8 +49,10 @@
                                     wire:click='setSize("{{ $size }}")'>
                                     <input value="{{ $size }}" aria-label="size" hidden class=" peer hidden"
                                         type="radio" name="size" id="size-{{ $size }}">
-                                    <div {{-- -add the ring if he the selectedSize is equal to the size --}}
-                                        class="  w-9 p-1 text-sm h-9 flex justify-center items-center rounded-lg border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                    <div {{-- -add the ring if he the selectedSize is equal to the size --}} x-data="{ selectedSize: @entangle('selectedSize').defer }" {{-- lets console the selected size --}}
+                                        x-init="console.log(selectedSize)"
+                                        class="  w-9 p-1 text-sm h-9 flex justify-center items-center rounded-lg border border-slate-400/35   transtio duration-300 peer-checked:ring-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:border-transparent
+                                        {{ $selectedSize == $size ? 'ring-primary ring-2 ring-offset-2 border-transparent' : '' }}">
                                         <span class=" text-sm">
                                             {{ $size }}
                                         </span>
@@ -72,13 +74,14 @@
                                 <div class="flex gap-3">
                                     <label class=" cursor-pointer" for="color-{{ $color }}"
                                         wire:click='setColor("{{ $color }}")'>
-                                        <input value="{{ $color }}" aria-label="color" hidden
-                                            class=" peer hidden" type="radio" name="color"
+                                        <input x-data="{ selectedColor: @entangle('selectedColor').defer }" value="{{ $color }}" aria-label="color"
+                                            hidden class=" peer hidden" type="radio" name="color"
                                             id="color-{{ $color }}">
                                         <div style="
                                   background-color: {{ $color }};
                                   "
-                                            class="  w-9  text-sm h-9 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300  peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 peer-checked:border-transparent">
+                                            class="  w-9  text-sm h-9 flex justify-center items-center rounded-full border border-slate-400/35   transtio duration-300  peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 peer-checked:border-transparent
+                                        {{ $selectedColor == $color ? 'ring-primary ring-2 ring-offset-2 border-transparent' : '' }}">
                                         </div>
                                     </label>
                                 </div>
@@ -105,7 +108,7 @@
 
                         $newPrice = $price - $discount;
                     @endphp
-                    {{ round($newPrice,2) }} درهم مغربي
+                    {{ round($newPrice, 2) }} درهم مغربي
                 </p>
             </div>
             @include('components.custom.product.quantity-input', ['currentQuantity' => $currentQuantity])
@@ -116,7 +119,7 @@
                 <!-- Spinner displayed during loading -->
                 <div wire:loading wire:target="addToCart" class="flex gap-x-2 items-center">
                     <svg aria-hidden="true" role="status"
-                        class="inline mr-2 w-4 h-4 text-secondary animate-spin dark:text-secondary"
+                        class="inline mr-2 w-4 h-4 text-white animate-spin dark:text-white"
                         viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -194,30 +197,39 @@
         </div>
     </div>
     <div class=" w-full mt-5 col-span-3  gap-0  overflow-x-hidden justify-start items-start ">
-        <div class="flex justify-start items-start flex-col gap-4 max-w-lg w-full p-4 bg-white ">
-            <h4 class="text-lg font-semibold mb-4">توزيع تقييمات المنتج</h4>
-            <ul class="space-y-3 w-full">
-                @foreach ($ratings as $rating)
-                    @php
-                        $percentage = $totalComments > 0 ? ($rating->count / $totalComments) * 100 : 0;
-                    @endphp
-                    <li class="flex flex-col gap-2 w-full">
-                        <div class="flex justify-between gap-2 items-center w-full">
-                            <span class="text-sm font-medium text-slate-600 flex items-center gap-1">
-                                {{ $rating->rating }}
-                            </span>
-                            <div
-                                class="relative flex justify-start items-center overflow-hidden w-full bg-slate-200 rounded-full h-2">
+        <div class="flex justify-start items-start flex-col gap-4 max-w-lg w-full py-4 bg-white ">
+            <h4 class="text-lg font-semibold text-slate-800">
+                توزيع تقييمات المنتج
+            </h4>
+            @if ($totalComments > 0)
+                <ul class="space-y-3 w-full">
+                    @foreach ($ratings as $rating)
+                        @php
+                            $percentage = $totalComments > 0 ? ($rating->count / $totalComments) * 100 : 0;
+                        @endphp
+                        <li class="flex flex-col gap-2 w-full">
+                            <div class="flex justify-between gap-2 items-center w-full">
+                                <span class="text-sm font-medium text-slate-600 flex items-center gap-1">
+                                    {{ $rating->rating }}
+                                </span>
+                                <div
+                                    class="relative flex justify-start items-center overflow-hidden w-full bg-slate-200 rounded-full h-2">
+                                    <span
+                                        class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full"
+                                        style="width: {{ $percentage }}%;"></span>
+                                </div>
                                 <span
-                                    class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full"
-                                    style="width: {{ $percentage }}%;"></span>
+                                    class="text-sm font-semibold text-slate-500">{{ number_format($percentage, 1) }}%</span>
                             </div>
-                            <span
-                                class="text-sm font-semibold text-slate-500">{{ number_format($percentage, 1) }}%</span>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p class="text-slate-600 text-base">
+                    لا يوجد تقييمات حتى الآن
+                </p>
+            @endif
+
         </div>
         <p class=" text-slate-600 underline underline-offset-2  text-base">
             التعليقات والآراء
@@ -246,8 +258,7 @@
                                     </p>
                                 </div>
                                 @if ($comment->user_id === Auth::id())
-                                    <x-dropdown
-                                    >
+                                    <x-dropdown>
                                         <x-dropdown.item icon="eye" label="تبديل الرؤية"
                                             wire:click="toggleVisibility({{ $comment->id }})" />
                                         <x-dropdown.item icon="trash" label="حذف التعليق"

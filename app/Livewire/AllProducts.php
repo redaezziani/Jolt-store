@@ -11,13 +11,12 @@ class AllProducts extends Component
 {
     use WithPagination;
 
-    public $filter = ''; // Category filter
-    public $search = ''; // Search keyword
-    public $sortPrice = null; // Price sorting
-    public $shipping = null; // Shipping filter
-    public $color = null; // Color filter
-    public $size = null; // Size filter
-
+    public $filter = null;
+    public $search = null;
+    public $sortPrice = null;
+    public $shipping = null;
+    public $color = null;
+    public $size = null; 
     public $best=null;
     public $sizes = [];
     public $colors = [];
@@ -110,8 +109,8 @@ class AllProducts extends Component
 
     public function resetFilters()
     {
-        $this->filter = '';
-        $this->search = '';
+        $this->filter = null;
+        $this->search = null;
         $this->sortPrice = null;
         $this->shipping = null;
         $this->color = null;
@@ -197,13 +196,18 @@ class AllProducts extends Component
         $products = $query->orderBy('created_at', 'desc')->paginate(16);
 
         // Fetch categories for display
-        $categories = Category::inRandomOrder()->limit(4)->get();
+        $categories = Category::limit(5)->get();
 
         return view('livewire.all-products', [
             'products' => $products,
             'categories' => $categories,
             'sizes' => $this->sizes,
             'colors' => $this->colors,
+            'selectedCategory' => $this->filter,
+            'selectedSortPrice' => $this->sortPrice,
+            'selectedShipping' => $this->shipping,
+            'selectedColor' => $this->color,
+            'selectedSize' => $this->size,
         ]);
     }
 }

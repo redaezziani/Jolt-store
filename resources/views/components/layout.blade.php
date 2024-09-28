@@ -21,11 +21,13 @@
     @trixassets
 </head>
 
-<body class="relative flex flex-col  items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden" >
+<body class="relative flex flex-col  items-center justify-start w-full min-h-screen gap-3 overflow-x-hidden">
+    {{-- <x-order-created /> --}}
     <x-notifications z-index="z-[999]" />
-
     {{ $slot }}
     <!-- Scripts -->
     @livewireScripts
+
 </body>
+
 </html>

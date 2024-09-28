@@ -16,10 +16,10 @@
                 {{ $latestCategory->description }}
             </p>
 
-         <a href="{{ url('/products?filter=' . $latestCategory->slug) }}">
+         <a href="{{ url('/products?filter_category=' . $latestCategory->slug) }}">
 
                 <button class="  font-medium w-32  rounded-full text-primary px-7 py-2.5  bg-white hover:bg-white/90">
-                    Shop Now
+                    تسوق الآن
                 </button>
             </a>
         </div>

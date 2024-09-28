@@ -87,7 +87,7 @@
         </section>
 
         <section
-            class="mt-10 w-full pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
+            class="mt-10 w-full pb-3 lg:px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
             <h3 class="text-neutral-900 flex gap-x-2 justify-start items-center text-3xl font-bold">
                 <span class="w-14 bg-slate-900 h-1"></span>
                 {{ __('subscribe') }}

@@ -22,6 +22,7 @@ class CreateOrder extends Component
     public $total = 0;
     // lets add a var to check if any of the items in the cart has a Paid Shipping
     public $hasPaidShipping = false;
+
     protected $rules = [
         'firstname' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
@@ -86,6 +87,8 @@ class CreateOrder extends Component
         }
     }
 
+
+
     public function PayOnDelivery()
     {
         $this->validate();
@@ -122,7 +125,6 @@ class CreateOrder extends Component
             }
         }
 
-        // Clear the cart after order creation
         Resend::emails()->send([
             'from' => 'Acme <onboarding@resend.dev>',
             'to' => 'klausdev2@gmail.com',
@@ -131,7 +133,10 @@ class CreateOrder extends Component
         ]);
         // reste the inputs
         $this->clearCart();
-        return redirect()->route('order-success');
+        // lets trigger the event listener
+        $this->dispatch('orderCreated');
+        // Redirect to the order success page
+        // return redirect()->route('order-success');
     }
 
     function generateOrderEmail($order) {

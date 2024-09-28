@@ -1,7 +1,9 @@
 {{-- Product details page lets render the titel and also desc and keywords props base on it  --}}
-<x-store-layout title="Detials page for product"
-    description="This is the details page for the product . You can find all the information about the product here."
-    keywords="product, details, information">
+<x-store-layout
+    title="تفاصيل الطلب"
+    description="قم بمراجعة تفاصيل طلبك وتقديم المعلومات اللازمة لإتمام الشراء."
+    keywords=""
+    
     >
     <div class=" w-full  gap-0 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
 

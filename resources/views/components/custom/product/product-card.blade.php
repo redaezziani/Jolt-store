@@ -9,7 +9,7 @@
     }
 }" class="w-full flex flex-col justify-start items-center relative">
     <div {{-- href="{{ route('products-show-details', $product->slug) }}" --}}
-        class="relative  select-none flex justify-center items-center overflow-hidden rounded-md w-full aspect-[9/12] h-auto">
+        class="relative  select-none flex justify-center items-center overflow-hidden rounded-none w-full aspect-[9/12] h-auto">
         <span class=" w-full h-full z-10 absolute bg-slate-300 animate-pulse duration-300 ease-in-out">
 
         </span>
