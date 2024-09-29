@@ -5,6 +5,15 @@
     <!-- Main Image -->
     <div aria-label="product-image"
         class="w-full flex justify-center rounded-none  relative overflow-hidden   bg-slate-300  items-center aspect-[9/12]">
+        @if ($product->discounts->count()>0)
+        <span
+        class=" w-44 origin-center bg-secondary gap-2 font-bold flex justify-center items-center text-sm text-white absolute -right-14 top-10 rotate-45  z-40"
+        >
+        خصم
+        %{{$product->discounts[0]->value}}
+        </span>
+        @endif
+
         <span class=" absolute z-10 bg-slate-300 animate-pulse">
 
         </span>

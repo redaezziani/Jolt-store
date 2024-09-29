@@ -57,27 +57,9 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                                     {{ $item->product->description }}
                                 </p>
                                 <p class="text-sm  text-slate-600">
-                                    @php
-                                        $discountValue = optional($item->product->discounts->last())->value;
-                                        $discountValue = (float) $discountValue;
-                                        $price = (float) $item->product->price;
-                                        $discount = ($discountValue / 100) * $price;
-                                        $newPrice = $price - $discount;
-                                    @endphp
                                     <span class="flex gap-0.5 justify-start items-center">
-                                        {{ $item->quantity }}
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icon-tabler-x">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M18 6l-12 12" />
-                                            <path d="M6 6l12 12" />
-                                        </svg>
-                                        {{ number_format($newPrice, 2) }}
-                                        =
-                                        {{ number_format($newPrice * $item->quantity, 2) }}
-                                        درهم
+                                        {{ $item->quantity }} × {{ $item->price }} = {{$item->price * $item->quantity  }} درهم
+                                        
                                     </span>
                                 </p>
 

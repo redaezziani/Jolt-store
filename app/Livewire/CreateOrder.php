@@ -54,6 +54,7 @@ class CreateOrder extends Component
 
     public function mount()
     {
+        $this->calculateTotal();
         $this->loadCartItems();
     }
 
@@ -73,15 +74,15 @@ class CreateOrder extends Component
                     break;
                 }
             }
+
         }
 
-        // lets check if any of the items in the cart has a Paid Shipping
 
     }
 
     public function calculateTotal()
     {
-        $this->total = 0; // Reset the total before recalculating
+        $this->total = 0;
         foreach ($this->cartItems as $item) {
             $this->total += floatval($item->price) * $item->quantity;
         }
@@ -286,7 +287,7 @@ class CreateOrder extends Component
     {
         return view('livewire.create-order', [
             'cartItems' => $this->cartItems,
-            'total' => $this->total,
+            'total'=>$this->total,
             'hasPaidShipping' => $this->hasPaidShipping,
         ]);
     }

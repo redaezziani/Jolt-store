@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Livewire;
-
 use Livewire\Component;
 use App\Models\Cart as CartModel;
 use App\Models\Comment;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use WireUi\Traits\Actions;
@@ -100,7 +100,6 @@ class AddToCart extends Component
 
 
 
-        // Validate the input data
         $this->validate();
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -110,7 +109,7 @@ class AddToCart extends Component
             'comment_text' => $this->commentText,
             'rating' => $this->rating,
             'product_id' => $this->product->id,
-            'user_id' => Auth::id(), // Assuming the user is authenticated
+            'user_id' => Auth::id(),
         ]);
 
         if (!$ADD) {
@@ -145,6 +144,24 @@ class AddToCart extends Component
     }
 
 
+    public function getDiscountTimeLeft($discount)
+    {
+        if (!$discount || !$discount->end_date) {
+            return null;
+        }
+
+        $now = Carbon::now();
+        $endDate = Carbon::parse($discount->end_date);
+
+        if ($endDate->isPast()) {
+            return 'Expired';
+        }
+
+        return $endDate->diffForHumans($now, [
+            'parts' => 3,
+            'short' => true
+        ]);
+    }
     public function addToCart($productId)
     {
         $product = Product::find($productId);
@@ -158,17 +175,14 @@ class AddToCart extends Component
             return redirect()->route('login');
         }
 
-        // Validate the inputs
         $this->validate([
             'quantity' => 'required|integer|min:1'
         ]);
 
-        // Handle the case where product does not have colors or sizes
         if (!$product->colors && !$product->sizes) {
             $this->color = '';
             $this->size = '';
         } else {
-            // Default to the first available color and size if not selected
             if (!$this->color) {
                 $this->color = $product->colors ? explode('@', $product->colors)[0] : '';
             }
@@ -219,22 +233,24 @@ class AddToCart extends Component
 
     public function render()
     {
-        // Retrieve comments for the current product
         $comments = Comment::where('product_id', $this->product->id)
             ->with('user')
             ->latest()
             ->get();
 
-        // Get total number of comments
         $totalComments = $comments->count();
 
-        // Group ratings by their value and count how many times each rating was given
         $ratings = Comment::selectRaw('rating, COUNT(*) as count')
             ->where('product_id', $this->product->id)
             ->groupBy('rating')
             ->orderBy('rating', 'desc')
-            ->limit(6) // Limit the results to 6
+            ->limit(6)
             ->get();
+        $latestDiscount = $this->product->discounts->last();
+
+        $time=null;
+
+        $time=$this->getDiscountTimeLeft($latestDiscount);
 
         return view('livewire.add-to-cart', [
             'selectedColor' => $this->color,
@@ -243,6 +259,7 @@ class AddToCart extends Component
             'comments' => $comments,
             'ratings' => $ratings,
             'totalComments' => $totalComments,
+            'time'=> $time,
         ]);
     }
 }

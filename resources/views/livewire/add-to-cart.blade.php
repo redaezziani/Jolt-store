@@ -1,4 +1,6 @@
-<div class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
+<div
+wire:poll.1000ms
+class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
     <div class="col-span-3 overflow-hidden flex">
         @include('components.show-product-path-link', ['product' => $product])
     </div>
@@ -8,6 +10,12 @@
             class=" text-slate-700 -mt-2 underline underline-offset-2 text-lg ">
             {{ $product->category->name }}
         </a>
+       @if ($time)
+       <p class="text-base text-secondary underline underline-offset-2 font-semibold">
+        ينتهي الخصم في: {{ $time }}
+    </p>
+       @endif
+
         <h2 class="text-slate-900 mt-5 text-xl font-bold uppercase flex items-center">
             {{ $product->name }}
         </h2>
@@ -36,7 +44,7 @@
                         الأحجام
                         {{-- display a alret if count of product q is less then 5 --}}
                         @if ($product->quantity < 5)
-                            <span class=" text-amber-400 text-sm">
+                            <span class=" text-secondary text-sm">
                                 (الكمية محدودة)
                             </span>
                         @endif
@@ -291,7 +299,7 @@
                             value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                             fill="currentColor" class="w-5 h-5"
-                            :class="currentVal >= 1 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            :class="currentVal >= 1 ? 'text-amber-400' : 'text-slate-400 dark:text-neutral-300'">
                             <path fill-rule="evenodd"
                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                 clip-rule="evenodd"></path>
@@ -304,7 +312,7 @@
                             value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                             fill="currentColor" class="w-5 h-5"
-                            :class="currentVal >= 2 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            :class="currentVal >= 2 ? 'text-amber-400' : 'text-slate-400 dark:text-neutral-300'">
                             <path fill-rule="evenodd"
                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                 clip-rule="evenodd"></path>
@@ -317,7 +325,7 @@
                             value="3">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                             fill="currentColor" class="w-5 h-5"
-                            :class="currentVal >= 3 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            :class="currentVal >= 3 ? 'text-amber-400' : 'text-slate-400 dark:text-neutral-300'">
                             <path fill-rule="evenodd"
                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                 clip-rule="evenodd"></path>
@@ -330,7 +338,7 @@
                             value="4">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                             fill="currentColor" class="w-5 h-5"
-                            :class="currentVal >= 4 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            :class="currentVal >= 4 ? 'text-amber-400' : 'text-slate-400 dark:text-neutral-300'">
                             <path fill-rule="evenodd"
                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                 clip-rule="evenodd"></path>
@@ -343,7 +351,7 @@
                             value="5">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"
                             fill="currentColor" class="w-5 h-5"
-                            :class="currentVal >= 5 ? 'text-amber-500' : 'text-slate-400 dark:text-neutral-300'">
+                            :class="currentVal >= 5 ? 'text-amber-400' : 'text-slate-400 dark:text-neutral-300'">
                             <path fill-rule="evenodd"
                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                                 clip-rule="evenodd"></path>

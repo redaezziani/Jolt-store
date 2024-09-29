@@ -1,4 +1,6 @@
-<div class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
+<div
+wire:poll.2000ms
+class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
     <div class="flex flex-col gap-2 col-span-2 justify-start items-start">
         {{-- عرض أول عنصر في الطلب --}}
         <div class="w-full">
@@ -32,7 +34,7 @@
                         <strong>
                             السعر:
                         </strong>
-                        {{ $cartItems[0]->product->price }} درهم
+                        {{ $cartItems[0]->price }} درهم
                     </p>
                 </div>
 
@@ -43,9 +45,17 @@
         </div>
         <div class="mb-6">
             <h3 class="text-lg font-semibold text-slate-600 mb-4">ملخص الطلب</h3>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+            <ul class="list-disc pr-5 space-y-2 text-slate-600">
                 @foreach ($cartItems as $item)
-                    <li>{{ $item->product->name }} - {{ $item->quantity }} × {{ $item->product->price }} درهم</li>
+                    <li>
+                        <strong
+                        >
+                            {{ $item->product->name }} :
+                        </strong>
+                        <bdi>
+                             {{ $item->quantity }} × {{ $item->price }} = {{$item->price * $item->quantity  }} درهم
+                        </bdi>
+                    </li>
                 @endforeach
             </ul>
             <p class="text-base text-secondary underline underline-offset-2 font-semibold mt-4">
