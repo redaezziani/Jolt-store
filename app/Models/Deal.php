@@ -33,7 +33,7 @@ class Deal extends Model
 
     public function discount()
     {
-        return $this->belongsTo(Discount::class);
+        return $this->belongsTo(Discount::class);  // Ensure the correct namespace is used here
     }
 
     public function products()

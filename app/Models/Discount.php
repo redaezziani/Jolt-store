@@ -27,4 +27,9 @@ class Discount extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function deal()
+    {
+        return $this->hasMany(Deal::class);
+    }
 }
