@@ -3,8 +3,13 @@
     description="{{ __('hero_description') }}"
     keywords="متجر {{env('APP_NAME')}} تسوق، خصم 60٪، منتجات، جودة، سعر">
     <div
-        class="w-full h-96 lg:h-[90vh]   flex justify-center items-center overflow-hidden relative ">
+    class="w-full h-96 lg:h-[90vh] hidden   lg:flex justify-center items-center overflow-hidden relative ">
         <livewire:deals-display>
+    </div>
+
+    <div
+    class="w-full h-96 mt-10 lg:h-[90vh]    lg:hidden flex justify-center items-center overflow-hidden relative ">
+        <livewire:deals-slide-show>
     </div>
     <div class="relative flex items-center flex-col justify-start w-full min-h-screen gap-2 overflow-hidden">
         <section class="mt-10 pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">
