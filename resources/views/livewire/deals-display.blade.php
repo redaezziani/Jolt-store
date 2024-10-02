@@ -48,7 +48,7 @@
             </div>
             <img
             src="{{$deal->cover_img}}"
-             alt="deal" class="w-full h-full object-cover">
+             alt="deal" class="w-full z-0 h-full object-cover">
         </span>
         @endforeach
 

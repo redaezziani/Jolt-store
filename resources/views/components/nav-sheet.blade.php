@@ -28,9 +28,33 @@
                     <path d="M6 6l12 12" />
                 </svg>
         </div>
+
+
         <p class="text-lg mt-5 font-semibold text-slate-700">
             القائمة الرئيسية
         </p>
+
+        <div class="flex gap-2 justify-start items-center ">
+            @auth
+            <p class="text-sm font-semibold text-secondary underline underline-offset-2 ">
+                المستخدم الحالي هو:
+                {{ auth()->user()->name }}
+            </p>
+            @endauth
+            @guest
+            <a href="{{ route('login') }}"
+                class="text-sm font-semibold text-slate-500">
+                تسجيل الدخول
+            </a>
+            <span
+            class="text-sm font-semibold text-slate-500"
+            >-</span>
+            <a href="{{ route('register') }}"
+                class="text-sm font-semibold text-slate-500">
+                تسجيل
+            </a>
+            @endguest
+        </div>
         <p
         x-data
         x-on:click="$dispatch('side-bar-open')"

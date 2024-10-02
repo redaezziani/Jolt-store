@@ -10,7 +10,7 @@ return [
     'registration_include_password_confirmation_field' => true,
     'registration_require_email_verification' => false,
     'enable_branding' => true,
-    'dev_mode' => true,
+    'dev_mode' => false,
     'enable_2fa' => false, // Enable or disable 2FA functionality globally
     'login_show_social_providers' => true,
     'center_align_social_provider_button_content' => false,

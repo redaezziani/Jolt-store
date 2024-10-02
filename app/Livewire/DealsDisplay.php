@@ -14,7 +14,7 @@ class DealsDisplay extends Component
     public function mount()
     {
         // Fetching all deals with associated products and discount, limiting to 2 deals
-        $this->deals = Deal::with('products', 'discount')->limit(2)->get();
+        $this->deals = Deal::with('products')->limit(2)->get();
 
         // Fetching the deal with the highest discount value
         $this->latestCategory = Category::with('products')->first();
