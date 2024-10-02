@@ -9,10 +9,10 @@ export default defineConfig({
         }),
     ],
     // server: {
-    //     host: '192.168.1.35', // Your IP address
+    //     host: '192.168.86.148', // Your IP address
     //     port: 3000, // Vite port
     //     hmr: {
-    //         host: '192.168.1.35', // For Hot Module Replacement
+    //         host: '192.168.86.148', // For Hot Module Replacement
     //     },
     // },
 });

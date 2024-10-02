@@ -17,8 +17,13 @@ class SalesAreaChartComponent
 
     public function build(): \ArielMejiaDev\LarapexCharts\AreaChart
     {
+        // Get the start and end dates for the current month
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        // Query to get sales data for the current month
         $salesData = Order::selectRaw('DATE(created_at) as date, ROUND(SUM(total), 2) as total')
-            ->where('created_at', '>=', now()->subWeek())
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->groupBy('date')
             ->orderBy('date')
             ->pluck('total', 'date')
@@ -38,17 +43,17 @@ class SalesAreaChartComponent
         $totals = [];
         foreach ($labels as $label) {
             // Find the corresponding total for each label
-            $date = Carbon::now()->subWeek()->startOfDay()->addDays(array_search($label, $labels));
+            $date = Carbon::now()->startOfMonth()->startOfDay()->addDays(array_search($label, $labels));
             $totals[] = $salesData[$date->toDateString()] ?? 0;
         }
 
         return $this->chart->areaChart()
             ->addData('مبيعات', $totals)
-            ->setColors(['#6366f1'])
+            ->setColors(['#0ea5e9'])
             ->setLabels($labels)
-            ->setStroke(1, ['#6366f1'], 'straight')
+            ->setStroke(1, ['#0ea5e9'], 'straight')
             // ->setGrid(opacity: '0.05')
-            ->setMarkers(['#6366f1', '#6366f1'], 4, 6)
+            ->setMarkers(['#0ea5e9', '#0ea5e9'], 4, 6)
             ->setFontFamily('Zain');
     }
 }

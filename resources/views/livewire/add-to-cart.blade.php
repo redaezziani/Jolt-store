@@ -1,20 +1,20 @@
-<div
-wire:poll.1000ms
-class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
+<div wire:poll.1000ms class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
     <div class="col-span-3 overflow-hidden flex">
         @include('components.show-product-path-link', ['product' => $product])
     </div>
     @include('components.custom.product.product-slide-image')
     <div class="w-full md:w-2/3 flex gap-2 col-span-3 md:col-span-2  flex-col justify-start items-start">
-        <a {{-- lets send the slug as query filter= --}} href="{{ route('products-index', ['filter' => $product->category->slug]) }}"
-            class=" text-slate-700 -mt-2 underline underline-offset-2 text-lg ">
-            {{ $product->category->name }}
-        </a>
-       @if ($time)
-       <p class="text-base text-secondary underline underline-offset-2 font-semibold">
-        ينتهي الخصم في: {{ $time }}
-    </p>
-       @endif
+        <div class="flex flex-col justify-start items-start gap-1">
+            <a {{-- lets send the slug as query filter= --}} href="{{ route('products-index', ['filter' => $product->category->slug]) }}"
+                class=" text-slate-700 -mt-2  text-lg ">
+                {{ $product->category->name }}
+            </a>
+            @if ($time)
+                <p class="text-sm text-secondary underline underline-offset-2 font-semibold">
+                    ينتهي الخصم في: {{ $time }}
+                </p>
+            @endif
+        </div>
 
         <h2 class="text-slate-900 mt-5 text-xl font-bold uppercase flex items-center">
             {{ $product->name }}
@@ -40,8 +40,8 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
         @if ($product->sizes)
             <div class="flex gap-5 mt-2 flex-wrap">
                 <div class="flex flex-col gap-3 justify-start items-start">
-                    <p class=" text-slate-800 font-semibold text-lg">
-                        الأحجام
+                    <p class=" text-slate-600 font-semibold text-lg">
+                        المقاسات
                         {{-- display a alret if count of product q is less then 5 --}}
                         @if ($product->quantity < 5)
                             <span class=" text-secondary text-sm">
@@ -73,7 +73,7 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
                 {{-- if the product have a colors --}}
                 @if ($product->colors)
                     <div class="flex flex-col  gap-3 justify-start items-start">
-                        <p class=" text-slate-800 font-semibold text-lg">
+                        <p class=" text-slate-600 font-semibold text-lg">
                             الألوان
                         </p>
                         <div class="w-full flex gap-3 flex-wrap justify-start items-center">
@@ -104,7 +104,7 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
                 <p class=" text-lg line-through mt-2 text-slate-400">
                     {{ round($product->price, 2) }}
                 </p>
-                <p class=" text-lg font-bold mt-2 text-primary">
+                <p class=" text-lg font-bold mt-2 text-green-400">
                     @php
                         $discountValue = optional($product->discounts->last())->value;
 
@@ -116,7 +116,7 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
 
                         $newPrice = $price - $discount;
                     @endphp
-                    {{ round($newPrice, 2) }} درهم مغربي
+                    {{ round($newPrice, 2) }} {{env('APP_CURRENCY')}}
                 </p>
             </div>
             @include('components.custom.product.quantity-input', ['currentQuantity' => $currentQuantity])
@@ -127,8 +127,8 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
                 <!-- Spinner displayed during loading -->
                 <div wire:loading wire:target="addToCart" class="flex gap-x-2 items-center">
                     <svg aria-hidden="true" role="status"
-                        class="inline mr-2 w-4 h-4 text-white animate-spin dark:text-white"
-                        viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        class="inline mr-2 w-4 h-4 text-white animate-spin dark:text-white" viewBox="0 0 100 101"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                             fill="currentColor"></path>
@@ -255,7 +255,7 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
                 {{ $comment->status != 'show' && $comment->user_id === Auth::id() ? 'opacity-50 ' : '' }}">
                             <div class="w-full flex justify-between items-center">
                                 <div class="flex max-w-[40rem]  justify-start w-full items-start flex-col">
-                                    <p class="text-slate-800 font-semibold text-lg">
+                                    <p class="text-slate-600 font-semibold text-lg">
                                         {{ $comment->user->name }}
                                     </p>
                                     <p title="time" class="text-slate-600 text-sm">
@@ -278,7 +278,11 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
                     @endif
                 @endforeach
             @endif
-
+            <span
+            x-on:click="$dispatch('comments-bar-open', { productId: {{ $product->id }} })"
+            class="text-base text-slate-400 font-semibold underline underline-offset-2 cursor-pointer">
+            عرض التعليقات
+        </span>
         </section>
         {{-- -add comment --}}
         <p class=" text-slate-600 mt-5 underline underline-offset-2  text-base">
@@ -395,7 +399,9 @@ class=" w-full mt-24 gap-6 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-c
             المنتجات ذات الصلة
         </p>
         <div class="w-full col-span-3 mb-10">
-            <livewire:related-products :product="$product" />
+            <livewire:related-products
+              lazy
+             :product="$product" />
         </div>
     </div>
 

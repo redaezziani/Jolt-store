@@ -11,7 +11,14 @@ class TotalRevenue extends Component
 
     public function mount()
     {
-        $this->totalRevenue = round(Order::sum('total'), 2);
+        // total revenue for this month
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+        $this->totalRevenue = Order::whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->where('status', 'completed')
+            ->sum('total');
+        $this->totalRevenue = round($this->totalRevenue, 2);
     }
     public function render()
     {

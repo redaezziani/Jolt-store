@@ -3,11 +3,11 @@
     title="تفاصيل الطلب"
     description="قم بمراجعة تفاصيل طلبك وتقديم المعلومات اللازمة لإتمام الشراء."
     keywords=""
-    
+
     >
     <div class=" w-full  gap-0 px-3 overflow-x-hidden lg:max-w-[75%] grid  md:grid-cols-3 ">
 
-        <div class="col-span-3 mt-20  overflow-hidden flex">
+        <div class="col-span-3 mt-32  overflow-hidden flex">
             <nav class="flex gap-1 justify-start items-center line-clamp-1 truncate font-medium group  transition-all ease-in-out duration-300">
                 <a href="{{ route('home') }}" class="text-sm text-teal-700 group-hover:text-teal-700">الصفحة الرئيسية</a>
                 <span class="text-sm text-slate-500">/</span>

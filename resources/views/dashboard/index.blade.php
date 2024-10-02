@@ -13,9 +13,9 @@
     <section class=" w-full grid   mt-5 lg:h-[45rem] grid-cols-1 lg:grid-rows-6 gap-3 lg:grid-cols-4">
 
         <livewire:total-orders>
-        <livewire:total-revenue>
-        <livewire:total-products-sold>
-        <div class="w-full shadow-sm rounded-lg col-span-1 bg-white row-span-3 border border-slate-400/35">
+            <livewire:total-revenue>
+                <livewire:total-products-sold>
+                    <div class="w-full shadow-sm rounded-lg col-span-1 bg-white row-span-3 border border-slate-400/35">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-gray-700">حالة الطلبات</h3>
                             <p class="text-slate-500 text-sm">
@@ -23,7 +23,7 @@
                             </p>
                             <livewire:order-status-pie-chart />
                         </div>
-        </div>
+                    </div>
                     <div
                         class="w-full shadow-sm rounded-lg flex-col justify-between items-start flex lg:col-span-3 bg-white lg:row-span-5 border border-slate-400/35">
                         <div class="p-4 w-full h-full flex-col justify-between items-start flex">
@@ -37,22 +37,18 @@
                             </div>
                             <livewire:sales-area-chart>
                         </div>
-        </div>
-        <div class="w-full shadow-sm rounded-lg  col-span-1 bg-white row-span-3 border border-slate-400/35">
-            <div class="p-4">
-                <h3 class="text-lg font-semibold text-gray-700">
-                    مبيعات المستخدمين
-                </h3>
-                <p class="text-slate-500 text-sm">
-                    يمكنك من خلال هذا الرسم البياني متابعة مبيعات المستخدمين بكل سهولة
-                </p>
-                <livewire:user-bar-chart />
-            </div>
-        </div>
+                    </div>
+                    <div class="w-full shadow-sm rounded-lg  col-span-1 bg-white row-span-3 border border-slate-400/35">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-700">
+                                مبيعات المستخدمين
+                            </h3>
+                            <p class="text-slate-500 text-sm">
+                                يمكنك من خلال هذا الرسم البياني متابعة مبيعات المستخدمين بكل سهولة
+                            </p>
+                            <livewire:user-bar-chart />
+                        </div>
+                    </div>
     </section>
-
-        <livewire:dashboard-orders-table>
-    <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash/lodash.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <livewire:dashboard-orders-table>
 </x-dashboard-layout>

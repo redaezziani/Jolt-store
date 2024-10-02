@@ -51,10 +51,10 @@
                         ]) x-on:click="toggle">
                             @if ($icon)
                                 <x-dynamic-component :component="WireUi::component('icon')" :name="$icon"
-                                    class="h-5 w-5 mr-1 text-gray-400 dark:text-gray-600" />
+                                    class="h-5 w-5 mr-1 text-slate-400 dark:text-slate-600" />
                             @endif
 
-                            <span class="truncate text-secondary-700  dark:text-secondary-400 text-sm"
+                            <span class="truncate text-slate-500  dark:text-slate-400 text-sm"
                                 x-show="!isEmpty()" x-html="getSelectedDisplayText()">
                             </span>
                         </div>
@@ -66,11 +66,11 @@
                             <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar">
                                 @if ($icon)
                                     <x-dynamic-component :component="WireUi::component('icon')" :name="$icon"
-                                        class="h-5 w-5 text-gray-400 dark:text-gray-600" />
+                                        class="h-5 w-5 text-slate-400 dark:text-slate-600" />
                                 @endif
 
                                 @if (!$withoutItemsCount)
-                                    <span class="inline-flex text-secondary-700 dark:text-secondary-400 text-sm"
+                                    <span class="inline-flex text-slate-500 dark:text-slate-400 text-sm"
                                         x-show="selectedOptions.length" x-text="selectedOptions.length">
                                     </span>
                                 @endif
@@ -80,16 +80,17 @@
                                         <span
                                             class="
                                                 inline-flex items-center py-0.5 pl-2 pr-0.5 rounded-full text-xs font-medium
-                                                border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700
-                                                dark:bg-secondary-700 dark:text-secondary-400 dark:border-none
+                                                border border-slate-400/35 shadow-sm bg-slate-100 text-slate-400
+                                                dark:bg-slate-500 dark:text-slate-400 dark:border-none
                                             ">
                                             <span style="max-width: 5rem" class="truncate" x-text="option.label"></span>
 
                                             <button
-                                                class="shrink-0 h-4 w-4 flex items-center text-secondary-400 justify-center hover:text-secondary"
+                                                class="shrink-0 h-4 w-4 flex items-center text-slate-400 justify-center hover:text-slate"
                                                 x-on:click.stop="unSelect(option)" tabindex="-1" type="button">
                                                 <x-dynamic-component :component="WireUi::component('icon')" class="h-3 w-3"
-                                                    name="x" />
+                                                    name="x"
+                                                 />
                                             </button>
                                         </span>
                                     </template>
@@ -105,14 +106,14 @@
                     @if ($clearable && !$readonly && !$disabled)
                         <button x-show="!isEmpty()" x-on:click="clear" tabindex="-1" type="button" x-cloak>
                             <x-dynamic-component :component="WireUi::component('icon')"
-                                class="w-4 h-4 text-secondary-400 hover:text-negative-400" name="x" />
+                                class="w-4 h-4 text-slate-400 hover:text-primary" name="x" />
                         </button>
                     @endif
 
                     <button tabindex="-1" x-on:click="toggle" type="button">
                         <x-dynamic-component :component="WireUi::component('icon')"
                             class="w-5 h-5
-                            {{ $name && $errors->has($name) ? 'text-negative-400 dark:text-negative-600' : 'text-secondary-400' }}"
+                            {{ $name && $errors->has($name) ? 'text-primary dark:text-primary' : 'text-slate-400' }}"
                             :name="$rightIcon" />
                     </button>
                 </div>
@@ -121,7 +122,7 @@
 
         @if ($hint)
             <label @if ($id) for="{{ $id }}" @endif
-                class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">
+                class="mt-2 text-sm text-slate-500 dark:text-slate-400">
                 {{ $hint }}
             </label>
         @endif
@@ -145,9 +146,9 @@
             x-on:keydown.arrow-up.prevent="getPrevFocusable().focus()">
             <div class="w-full h-0.5 rounded-full relative overflow-hidden"
                 :class="{
-                    'bg-gray-200 dark:bg-gray-700': asyncData.fetching
+                    'bg-slate-200 dark:bg-slate-500': asyncData.fetching
                 }">
-                <div class="bg-primary-500 h-0.5 rounded-full absolute animate-linear-progress" style="width: 30%"
+                <div class="bg-primary h-0.5 rounded-full absolute animate-linear-progress" style="width: 30%"
                     x-show="asyncData.fetching">
                 </div>
             </div>
@@ -169,7 +170,7 @@
             </ul>
 
             @unless ($hideEmptyMessage)
-                <div class="py-12 px-3 sm:py-2 sm:px-3 text-center sm:text-left text-secondary-500 cursor-pointer"
+                <div class="py-12 px-3 sm:py-2 sm:px-3 text-center sm:text-left text-slate-500 cursor-pointer"
                     x-show="displayOptions.length === 0" x-on:click="close">
                     {{ $emptyMessage ?? __('wireui::messages.empty_options') }}
                 </div>

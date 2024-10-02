@@ -25,10 +25,10 @@
         </div>
     @endif
 
-    <div class="relative rounded-md @unless($shadowless) shadow-sm @endunless">
+    <div class="relative rounded-none @unless($shadowless) shadow-sm @endunless">
         @if ($prefix || $icon)
             <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none
-                {{ $hasError ? 'text-negative-500' : 'text-secondary-400' }}">
+                {{ $hasError ? 'text-negative-500' : 'text-slate-400' }}">
                 @if ($icon)
                     <x-dynamic-component
                         :component="WireUi::component('icon')"
@@ -45,7 +45,9 @@
             {{ $prepend }}
         @endif
 
-        <input {{ $attributes->class([
+        <x-my-input
+        placeholder=""
+        {{ $attributes->class([
                 $getInputClasses($hasError),
             ])->merge([
                 'type'         => 'text',
@@ -54,7 +56,7 @@
 
         @if ($suffix || $rightIcon || ($hasError && !$append) || $spinner)
             <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none
-                {{ $hasError ? 'text-negative-500' : 'text-secondary-400' }}">
+                {{ $hasError ? 'text-negative-500' : 'text-slate-400' }}">
 
                 @if ($rightIcon)
                     <x-dynamic-component
@@ -94,7 +96,7 @@
     </div>
 
     @if (!$hasError && $hint)
-        <label @if ($id) for="{{ $id }}" @endif class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">
+        <label @if ($id) for="{{ $id }}" @endif class="mt-2 text-sm text-slate-500 dark:text-slate-400">
             {{ $hint }}
         </label>
     @endif

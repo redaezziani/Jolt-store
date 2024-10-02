@@ -4,28 +4,7 @@
     keywords="متجر {{env('APP_NAME')}} تسوق، خصم 60٪، منتجات، جودة، سعر">
     <div
         class="w-full h-96 lg:h-[90vh] bg-slate-200  flex justify-center items-center overflow-hidden relative ">
-        <section
-        class="grid lg:grid-cols-5 h-2/3  gap-x-3  w-full lg:grid-rows-2 md:max-w-[100%] lg:max-w-[78%] px-3  "
-        >
-        <div
-        class=" col-span-2 row-span-3   bg-white border-l border-slate-400/35"
-        >
-
-        </div>
-        <div class="col-span-3  gap-y-3 row-span-3   grid grid-rows-2 ">
-            <span
-
-            class=" row-span-1  bg-white w-full"
-            >
-
-            </span>
-            <span
-            class=" row-span-1  bg-white w-full"
-            >
-
-            </span>
-        </div>
-        </section>
+        <livewire:deals-display>
     </div>
     <div class="relative flex items-center flex-col justify-start w-full min-h-screen gap-2 overflow-hidden">
         <section class="mt-10 pb-3 px-3 flex flex-col gap-4 justify-center items-center md:max-w-[100%] lg:max-w-[70%]">

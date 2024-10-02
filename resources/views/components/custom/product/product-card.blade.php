@@ -34,7 +34,9 @@
                 </svg>
             </span>
         </span>
-        <img :src="images[currentImageIndex]" alt="{{ $product->name }}"
+        <img
+        loading="lazy"
+         :src="images[currentImageIndex]" alt="{{ $product->name }}"
             class="w-full hover:scale-105 z-20 duration-500 transition-all ease-in-out h-full object-cover">
     </div>
     <div class="flex w-full justify-between items-center gap-2">
@@ -53,17 +55,17 @@
                 {{ $product->description }}
             </p>
             <div class="flex gap-2">
-                <p class="line-through text-slate-600">
+                <p class="line-through text-slate-400">
                     {{ $product->price }}
                 </p>
-                <p class="text-primary">
+                <p class="text-green-400 font-bold">
                     @php
                         $discountValue = (float) optional($product->discounts->last())->value;
                         $price = (float) $product->price;
                         $discount = ($discountValue / 100) * $price;
                         $newPrice = $price - $discount;
                     @endphp
-                    {{ $newPrice }} DH
+                    {{ $newPrice }} {{env('APP_CURRENCY')}}
                 </p>
 
             </div>

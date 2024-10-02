@@ -4,7 +4,7 @@ class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
     <div class="flex flex-col gap-2 col-span-2 justify-start items-start">
         {{-- عرض أول عنصر في الطلب --}}
         <div class="w-full">
-            <h2 class="text-lg font-semibold text-slate-600">تفاصيل الطلب</h2>
+            <h2 class="text-lg font-semibold text-slate-800">تفاصيل الطلب</h2>
             <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
             @if ($cartItems && count($cartItems) > 0)
 
@@ -66,7 +66,7 @@ class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
         </div>
     </div>
     <div class="col-span-2  bg-white">
-        <h2 class="text-lg font-semibold text-slate-600">معلومات الشحن</h2>
+        <h2 class="text-lg font-semibold text-slate-800">معلومات الشحن</h2>
         <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
         <div class="border-r flex flex-col gap-4 pb-3 justify-start items-start border-slate-400/35 px-2">
 

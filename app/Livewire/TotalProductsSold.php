@@ -11,7 +11,13 @@ class TotalProductsSold extends Component
 
     public function mount()
     {
-        $this->totalProductsSold = OrderItem::sum('quantity');
+        // total sum quantity of products sold for this month
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+
+        $this->totalProductsSold = OrderItem::whereYear('created_at', $currentYear)
+        ->whereMonth('created_at', $currentMonth)->sum('quantity');
+
     }
     public function render()
     {

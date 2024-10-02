@@ -10,13 +10,16 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
         x-transition:enter-start="transform -translate-x-full" x-transition:enter-end="transform translate-x-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform translate-x-0"
         x-transition:leave-end="transform -translate-x-full"
-        class="w-[20rem] md:w-[35rem] z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
+        class="w-[23rem] md:w-[35rem] z-10 absolute left-0 top-0 h-screen flex bg-white flex-col gap-4 justify-start items-start p-4">
         <div class="w-full flex justify-between items-center">
             <p class="text-2xl font-semibold text-slate-800">
                 عربة التسوق الخاصة بك
             </p>
-            <svg x-on:click="open = false" class="text-slate-800" xmlns="http://www.w3.org/2000/svg" width="14"
-                height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            <svg
+                x-on:click="open = false"
+                class="text-slate-800 cursor-pointer"
+                xmlns="http://www.w3.org/2000/svg" width="20"
+                height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-x">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M18 6l-12 12" />
@@ -56,15 +59,12 @@ x-data="{ open: false }" x-on:keydown.escape="open = false" x-on:keydown.tab="op
                                 >
                                     {{ $item->product->description }}
                                 </p>
-                                <p class="text-sm  text-slate-600">
-                                    <span class="flex gap-0.5 justify-start items-center">
-                                        {{ $item->quantity }} × {{ $item->price }} = {{$item->price * $item->quantity  }} درهم
-                                        
-                                    </span>
+                                <p class="text-sm mt-2  text-slate-600">
+                                    <strong class="flex gap-0.5 justify-start  items-center">
+                                        {{ $item->quantity }} × {{ $item->price }} = <bdi class=" text-green-400">{{$item->price * $item->quantity  }} {{env('APP_CURRENCY')}}</bdi>
+                                    </strong>
                                 </p>
-
-                                {{--lets make a comp that add or update the qua--}}
-                                <div class="flex gap-2 justify-start items-center">
+                                <div class="flex gap-2 mt-2 justify-start items-center">
                                     <button wire:click='increaseQuantity({{ $item->id }})'
                                         class=" text-base h-6 w-6 border-none flex justify-center items-center rounded-none bg-slate-200 text-slate-700 font-semibold p-1">
                                         +

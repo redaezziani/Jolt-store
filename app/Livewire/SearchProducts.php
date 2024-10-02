@@ -10,18 +10,19 @@ class SearchProducts extends Component
 {
     use WithPagination;
     public $search = '';
-    protected $queryString = ['search' =>['as'=> 'product-search']];
+    protected $queryString = ['search' => ['as' => 'product-search']];
 
     public function render()
     {
-        if (strlen($this->search) < 1) {
-            return view('livewire.search-products', ['products' => []]);
+        // Initialize an empty collection to hold products
+        $products = collect();
+
+        if (strlen($this->search) > 0) {
+            // Execute the search query
+            $products = Product::where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('description', 'like', '%' . $this->search . '%')
+                ->paginate(5,pageName:'search-products');
         }
-
-        $products = Product::where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('description', 'like', '%' . $this->search . '%')
-            ->paginate(4);
-
 
         return view('livewire.search-products', ['products' => $products]);
     }

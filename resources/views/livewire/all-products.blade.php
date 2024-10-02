@@ -11,9 +11,11 @@
             </h3>
             <div class="flex justify-end">
                 <span
-                class="hover:text-primary transition-all ease-in-out duration-300 text-slate-400 font-medium cursor-pointer flex gap-1 justify-start items-center"
+                class="hover:text-green-400  group transition-all ease-in-out duration-300 text-slate-400 font-medium cursor-pointer flex gap-1 justify-start items-center"
                 wire:click="resetFilters">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    <svg
+                    class=" transition-all  group-hover:ml-2"
+                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-restore">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -89,7 +91,7 @@
                             class="flex items-center justify-between w-full text-left font-semibold py-2"
                             @click="expanded = !expanded" :aria-expanded="expanded" aria-controls="sizes-section">
                             <p class="text-primary font-medium">
-                                اختر الحجم
+                                اختر المقاسات
                             </p>
                             <svg class="transform origin-center transition duration-200 ease-out text-slate-600"
                                 :class="{ '!rotate-180 !text-primary': expanded }" xmlns="http://www.w3.org/2000/svg"

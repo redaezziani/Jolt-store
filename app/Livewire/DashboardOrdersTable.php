@@ -12,9 +12,9 @@ class DashboardOrdersTable extends Component
 
     public function render()
     {
-        // Paginate the orders here, not in mount the new orders will be fetched and with order_items
-        $orders = Order::orderBy("id","desc")->with('items')->paginate(10);
-
+        $currentYear = now()->year;
+        $currentMonth = now()->month;  $currentYear = now()->year;
+        $orders = Order::whereYear('created_at', $currentYear)->orderBy('created_at','desc')->with('items')->whereHas('items')->paginate(10);
         return view('livewire.dashboard-orders-table', [
             'orders' => $orders
         ]);

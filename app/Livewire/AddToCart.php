@@ -236,6 +236,7 @@ class AddToCart extends Component
         $comments = Comment::where('product_id', $this->product->id)
             ->with('user')
             ->latest()
+            ->limit(5)
             ->get();
 
         $totalComments = $comments->count();

@@ -11,7 +11,10 @@ class TotalOrders extends Component
 
     public function mount()
     {
-        $this->totalOrders = Order::count();
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+        $this->totalOrders = Order::whereYear('created_at', $currentYear)
+        ->whereMonth('created_at', $currentMonth)->count();
     }
     public function render()
     {

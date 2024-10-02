@@ -3,53 +3,50 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class CommentSeeder extends Seeder
 {
     public function run()
     {
-        // Arabic comments to seed for product ID 77
+        // Get a specific product (for example, product with ID 1)
+        $product = Product::find(87);
+
+        // Get random users to assign comments to them
+        $users = User::inRandomOrder()->take(10)->get(); // Using 10 random users
+
+        // Seed 100 comments in Arabic
+        for ($i = 0; $i < 100; $i++) {
+            Comment::create([
+                'comment_text' => $this->generateArabicText(),
+                'product_id'   => $product->id,
+                'user_id'      => 3,
+                'rating'       => rand(1, 5), // Random rating between 1 and 5
+                'status'       => 'show', // Assuming 'approved' is a valid status
+            ]);
+        }
+    }
+
+    /**
+     * Generate a sample Arabic comment text
+     */
+    private function generateArabicText()
+    {
         $comments = [
-            [
-                'comment_text' => 'هذا المنتج رائع للغاية! أنصح الجميع بشرائه.',
-                'product_id' => 77,
-                'user_id' => 1,  // Assuming there's a user with ID 1
-                'rating' => 5,
-                'status' => 'approved'
-            ],
-            [
-                'comment_text' => 'الخامة ممتازة ولكن المقاس كان صغيرًا.',
-                'product_id' => 77,
-                'user_id' => 3,  // Assuming there's a user with ID 2
-                'rating' => 4,
-                'status' => 'approved'
-            ],
-            [
-                'comment_text' => 'المنتج جيد، لكن السعر مرتفع قليلاً.',
-                'product_id' => 77,
-                'user_id' => 3,  // Assuming there's a user with ID 3
-                'rating' => 3,
-                'status' => 'approved'
-            ],
-            [
-                'comment_text' => 'تجربة شراء رائعة، سأشتري مرة أخرى.',
-                'product_id' => 77,
-                'user_id' => 3,  // Assuming there's a user with ID 4
-                'rating' => 5,
-                'status' => 'approved'
-            ],
-            [
-                'comment_text' => 'لم أكن راضيًا عن الجودة، كنت أتوقع الأفضل.',
-                'product_id' => 77,
-                'user_id' => 3,  // Assuming there's a user with ID 5
-                'rating' => 2,
-                'status' => 'approved'
-            ]
+            'منتج رائع جدا!',
+            'أعجبني المنتج وسوف أشتريه مرة أخرى.',
+            'سعر ممتاز مقابل الجودة.',
+            'خدمة التوصيل كانت سريعة!',
+            'التغليف جيد جدا.',
+            'لم أكن راضياً عن المنتج تماماً.',
+            'تجربة ممتازة وسأوصي به للأصدقاء.',
+            'المنتج مطابق للوصف على الموقع.',
+            'سأشتري المزيد من هذا المتجر.',
+            'جودة المنتج عالية وسعره مناسب.'
         ];
 
-        foreach ($comments as $comment) {
-            Comment::create($comment);
-        }
+        return $comments[array_rand($comments)];
     }
 }

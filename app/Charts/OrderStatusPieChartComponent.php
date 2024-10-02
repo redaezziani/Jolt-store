@@ -16,15 +16,28 @@ class OrderStatusPieChartComponent
 
     public function build(): \ArielMejiaDev\LarapexCharts\DonutChart
     {
-        // Fetching real data from the database
-        $pendingCount = Order::where('status', 'pending')->count();
-        $processingCount = Order::where('status', 'processing')->count();
-        $completedCount = Order::where('status', 'completed')->count();
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+
+        // Count pending orders for the current month and year
+        $pendingCount = Order::where('status', 'pending')
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->count();
+
+        $processingCount = Order::where('status', 'processing')
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->count();
+        $completedCount = Order::where('status', 'completed')
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->count();
 
         return $this->chart->donutChart()
-            ->addData([$pendingCount, $processingCount, $completedCount]) // Dynamic data
-            ->setLabels(['قيد الانتظار', 'قيد المعالجة', 'مكتمل']) // Arabic labels
-            ->setColors(['#6366f1', '#3b6bd3', '#ff6384']) // Custom colors
+            ->addData([$pendingCount, $processingCount, $completedCount])
+            ->setLabels(['قيد الانتظار', 'قيد المعالجة', 'مكتمل'])
+            ->setColors(['#0ea5e9', '#fb923c', '#ff6384'])
             ->setFontFamily('Zain');
     }
 }

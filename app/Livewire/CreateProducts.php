@@ -9,6 +9,9 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Str;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class CreateProducts extends Component
 {
@@ -127,12 +130,10 @@ class CreateProducts extends Component
             "prev_imgs" => $imagesPathsString,
         ]);
 
-        // Check if discount info is provided
         if ($this->discount_name && $this->discount_value && $this->discount_start && $this->discount_end) {
             $this->createDiscount($product->id);
         }
 
-        // Display toast notification
 
         $this->notification()->success(
             $title = 'تم إنشاء المنتج بنجاح',
@@ -141,6 +142,44 @@ class CreateProducts extends Component
         $this->dispatch('dashboard-sheet-bar-close');
         $this->reset();
     }
+
+    public function removeCoverImg()
+{
+    if ($this->cover_img) {
+        Storage::disk('public')->delete($this->cover_img);
+
+        $this->cover_img = '';
+    }
+
+    $this->notification()->success(
+        $title = 'تم حذف صورة الغلاف',
+        $description = 'تم حذف صورة الغلاف بنجاح.'
+    );
+}
+
+public function removePrevImg($index)
+{
+    // Check if the index is valid
+    if (isset($this->prev_imgs[$index])) {
+        // Get the image path
+        $imagePath = $this->prev_imgs[$index];
+
+        // Delete the image from storage
+        Storage::disk('public')->delete($imagePath);
+
+        // Remove the image from the array
+        unset($this->prev_imgs[$index]);
+
+        // Reset the array keys to avoid gaps
+        $this->prev_imgs = array_values($this->prev_imgs);
+
+        // Optionally, show a success notification
+        $this->notification()->success(
+            $title = 'تم حذف الصورة السابقة',
+            $description = 'تم حذف الصورة السابقة بنجاح.'
+        );
+    }
+}
 
     public function cancelProduct()
     {

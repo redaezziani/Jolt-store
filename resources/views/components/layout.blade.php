@@ -10,8 +10,6 @@
     <title>{{ $title ?? 'My App' }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="icon" href="{{ asset('favicon.ico') }}" />
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-BTVpG8X0.css ') }}" />
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CCJSjwJX.css') }}" /> <!-- If you have a lib.css built --> --}}
     <script src="{{ asset('build/assets/app-CCJSjwJX.js') }}" defer></script>
     @vite('resources/css/app.css')
     @vite('resources/css/lib.css')

@@ -74,4 +74,11 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    // my have many a
+    public function deals()
+{
+    return $this->belongsToMany(Deal::class, 'deal_product');
+}
+
 }
