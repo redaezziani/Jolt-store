@@ -4,8 +4,8 @@ class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
     <div class="flex flex-col gap-2 col-span-2 justify-start items-start">
         {{-- عرض أول عنصر في الطلب --}}
         <div class="w-full">
-            <h2 class="text-lg font-semibold text-slate-800">تفاصيل الطلب</h2>
-            <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
+            <h2 class="text-lg font-semibold text-slate-600">قائمة المنتجات المطلوبة</h2>
+            <p class="text-slate-400">هذه هي قائمة المنتجات التي قمت بطلبها. يرجى مراجعتها قبل إتمام عملية الشراء.</p>
             @if ($cartItems && count($cartItems) > 0)
 
             <div class="flex gap-2 mt-4">
@@ -60,14 +60,21 @@ class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
             </ul>
             <p class="text-base text-secondary underline underline-offset-2 font-semibold mt-4">
                 إجمالي الطلب :
-                {{ round($total,2) }}
+                @php
+                    $total = 0;
+                    foreach ($cartItems as $item) {
+                        $total += $item->price * $item->quantity;
+                    }
+                    echo $total;
+                @endphp
+
             درهم</p>
 
         </div>
     </div>
     <div class="col-span-2  bg-white">
-        <h2 class="text-lg font-semibold text-slate-800">معلومات الشحن</h2>
-        <p class="text-slate-600">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
+        <h2 class="text-lg font-semibold text-slate-600">معلومات الشحن</h2>
+        <p class="text-slate-400">راجع تفاصيل طلبك وقدم المعلومات اللازمة لإكمال عملية الشراء.</p>
         <div class="border-r flex flex-col gap-4 pb-3 justify-start items-start border-slate-400/35 px-2">
 
             <div class="flex w-full gap-2 mt-5  justify-start items-center">
@@ -171,9 +178,16 @@ class="w-full grid grid-cols-2 md:grid-cols-4 mt-10 gap-3">
                     <img src="/paypal.svg" class=" w-7 aspect-auto " />
                 </x-my-button>
             </div>
-            <x-my-button wire:click="PayOnDelivery()" class="w-full default">
-                الدفع عند الاستلام
-            </x-my-button>
+            <div class="flex w-full justify-end gap-x-3 items-center">
+                {{--cancel button--}}
+                <p class="text-base text-slate-500 underline underline-offset-2 font-medium min-w-32">
+                    إلغاء الطلب
+                </p>
+                <x-my-button wire:click="PayOnDelivery()" class="w-full rounded-full  default">
+                    الدفع عند الاستلام
+                </x-my-button>
+            </div>
+
             </form>
         </div>
     </div>

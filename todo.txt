@@ -1,4 +1,0 @@
-
---fix:sizes text from = "Ahjjam" to "ma9assat"
---add:improve the UI in the order page also the subscription message email
-

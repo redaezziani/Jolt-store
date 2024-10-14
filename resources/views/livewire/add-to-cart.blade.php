@@ -122,6 +122,7 @@
             @include('components.custom.product.quantity-input', ['currentQuantity' => $currentQuantity])
         </div>
         <div class="flex w-full  md:w-fit gap-x-3 md:gap-x-5 mt-10 pb-3 justify-start items-center">
+            
             <x-my-button id="add-to-cart" wire:loading.attr="disabled" wire:click="addToCart({{ $product->id }})"
                 class=" default  font-bold w-1/2 flex gap-x-2 justify-center items-center">
                 <!-- Spinner displayed during loading -->
